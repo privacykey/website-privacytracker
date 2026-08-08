@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+<title>Privacy Policy — privacytracker</title>
+<meta name="description" content="privacytracker runs locally and does not collect, store, or transmit any personal data. Every third-party endpoint the app may contact is listed in full." />
+<meta name="application-name" content="privacytracker" />
+<meta name="author" content="privacykey" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://privacytracker.privacykey.org/privacy.html" />
+
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08080f" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" href="assets/logo/privacytracker-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/logo/privacytracker-128.png" type="image/png" sizes="128x128" />
+<link rel="apple-touch-icon" href="assets/logo/privacytracker-180.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Privacy — privacytracker" />
+<meta property="og:description" content="No cookies, no analytics, no tracking. Here's exactly what this website does with your data." />
+<meta property="og:url" content="https://privacytracker.privacykey.org/privacy.html" />
+<meta property="og:image" content="https://privacytracker.privacykey.org/assets/social/og-image.png" />
+
+<link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
+
+<link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('pt-theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  /* ── Self-hosted Inter (v4.1, SIL OFL-1.1) ── */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable-Italic.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  }
+
+  /* ─── Brand tokens (mirrors index.html) ─── */
+  :root {
+    --ink: #0F172A;
+    --slate: #334155;
+    --muted: #475569;
+    --line: #E2E8F0;
+    --line-strong: #CBD5E1;
+    --surface: #FFFFFF;
+    --surface-soft: #F8FAFC;
+    --navy-deep: #08080f;
+    --navy: #1E3A8A;
+    --blue: #0a84ff;
+    --blue-soft: #DBEAFE;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+    --shadow-md: 0 8px 24px -8px rgba(15,23,42,.12), 0 2px 6px rgba(15,23,42,.05);
+    --duration: 600ms;
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --link-color: var(--navy);
+    --link-hover: #0066d6;
+    --focus-ring: var(--blue);
+    --color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
+      --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
+      --surface: #111118; --surface-soft: #18181f;
+      --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
+      --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
+      --color-scheme: dark;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
+    --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
+    --surface: #111118; --surface-soft: #18181f;
+    --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
+    --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
+    --color-scheme: dark;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { color-scheme: var(--color-scheme); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--ink); background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    transition: background-color 200ms var(--ease), color 200ms var(--ease);
+  }
+  ::selection { background: var(--blue-soft); color: var(--navy); }
+  a { color: var(--link-color); text-decoration: none; transition: color 150ms var(--ease); }
+  a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+  h2, h3 { scroll-margin-top: 84px; }
+
+  .skip-link {
+    position: absolute; left: 16px; top: -100px;
+    background: var(--navy-deep); color: #fff;
+    padding: 12px 16px; border-radius: 8px; font-weight: 600; z-index: 1000;
+    transition: top 200ms var(--ease);
+  }
+  .skip-link:focus-visible { top: 16px; color: #fff; text-decoration: none; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 640px) { .container { padding: 0 20px; } }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ─── Sticky nav (mirrors index.html) ─── */
+  nav.topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    transition: background 220ms var(--ease), border-color 220ms var(--ease);
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.topnav .row { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  nav.topnav .brand-lockup {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; letter-spacing: -0.2px;
+    color: var(--ink);
+  }
+  nav.topnav .brand-lockup:hover { text-decoration: none; }
+  nav.topnav .mark {
+    width: 32px; height: 32px; border-radius: 8px; overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 4px 10px -4px rgba(10,132,255,0.4);
+  }
+  nav.topnav .mark img { width: 100%; height: 100%; display: block; }
+  nav.topnav .name .accent {
+    background-image: linear-gradient(180deg, #0a84ff 0%, #1E3A8A 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  nav.topnav ul.links { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav.topnav ul.links a { color: var(--slate); font-size: 14px; font-weight: 500; }
+  nav.topnav ul.links a:hover { color: var(--ink); text-decoration: none; }
+  @media (max-width: 760px) { nav.topnav ul.links { display: none; } }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px; border-radius: 999px;
+    font-weight: 600; font-size: 14px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform 120ms var(--ease), background 200ms var(--ease), box-shadow 200ms var(--ease);
+    text-decoration: none; font-family: inherit;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary {
+    background: linear-gradient(180deg, #0a84ff 0%, #0066d6 100%);
+    color: #fff !important;
+    box-shadow: 0 6px 18px -6px rgba(10,132,255,0.5);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(180deg, #2294ff 0%, #0a84ff 100%);
+    box-shadow: 0 10px 24px -6px rgba(10,132,255,0.6);
+  }
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--line-strong); background: transparent;
+    border-radius: 999px; color: var(--ink); cursor: pointer;
+    transition: background 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .theme-toggle:hover { background: var(--surface-soft); border-color: var(--ink); }
+  body.theme-dark .theme-toggle .icon-moon { display: none; }
+  body:not(.theme-dark) .theme-toggle .icon-sun { display: none; }
+
+  /* ─── Page-specific: long-form trust page ─── */
+  .page-hero {
+    padding: 130px 0 50px;
+    background:
+      radial-gradient(800px 320px at 50% 0%, rgba(10,132,255,0.07), transparent 65%),
+      var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  .page-hero .crumb {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--navy); font-weight: 600; margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .page-hero .crumb::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue); box-shadow: 0 0 0 4px rgba(10,132,255,0.18);
+  }
+  .page-hero h1 {
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 700; letter-spacing: -1.4px; line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .page-hero p {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: var(--slate);
+    max-width: 60ch; margin: 0;
+    line-height: 1.55;
+  }
+
+  /* Two-column doc layout — shared with legal.html. Sticky sidebar
+     on the left, reading content on the right. Collapses to a single
+     column with the sidebar above the content on narrow screens. */
+  .doc-layout {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 56px;
+  }
+  @media (max-width: 880px) {
+    .doc-layout {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 40px 20px 72px;
+    }
+  }
+
+  /* Sidebar */
+  aside.doc-sidebar {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  @media (max-width: 880px) {
+    aside.doc-sidebar {
+      position: static;
+      max-height: none;
+      overflow: visible;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+  }
+  .doc-sidebar .sidebar-title {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .doc-sidebar ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  @media (max-width: 880px) {
+    .doc-sidebar ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  }
+  .doc-sidebar li { margin: 0; }
+  .doc-sidebar a {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--slate);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease);
+  }
+  .doc-sidebar a:hover {
+    background: var(--surface-soft);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .doc-sidebar a.is-active {
+    background: var(--blue-soft);
+    color: var(--navy);
+    border-color: rgba(10,132,255,0.18);
+  }
+  .doc-sidebar .count {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 1px 7px;
+    border-radius: 999px;
+    min-width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .doc-sidebar a.is-active .count {
+    background: rgba(10,132,255,0.10);
+    border-color: rgba(10,132,255,0.25);
+    color: var(--navy);
+  }
+  /* Soft "your active section sits inside this group" state — applied
+     to the parent link while a child sub-item is the leaf .is-active.
+     Subtler than .is-active so the leaf still reads as the primary. */
+  .doc-sidebar a.is-active-ancestor {
+    background: var(--surface-soft);
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+  .doc-sidebar a.is-active-ancestor .count {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  /* Nested sub-list — H3 entries under a parent H2. Indented with a
+     thin guide rule on the left so the hierarchy is unmistakable.
+     Hidden on mobile because the sidebar is already a horizontal
+     wrap there and nesting reads badly. */
+  .doc-sidebar ul.sub {
+    display: flex; flex-direction: column;
+    gap: 1px;
+    margin: 4px 0 6px 16px;
+    padding: 0 0 0 12px;
+    border-left: 1px solid var(--line);
+    list-style: none;
+  }
+  .doc-sidebar ul.sub a {
+    padding: 6px 10px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .doc-sidebar ul.sub a:hover {
+    color: var(--ink);
+    background: var(--surface-soft);
+  }
+  .doc-sidebar ul.sub a.is-active {
+    background: var(--blue-soft);
+    color: var(--navy);
+    border-color: rgba(10,132,255,0.18);
+  }
+  .doc-sidebar ul.sub .count {
+    font-size: 10px;
+    padding: 1px 6px;
+    min-width: 20px;
+  }
+  @media (max-width: 880px) {
+    .doc-sidebar ul.sub { display: none; }
+  }
+
+  /* Reading column — same prose styles as the old article.prose */
+  article.prose, .doc-content {
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.7;
+    min-width: 0;
+  }
+  /* When the article is wrapped in doc-layout, the layout's grid column
+     manages width — drop the article's own max-width / margin / padding
+     so we don't double-pad. */
+  article.prose.doc-content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  /* Standalone article (no sidebar) keeps its old reading-column behaviour. */
+  article.prose:not(.doc-content) {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+  @media (max-width: 640px) {
+    article.prose:not(.doc-content) { padding: 48px 20px 72px; font-size: 16px; }
+    article.prose.doc-content { font-size: 16px; }
+  }
+  article.prose h2 {
+    font-size: 24px; font-weight: 700; letter-spacing: -0.4px;
+    margin: 56px 0 16px; color: var(--ink);
+  }
+  article.prose h2:first-child { margin-top: 0; }
+  article.prose h3 {
+    font-size: 18px; font-weight: 600; margin: 32px 0 12px;
+    color: var(--ink); letter-spacing: -0.2px;
+  }
+  article.prose p { margin: 0 0 18px; color: var(--slate); }
+  article.prose strong { color: var(--ink); font-weight: 600; }
+  article.prose em { color: var(--ink); }
+  article.prose ul, article.prose ol {
+    margin: 0 0 22px; padding-left: 24px;
+  }
+  article.prose li {
+    margin-bottom: 10px; color: var(--slate);
+  }
+  article.prose li strong { color: var(--ink); }
+  article.prose code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    padding: 2px 6px;
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--ink);
+  }
+  article.prose blockquote {
+    margin: 24px 0;
+    padding: 14px 20px;
+    border-left: 3px solid var(--blue);
+    background: var(--surface-soft);
+    border-radius: 0 10px 10px 0;
+    color: var(--slate);
+  }
+  article.prose blockquote p:last-child { margin-bottom: 0; }
+  article.prose hr {
+    margin: 48px 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  /* Anchor link affordance for headings */
+  article.prose h2 a.anchor, article.prose h3 a.anchor {
+    color: var(--muted);
+    margin-left: 8px;
+    opacity: 0;
+    text-decoration: none;
+    font-weight: 400;
+    transition: opacity 150ms var(--ease);
+  }
+  article.prose h2:hover a.anchor, article.prose h3:hover a.anchor { opacity: 0.6; }
+  article.prose h2 a.anchor:hover, article.prose h3 a.anchor:hover { opacity: 1; }
+
+  /* ─── App Store-style "Data Not Collected" callout ───
+     Mirrors Apple's privacy nutrition card on the App Store listing,
+     so the page opens with the exact shape users already trust.
+     Adapts for light + dark mode (iOS systemGray6 light surface →
+     iOS systemGray6 dark surface). Compact width — sits centred
+     inside the article column instead of taking the full reading
+     width. Selectors are prefixed with article.prose to outrank
+     the prose typography rules above. */
+  article.prose .app-store-callout {
+    max-width: 460px;
+    margin: 0 auto 56px;
+    padding: 40px 32px;
+    background: #f2f2f7;                                 /* iOS light */
+    color: #1c1c1e;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 12px 32px -12px rgba(15, 23, 42, 0.10);
+  }
+  @media (max-width: 540px) {
+    article.prose .app-store-callout { padding: 32px 22px; }
+  }
+  article.prose .app-store-callout .tick {
+    display: block;
+    margin: 0 auto 18px;
+    width: 52px; height: 52px;
+  }
+  article.prose .app-store-callout h3 {
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.3px; line-height: 1.2;
+    margin: 0 0 8px;
+    color: inherit;
+    text-align: center;
+  }
+  article.prose .app-store-callout p {
+    font-size: 15.5px;
+    color: #6c6c80;                                       /* iOS sub-light */
+    margin: 0 auto;
+    max-width: 32ch;
+    line-height: 1.5;
+    text-align: center;
+  }
+  /* Dark-mode swap — system preference + manual override both honoured */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) article.prose .app-store-callout {
+      background: #1c1c1e;
+      color: #f5f5f7;
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.30);
+    }
+    :root:not([data-theme="light"]) article.prose .app-store-callout p {
+      color: #a1a1a6;
+    }
+  }
+  :root[data-theme="dark"] article.prose .app-store-callout {
+    background: #1c1c1e;
+    color: #f5f5f7;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.30);
+  }
+  :root[data-theme="dark"] article.prose .app-store-callout p {
+    color: #a1a1a6;
+  }
+
+  /* Highlight cards for "what we do" / "what we don't do" lists */
+  .claim-card {
+    margin: 24px 0;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-soft);
+  }
+  .claim-card.no   { border-left: 3px solid #16a34a; }
+  .claim-card.yes  { border-left: 3px solid #f59e0b; }
+  .claim-card h3 { margin-top: 0; }
+  .claim-card ul:last-child { margin-bottom: 0; }
+
+  /* Subprocessor cards — one per third-party endpoint the app calls */
+  .subproc-group { margin: 28px 0 8px; }
+  .subproc-group h3 {
+    font-size: 16px; font-weight: 600; letter-spacing: -0.2px;
+    margin: 0 0 4px; color: var(--ink);
+  }
+  .subproc-group .group-sub {
+    font-size: 14px; color: var(--muted); margin: 0 0 14px; line-height: 1.55;
+  }
+  .subproc-card {
+    margin: 12px 0;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .subproc-card .head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .subproc-card h4 {
+    margin: 0; font-size: 15px; font-weight: 600;
+    color: var(--ink); letter-spacing: -0.2px;
+  }
+  .subproc-card .endpoint {
+    display: block;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin: 8px 0 12px;
+    word-break: break-all;
+  }
+  .subproc-card dl {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 6px 14px;
+    margin: 8px 0 0;
+    font-size: 14px;
+  }
+  @media (max-width: 540px) {
+    .subproc-card dl { grid-template-columns: 1fr; gap: 2px 0; }
+    .subproc-card dt { margin-top: 8px; }
+  }
+  .subproc-card dt {
+    font-weight: 600; color: var(--ink);
+    font-size: 13px;
+  }
+  .subproc-card dd {
+    margin: 0; color: var(--slate);
+  }
+  .subproc-card .their-policy {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px;
+  }
+  .nec-chip {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .nec-required { background: #FEE2E2; color: #991B1B; }
+  .nec-optional { background: #FEF3C7; color: #92400E; }
+  .nec-on-demand { background: var(--blue-soft); color: var(--navy); }
+  :root[data-theme="dark"] .nec-required  { background: rgba(255,69,58,0.15); color: #FCA5A5; }
+  :root[data-theme="dark"] .nec-optional  { background: rgba(255,159,10,0.15); color: #FBBF24; }
+  :root[data-theme="dark"] .nec-on-demand { background: rgba(10,132,255,0.18); color: #7BBEFF; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .nec-required  { background: rgba(255,69,58,0.15); color: #FCA5A5; }
+    :root:not([data-theme="light"]) .nec-optional  { background: rgba(255,159,10,0.15); color: #FBBF24; }
+    :root:not([data-theme="light"]) .nec-on-demand { background: rgba(10,132,255,0.18); color: #7BBEFF; }
+  }
+
+  .meta-line {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  /* ─── Footer (mirrors index.html) ─── */
+  footer.site-footer {
+    background: linear-gradient(180deg, #08080f 0%, #050509 100%);
+    color: #C7D2DC; padding: 60px 0 40px;
+  }
+  footer.site-footer .row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
+  @media (max-width: 800px) { footer.site-footer .row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { footer.site-footer .row { grid-template-columns: 1fr; } }
+  footer.site-footer h5 { color: #fff; font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 600; margin: 0 0 12px; }
+  footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
+  footer.site-footer li { padding: 4px 0; }
+  footer.site-footer a { color: #C7D2DC; font-size: 14px; }
+  footer.site-footer a:hover { color: #fff; }
+  footer.site-footer .credit {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    color: #94A3B8; font-size: 12px;
+  }
+  footer.site-footer .brand-foot { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  footer.site-footer .brand-foot .mark { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+  footer.site-footer .brand-foot .mark img { width: 100%; height: 100%; }
+  footer.site-footer .brand-foot .name { color: #fff; font-weight: 600; font-size: 16px; letter-spacing: -0.2px; }
+  footer.site-footer .brand-foot .name .accent {
+    background-image: linear-gradient(180deg, #5AB1FF 0%, #0a84ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  footer.site-footer .desc { color: #94A3B8; font-size: 13.5px; max-width: 32ch; line-height: 1.55; }
+
+  /* ─── Mobile + iOS polish ───
+     Placed last so it overrides the design rules above without
+     editing them. Covers the common iOS-Safari quirks:
+       1. Auto text-resize on rotation (text-size-adjust).
+       2. Grey tap flash on touch (tap-highlight-color).
+       3. Notched-device side insets (env(safe-area-inset-*)).
+       4. Touch targets too tight for fingertaps (44×44 minimum). */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body { -webkit-tap-highlight-color: transparent; }
+  .container {
+    padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right));
+  }
+  @media (max-width: 640px) {
+    .container {
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+    }
+  }
+  @media (pointer: coarse) {
+    .btn { min-height: 44px; }
+    .theme-toggle { width: 44px; height: 44px; }
+    nav.topnav ul.links a { padding: 10px 0; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav class="topnav" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand-lockup" aria-label="privacytracker home">
+      <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-128.png" alt="" /></span>
+      <span class="name">privacy<span class="accent">tracker</span></span>
+    </a>
+    <ul class="links" role="list">
+      <li><a href="index.html#how">How it helps</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#install">Install</a></li>
+    </ul>
+    <span style="display:inline-flex;align-items:center;gap:6px;">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="index.html#install" class="btn btn-primary" aria-label="Download privacytracker">Download</a>
+    </span>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="container">
+    <span class="crumb">Privacy policy</span>
+    <h1>We don't collect your data.</h1>
+    <p>privacytracker runs on your machine. There's no server-side account system, no analytics pipeline, no data broker in the loop. Because "we don't collect anything" is cheap to say, this page also lists every third-party endpoint the app may contact while you use it — so the full shape of what actually goes over the wire is visible.</p>
+    <p style="font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:13px;color:var(--muted);margin-top:14px;">Last updated April 2026</p>
+  </div>
+</header>
+
+<div class="doc-layout">
+
+  <aside class="doc-sidebar" aria-label="Privacy policy navigation">
+    <p class="sidebar-title">Jump to</p>
+    <ul>
+      <li><a href="#disclosure"    data-target="disclosure"><span>Disclosure</span></a></li>
+      <li>
+        <a href="#subprocessors"   data-target="subprocessors"><span>Third parties</span><span class="count">10</span></a>
+        <ul class="sub">
+          <li><a href="#subproc-app-store" data-target="subproc-app-store" data-parent="subprocessors"><span>App Store</span><span class="count">3</span></a></li>
+          <li><a href="#subproc-policies"  data-target="subproc-policies"  data-parent="subprocessors"><span>Dev policies</span><span class="count">1</span></a></li>
+          <li><a href="#subproc-archives"  data-target="subproc-archives"  data-parent="subprocessors"><span>Wayback</span><span class="count">3</span></a></li>
+          <li><a href="#subproc-ai"        data-target="subproc-ai"        data-parent="subprocessors"><span>AI providers</span><span class="count">3</span></a></li>
+        </ul>
+      </li>
+      <li><a href="#offline"       data-target="offline"><span>Going offline</span></a></li>
+      <li><a href="#alternatives"  data-target="alternatives"><span>Other summarisers</span></a></li>
+      <li><a href="#questions"     data-target="questions"><span>Questions</span></a></li>
+    </ul>
+  </aside>
+
+  <article class="prose doc-content">
+
+  <div id="disclosure" class="app-store-callout" role="img" aria-label="Privacy disclosure: data not collected. The developer does not collect any data from this app.">
+    <div class="tick">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+        <circle cx="26" cy="26" r="23" stroke="#0a84ff" stroke-width="3" />
+        <path d="M15 27 L22 34 L37 19" stroke="#0a84ff" stroke-width="4"
+              stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg>
+    </div>
+    <h3>Data Not Collected</h3>
+    <p>The developer does not collect any data from this app.</p>
+  </div>
+
+  <h2 id="subprocessors">Third parties the app talks to<a href="#subprocessors" class="anchor" aria-label="Link to this section">#</a></h2>
+
+  <p>When you use privacytracker, it calls a small number of public endpoints on your behalf. Nothing here sends your personal identifiers — but these hosts see standard HTTP request metadata (your IP, your User-Agent, the URL you're fetching), so we list them all.</p>
+
+  <p>Nothing in the <em>browser</em> talks to a third party — Inter, the icons, every script and stylesheet are served from the same origin as the app. The list below is everything the <em>server</em> fetches on your behalf.</p>
+
+  <div class="subproc-group">
+    <h3 id="subproc-app-store">App Store &amp; metadata</h3>
+    <p class="group-sub">Required for the core loop. Without these the app can't find, identify, or sync iOS apps.</p>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Apple — iTunes Search API</h4>
+        <span class="nec-chip nec-required">Required</span>
+      </div>
+      <code class="endpoint">itunes.apple.com/search · itunes.apple.com/lookup</code>
+      <dl>
+        <dt>When it runs</dt><dd>Whenever you search for an app by name during onboarding, or when the app syncs metadata (version, developer, icon).</dd>
+        <dt>What we send</dt><dd>The app name you typed, or a known Apple track ID, plus the country code you picked (default AU).</dd>
+        <dt>What we receive</dt><dd>A public-catalogue JSON payload: track ID, name, developer, icon URL, App Store URL, current version.</dd>
+      </dl>
+      <p class="their-policy"><a href="https://www.apple.com/legal/privacy/en-ww/" rel="noopener">Apple's privacy policy ↗</a></p>
+    </div>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Apple — App Store web listing</h4>
+        <span class="nec-chip nec-required">Required</span>
+      </div>
+      <code class="endpoint">apps.apple.com/&lt;country&gt;/app/&lt;slug&gt;/id&lt;id&gt;</code>
+      <dl>
+        <dt>When it runs</dt><dd>During every privacy-label scrape — initial import, manual resync, and the 30-minute background sync.</dd>
+        <dt>What we send</dt><dd>A standard browser-style HTTP GET with a Referer of <code>apps.apple.com</code>. No cookies, no identifiers.</dd>
+        <dt>What we receive</dt><dd>The App Store page HTML, which the app parses for the privacy label JSON blob and developer's privacy policy link.</dd>
+      </dl>
+    </div>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Apple — mzstatic image CDN</h4>
+        <span class="nec-chip nec-required">Required</span>
+      </div>
+      <code class="endpoint">is1-ssl.mzstatic.com (and siblings)</code>
+      <dl>
+        <dt>When it runs</dt><dd>Only when your browser renders an app icon returned by the Apple lookup — Apple host the icons here directly.</dd>
+        <dt>What we send</dt><dd>Nothing beyond a standard image request.</dd>
+        <dt>What we receive</dt><dd>PNG / JPG icon bytes.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="subproc-group">
+    <h3 id="subproc-policies">Developer privacy policies</h3>
+    <p class="group-sub">Directly from whichever host the developer publishes on. We don't route this through any intermediary.</p>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Developer-published privacy policy URLs</h4>
+        <span class="nec-chip nec-required">Required</span>
+      </div>
+      <code class="endpoint">Whatever host the developer links to on the App Store page</code>
+      <dl>
+        <dt>When it runs</dt><dd>Each time you resync an app or the 30-minute background sync runs, we follow the privacy-policy link Apple publishes on the App Store page for that app.</dd>
+        <dt>What we send</dt><dd>A standard HTTP GET. No cookies, no identifiers.</dd>
+        <dt>What we receive</dt><dd>The HTML of the developer's published privacy policy.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="subproc-group">
+    <h3 id="subproc-archives">Historical archives (opt-in)</h3>
+    <p class="group-sub">Only contacted if you explicitly run a Wayback import from <code>Settings → Wayback import</code>.</p>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Internet Archive — Wayback availability API</h4>
+        <span class="nec-chip nec-on-demand">On-demand</span>
+      </div>
+      <code class="endpoint">archive.org/wayback/available</code>
+      <dl>
+        <dt>When it runs</dt><dd>Only when you explicitly run a historical Wayback import (once per app, per calendar quarter).</dd>
+        <dt>What we send</dt><dd>The App Store URL you're trying to back-fill, plus a target timestamp. No cookies, no identifiers.</dd>
+        <dt>What we receive</dt><dd>The closest available Wayback capture URL for that timestamp.</dd>
+      </dl>
+      <p class="their-policy"><a href="https://archive.org/about/terms.php" rel="noopener">Internet Archive's terms ↗</a></p>
+    </div>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Internet Archive — Wayback Machine replay</h4>
+        <span class="nec-chip nec-on-demand">On-demand</span>
+      </div>
+      <code class="endpoint">web.archive.org/web/&lt;timestamp&gt;id_/&lt;original&gt;</code>
+      <dl>
+        <dt>When it runs</dt><dd>Follow-up to the availability API — downloads the archived App Store HTML so we can re-parse it against the same schema as a live scrape.</dd>
+        <dt>What we send</dt><dd>A standard HTTP GET.</dd>
+        <dt>What we receive</dt><dd>The archived HTML with Wayback's toolbar injector disabled (<code>id_</code> suffix).</dd>
+      </dl>
+    </div>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Internet Archive — Save Page Now</h4>
+        <span class="nec-chip nec-on-demand">On-demand</span>
+      </div>
+      <code class="endpoint">web.archive.org/save/&lt;url&gt;</code>
+      <dl>
+        <dt>When it runs</dt><dd>Only fired when a historical import finds an empty quarter with no existing capture — we ask the Archive to create one for future runs.</dd>
+        <dt>What we send</dt><dd>The public App Store URL of the app. Nothing else.</dd>
+        <dt>What we receive</dt><dd>An HTTP response indicating whether the snapshot request was accepted; no data stored client-side.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="subproc-group">
+    <h3 id="subproc-ai">AI providers (opt-in)</h3>
+    <p class="group-sub">Not contacted unless you turn on AI summaries in <code>Settings → AI Policy Summaries</code> and pick a provider. The default is "disabled".</p>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>OpenAI API</h4>
+        <span class="nec-chip nec-optional">Optional</span>
+      </div>
+      <code class="endpoint">api.openai.com</code>
+      <dl>
+        <dt>When it runs</dt><dd>Only if you set the AI provider to "OpenAI" in Settings → AI and supply your own API key.</dd>
+        <dt>What we send</dt><dd>The scraped developer privacy policy text plus a structured-summary prompt. No app data beyond what's in the policy.</dd>
+        <dt>What we receive</dt><dd>A JSON summary keyed by the lenses defined in <code>lib/privacy-policy.ts</code>.</dd>
+      </dl>
+      <p class="their-policy"><a href="https://openai.com/policies/privacy-policy" rel="noopener">OpenAI's privacy policy ↗</a></p>
+    </div>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Anthropic API</h4>
+        <span class="nec-chip nec-optional">Optional</span>
+      </div>
+      <code class="endpoint">api.anthropic.com</code>
+      <dl>
+        <dt>When it runs</dt><dd>Only if you explicitly set the AI provider to "Anthropic" in Settings → AI and supply your own API key.</dd>
+        <dt>What we send</dt><dd>The same scraped policy text + summary prompt.</dd>
+        <dt>What we receive</dt><dd>A JSON summary.</dd>
+      </dl>
+      <p class="their-policy"><a href="https://www.anthropic.com/legal/privacy" rel="noopener">Anthropic's privacy policy ↗</a></p>
+    </div>
+
+    <div class="subproc-card">
+      <div class="head">
+        <h4>Custom / local AI endpoint</h4>
+        <span class="nec-chip nec-optional">Optional</span>
+      </div>
+      <code class="endpoint">Whatever base URL you configure (default 127.0.0.1:11434)</code>
+      <dl>
+        <dt>When it runs</dt><dd>Only if you set the AI provider to "Custom" in Settings → AI. Intended for local models — no data leaves your network if the endpoint is local (Ollama, LM Studio, llama.cpp).</dd>
+        <dt>What we send</dt><dd>Scraped policy text + summary prompt.</dd>
+        <dt>What we receive</dt><dd>A JSON summary.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h2 id="offline">Going fully offline<a href="#offline" class="anchor" aria-label="Link to this section">#</a></h2>
+
+  <p>The website you're reading right now makes zero third-party connections — Inter is self-hosted, every asset is served from the same origin. Server-side, you can cut the last two optional outbound calls from inside the app:</p>
+
+  <ul>
+    <li><strong>AI summaries</strong> — open <code>Settings → AI Policy Summaries</code> and set the provider to "Disabled", or point it at a local Ollama endpoint to keep summarisation on-device.</li>
+    <li><strong>Wayback imports</strong> — leave them alone. They're opt-in, so never running them keeps the Internet Archive out of the picture entirely.</li>
+  </ul>
+
+  <p>That leaves only Apple's own endpoints (iTunes Search + App Store pages) and the developer privacy-policy links you explicitly scrape — both of which are the point of the app.</p>
+
+  <h2 id="alternatives">Other privacy-policy summarisers<a href="#alternatives" class="anchor" aria-label="Link to this section">#</a></h2>
+
+  <p>privacytracker's AI summaries are one way to make sense of long policy documents, but they're opt-in and narrow by design — we only summarise policies for apps you've actively added. Two long-running third-party projects tackle the same problem across a much wider catalogue:</p>
+
+  <ul>
+    <li><strong><a href="https://tosdr.org/" rel="noopener">Terms of Service; Didn't Read (ToSDR) ↗</a></strong> — community-reviewed grades for thousands of services, each broken down into plain-language "points" (good / neutral / blocker) with links back to the clause they came from.</li>
+    <li><strong><a href="https://privacyspy.org/" rel="noopener">PrivacySpy ↗</a></strong> — open-source, machine-readable scoring of privacy policies across a curated list of services, with rubric-backed reasons for every rating.</li>
+  </ul>
+
+  <p>privacytracker has no affiliation with either project — they're listed because they're a useful complement to what this app does. If you decide to use either service, read <em>their</em> terms and privacy policy first.</p>
+
+  <h2 id="questions">Questions or corrections<a href="#questions" class="anchor" aria-label="Link to this section">#</a></h2>
+
+  <p>If something on this page looks wrong, incomplete, or has drifted from what the app actually does, please <a href="https://github.com/privacykey/privacytracker/issues" rel="noopener">open an issue on GitHub</a>. For security disclosures, follow <a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a> instead — encrypted email or GitHub Private Vulnerability Reporting.</p>
+
+  <p>The full list of bundled libraries and their licences is on the <a href="legal.html">legal page</a>.</p>
+
+  <hr />
+
+  <p class="meta-line">Last updated April 2026. If our practices change, we update this page and note the date here.</p>
+
+  </article>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="brand-foot">
+          <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-256.png" alt="" /></span>
+          <span class="name">privacy<span class="accent">tracker</span></span>
+        </div>
+        <p class="desc">A privacykey project. Free, open-source, made for people who want answers — not warnings.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#how">How it helps</a></li>
+          <li><a href="index.html#install">Install</a></li>
+          <li><a href="index.html#help">Help a friend</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>About this site</h5>
+        <ul>
+          <li><a href="about.html">About privacykey</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="legal.html">Legal &amp; licences</a></li>
+          <li><a href="/.well-known/security.txt" rel="noopener">security.txt</a></li>
+          <li><a href="/llms.txt" rel="noopener">llms.txt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Source</h5>
+        <ul>
+          <li><a href="https://github.com/privacykey/privacytracker" rel="noopener">GitHub repo</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/LICENSE" rel="noopener">License (Apache 2.0)</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">Report a security issue</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="credit">
+      <div>© 2026 privacykey. privacytracker is free and open-source.</div>
+      <div>Made with care, in plain English.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (mirrors index.html)
+  (function () {
+    var STORAGE_KEY = 'pt-theme';
+    var html = document.documentElement;
+    var body = document.body;
+    var btn  = document.getElementById('themeToggle');
+    var mql  = window.matchMedia('(prefers-color-scheme: dark)');
+    function resolved () {
+      var explicit = html.getAttribute('data-theme');
+      if (explicit === 'dark' || explicit === 'light') return explicit;
+      return mql.matches ? 'dark' : 'light';
+    }
+    function sync () {
+      var isDark = resolved() === 'dark';
+      body.classList.toggle('theme-dark', isDark);
+      if (btn) {
+        btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      }
+    }
+    sync();
+    if (mql.addEventListener) mql.addEventListener('change', function () { if (!html.getAttribute('data-theme')) sync(); });
+    if (btn) btn.addEventListener('click', function () {
+      var next = resolved() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+      sync();
+    });
+  })();
+
+  // Sidebar scrollspy — IntersectionObserver picks the topmost section
+  // whose heading is inside a thin band in the upper third of the
+  // viewport. The active link gets .is-active; if that link declares
+  // a data-parent, the parent (and any grandparent) get the softer
+  // .is-active-ancestor state so the user sees both "you are here"
+  // and "this is the section that contains it".
+  (function () {
+    var sidebarLinks = Array.from(document.querySelectorAll('aside.doc-sidebar a[data-target]'));
+    if (!sidebarLinks.length) return;
+    var byTarget = {};
+    sidebarLinks.forEach(function (a) { byTarget[a.dataset.target] = a; });
+
+    var sections = sidebarLinks
+      .map(function (a) { return document.getElementById(a.dataset.target); })
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    function setActive (id) {
+      sidebarLinks.forEach(function (a) {
+        a.classList.remove('is-active', 'is-active-ancestor');
+      });
+      var leaf = byTarget[id];
+      if (!leaf) return;
+      leaf.classList.add('is-active');
+      // Walk up the data-parent chain. Loop-guarded in case of a
+      // misconfigured cycle.
+      var parentId = leaf.dataset.parent;
+      var hops = 0;
+      while (parentId && hops++ < 8) {
+        var ancestor = byTarget[parentId];
+        if (!ancestor) break;
+        ancestor.classList.add('is-active-ancestor');
+        parentId = ancestor.dataset.parent;
+      }
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      var visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+      if (visible.length) setActive(visible[0].target.id);
+    }, {
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0,
+    });
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
+</body>
+</html>

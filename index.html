@@ -1,0 +1,2878 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+<!-- ─────────────────────────────────────────────────────────
+     Page identity
+     ───────────────────────────────────────────────────────── -->
+<title>privacytracker — See what your iOS apps quietly collect</title>
+<meta name="description" content="privacytracker is a free Mac app that watches every iOS app's privacy labels for silent changes. When an app starts collecting more about you — your location, contacts, photos — you'll know. From the makers of privacykey." />
+<meta name="application-name" content="privacytracker" />
+<meta name="keywords" content="privacy, iOS, app store, privacy labels, data tracking, privacy app, Mac app, open source privacy, app permissions, iOS privacy tracker" />
+<meta name="author" content="privacykey" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="googlebot" content="index, follow" />
+<link rel="canonical" href="https://privacytracker.privacykey.org/" />
+
+<!-- Theme colour — matches the active scheme so iOS Safari's
+     status bar and Android's chrome bar stay consistent. -->
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08080f" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+
+<!-- ─────────────────────────────────────────────────────────
+     Favicon family — covers browsers, Android, iOS, PWA install
+     favicon.ico has 16/24/32/48/64 embedded so older browsers
+     and pinned-tab use cases all resolve cleanly.
+     ───────────────────────────────────────────────────────── -->
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" href="assets/logo/privacytracker-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/logo/privacytracker-128.png" type="image/png" sizes="128x128" />
+<link rel="icon" href="assets/logo/privacytracker-192.png" type="image/png" sizes="192x192" />
+<link rel="icon" href="assets/logo/privacytracker-512.png" type="image/png" sizes="512x512" />
+<link rel="apple-touch-icon" href="assets/logo/privacytracker-180.png" sizes="180x180" />
+<link rel="apple-touch-icon" href="assets/logo/privacytracker-256.png" sizes="256x256" />
+<link rel="mask-icon" href="assets/logo/privacytracker-512.png" color="#0a84ff" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="privacytracker" />
+<meta name="msapplication-TileColor" content="#08080f" />
+<meta name="msapplication-TileImage" content="assets/logo/privacytracker-256.png" />
+
+<!-- ─────────────────────────────────────────────────────────
+     Open Graph (Facebook, LinkedIn, iMessage, Slack, Discord)
+     1200×630 share image lives at assets/social/og-image.png
+     ───────────────────────────────────────────────────────── -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="privacytracker" />
+<meta property="og:title" content="privacytracker — See what your iOS apps quietly collect" />
+<meta property="og:description" content="A free Mac app that watches every iOS app's privacy labels for silent changes. When an app starts collecting more about you, you'll know." />
+<meta property="og:url" content="https://privacytracker.privacykey.org/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:image" content="https://privacytracker.privacykey.org/assets/social/og-image.png" />
+<meta property="og:image:secure_url" content="https://privacytracker.privacykey.org/assets/social/og-image.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="privacytracker logo — a magnifying glass over binary digits — alongside the headline 'Privacy labels change. Now you'll know.'" />
+
+<!-- ─────────────────────────────────────────────────────────
+     Twitter / X card
+     ───────────────────────────────────────────────────────── -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="privacytracker — See what your iOS apps quietly collect" />
+<meta name="twitter:description" content="A free Mac app that watches every iOS app's privacy labels for silent changes. When an app starts collecting more about you, you'll know." />
+<meta name="twitter:image" content="https://privacytracker.privacykey.org/assets/social/twitter-card.png" />
+<meta name="twitter:image:alt" content="privacytracker logo with the headline 'Privacy labels change. Now you'll know.'" />
+
+<!-- ─────────────────────────────────────────────────────────
+     Schema.org — SoftwareApplication. Helps Google render
+     a richer card (icon, rating, free-price chip).
+     ───────────────────────────────────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "privacytracker",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": "Privacy",
+  "operatingSystem": "macOS, Linux, Windows (self-host)",
+  "description": "A free, open-source Mac app that watches iOS app privacy labels for silent changes and explains every developer privacy policy in plain English.",
+  "url": "https://privacytracker.privacykey.org/",
+  "downloadUrl": "https://github.com/privacykey/privacytracker/releases/latest",
+  "image": "https://privacytracker.privacykey.org/assets/social/og-image.png",
+  "screenshot": "https://privacytracker.privacykey.org/assets/social/og-image.png",
+  "softwareVersion": "1.0",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "privacykey",
+    "url": "https://github.com/privacykey",
+    "logo": "https://privacytracker.privacykey.org/assets/logo/privacytracker-512.png"
+  },
+  "featureList": [
+    "Watches App Store privacy labels for changes",
+    "Plain-English summaries of developer privacy policies",
+    "Cross-app privacy map grouped by data category",
+    "Daily or weekly automatic checks",
+    "Full timeline of changes per app",
+    "Local-first — your data stays on your computer"
+  ]
+}
+</script>
+
+<!-- ─────────────────────────────────────────────────────────
+     Schema.org — FAQPage. Mirrors the on-page #faq section
+     so Google can render the rich-result accordion. Question
+     text and answer text must match the visible DOM verbatim
+     or Google strips the rich result; if you edit one, edit
+     the other.
+     ───────────────────────────────────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is privacytracker really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It's free and open-source under the Apache 2.0 licence. No accounts, no subscriptions, no upsells. The full source is on GitHub for anyone to read or fork."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does privacytracker need access to my iPhone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It only reads the public App Store pages for apps you tell it about — exactly what you'd see if you opened the App Store yourself. Nothing on your phone is touched, paired, or copied across."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does my data go?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Onto your computer, and nowhere else by default. privacytracker keeps a small local database in its own folder. There's no cloud account, no analytics, no telemetry phoning home — that's the point."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's different from looking at the App Store myself?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The App Store only shows you what an app says today. privacytracker remembers what every app said yesterday, last month, last year — and tells you when something quietly changes. It also reads each developer's privacy policy and translates the legalese into plain English."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to be technical to use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at all. The recommended install is a single file: double-click, drag it into Applications, you're done. The Terminal-style options on the install page are there for people who prefer them — they're not required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on Windows or Linux?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The desktop app is Mac-only for now. If you're on Windows or Linux, the \"Run it yourself\" option lets you spin up the same app in Docker — that works on any operating system and takes about a minute of setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it watch Android apps too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not yet. iOS first because Apple's privacy labels are uniquely structured — Google Play doesn't publish the same kind of disclosure. We'd love to add Android once that data is reliably available in a comparable form."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I help a parent or partner without taking over their phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — that's what the Help a friend section is about. privacytracker runs on your computer; your friend just tells you which apps they use and you keep an eye on the labels for them. No remote access, no shared accounts, no awkward setup on their phone."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ─────────────────────────────────────────────────────────
+     AI / LLM crawl etiquette
+     - robots.txt blocks training-data crawlers, allows on-demand
+       agents that cite their sources.
+     - llms.txt is a markdown summary of the site (per llmstxt.org)
+       so cooperating agents don't have to scrape this HTML.
+     ───────────────────────────────────────────────────────── -->
+<link rel="alternate" type="text/markdown" title="llms.txt — site summary for AI agents" href="/llms.txt" />
+
+<!-- ─────────────────────────────────────────────────────────
+     Fonts — preconnect first so the request fans out early
+     ───────────────────────────────────────────────────────── -->
+<!-- Inter is self-hosted from /assets/fonts/ under SIL OFL-1.1 — no
+     Google Fonts round-trip. The variable font collapses every weight
+     into one woff2 file; the italic axis is split so non-italic pages
+     don't pay for it. font-display:swap lets the system fallback show
+     while the woff2 is in flight. -->
+<link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+<script>
+  /* Boot-time theme application — runs before any paint so users
+     who chose dark don't see a white flash on reload. Only sets
+     data-theme when they've explicitly picked one; otherwise
+     prefers-color-scheme drives the page. */
+  (function () {
+    try {
+      var saved = localStorage.getItem('pt-theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) { /* localStorage unavailable */ }
+  })();
+</script>
+<style>
+  /* ── Self-hosted Inter (v4.1, SIL OFL-1.1) ──
+     Two woff2 files in /assets/fonts/. Variable font collapses
+     every weight (100–900) into one file; italic is a separate axis. */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable-Italic.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  }
+
+  /* ============================================================
+     Tokens
+     - Marketing surface: light, navy/blue accents
+     - Mockup surface: matches the privacytracker app UI
+     ============================================================ */
+  :root {
+    /* privacykey neutrals — marketing surface */
+    --ink: #0F172A;
+    --slate: #334155;
+    --muted: #475569;
+    --line: #E2E8F0;
+    --line-strong: #CBD5E1;
+    --surface: #FFFFFF;
+    --surface-soft: #F8FAFC;
+    --surface-softer: #F1F5F9;
+
+    /* Blue brand — primary accent (replaces green) */
+    --navy-deep: #08080f;       /* matches app --bg */
+    --navy: #1E3A8A;            /* privacykey navy */
+    --blue: #0a84ff;            /* Apple system blue — used in app */
+    --blue-hover: #409cff;
+    --blue-soft: #DBEAFE;
+    --blue-softer: #EFF6FF;
+
+    /* Mockup-only tokens (dark UI, mirrors the actual app) */
+    --mock-bg: #08080f;
+    --mock-bg-2: #111118;
+    --mock-bg-3: #18181f;
+    --mock-surface: rgba(255,255,255,0.04);
+    --mock-surface-hover: rgba(255,255,255,0.07);
+    --mock-surface-active: rgba(255,255,255,0.10);
+    --mock-border: rgba(255,255,255,0.07);
+    --mock-border-strong: rgba(255,255,255,0.13);
+    --mock-text: #f0f0f5;
+    --mock-text-2: #a0a0b0;
+    --mock-text-3: #8e8e93;
+    --mock-blue: #0a84ff;
+    --mock-blue-dim: rgba(10,132,255,0.15);
+
+    /* Severity scale — exact from app */
+    --sev-red: #ff453a;
+    --sev-red-dim: rgba(255,69,58,0.12);
+    --sev-orange: #ff9f0a;
+    --sev-orange-dim: rgba(255,159,10,0.12);
+    --sev-yellow: #ffd60a;
+    --sev-yellow-dim: rgba(255,214,10,0.10);
+    --sev-cream: #d8c7a3;
+    --sev-cream-dim: rgba(216,199,163,0.13);
+    --sev-green: #30d158;
+    --sev-green-dim: rgba(48,209,88,0.12);
+
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --radius-xl: 28px;
+
+    --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+    --shadow-md: 0 8px 24px -8px rgba(15,23,42,.10), 0 2px 6px rgba(15,23,42,.04);
+    --shadow-lg: 0 30px 60px -30px rgba(8,8,15,.45), 0 12px 32px -12px rgba(8,8,15,.30);
+    --shadow-blue: 0 20px 60px -20px rgba(10,132,255,.45);
+
+    --duration: 600ms;
+    --ease: cubic-bezier(.2,.7,.2,1);
+
+    /* Themed surfaces — overridden in dark mode below.
+       Centralised here so the dark/light flip is one block. */
+    --hero-bg:
+      radial-gradient(1200px 500px at 80% -10%, rgba(10,132,255,0.10), transparent 65%),
+      radial-gradient(900px 400px at 5% 20%, rgba(30,58,138,0.06), transparent 60%),
+      linear-gradient(180deg, #fff 0%, var(--surface-soft) 100%);
+    --nav-bg: rgba(255,255,255,0.72);
+    --nav-bg-scrolled: rgba(255,255,255,0.88);
+    --help-card-bg: linear-gradient(135deg, #fff 0%, var(--surface-soft) 100%);
+    --help-glow: rgba(10,132,255,0.12);
+    --step-bg: #fff;
+    --accent-from: #0a84ff;
+    --accent-to: #1E3A8A;
+    --link-color: var(--navy);
+    --link-hover: #0066d6;        /* darker blue — passes 4.5:1 on white (5.1:1) */
+    --focus-ring: var(--blue);
+    --selection-bg: var(--blue-soft);
+    --selection-fg: var(--navy);
+    --check-bg: var(--blue-soft);
+    --check-stroke: '%231E3A8A';   /* used inside data: URI for SVG checkmark */
+    --color-scheme: light;
+  }
+
+  /* ============================================================
+     Dark mode — automatic via system, manual override via
+     <html data-theme="dark"> | <html data-theme="light">
+     All token values picked to clear WCAG 2.2 AA (≥4.5:1 body,
+     ≥3:1 large text + UI components) on the matching surface.
+     ============================================================ */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #f0f0f5;             /* 17.6:1 on --surface */
+      --slate: #c7d2dc;           /* 11.5:1 on --surface */
+      --muted: #a0a0b0;           /* 5.9:1 on --surface */
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.18);
+      --surface: #111118;
+      --surface-soft: #18181f;
+      --surface-softer: #1e1e26;
+
+      --navy: #5AB1FF;            /* 8.7:1 on --surface */
+      --blue: #0a84ff;            /* 6.5:1 on --surface */
+      --blue-hover: #5AB1FF;
+      --blue-soft: rgba(10,132,255,0.18);
+      --blue-softer: rgba(10,132,255,0.10);
+
+      --hero-bg:
+        radial-gradient(1200px 500px at 80% -10%, rgba(10,132,255,0.18), transparent 65%),
+        radial-gradient(900px 400px at 5% 20%, rgba(30,58,138,0.16), transparent 60%),
+        linear-gradient(180deg, #14141d 0%, #08080f 100%);
+      --nav-bg: rgba(8,8,15,0.72);
+      --nav-bg-scrolled: rgba(8,8,15,0.88);
+      --help-card-bg: linear-gradient(135deg, #18181f 0%, #111118 100%);
+      --help-glow: rgba(10,132,255,0.18);
+      --step-bg: #18181f;
+      --accent-from: #7BBEFF;
+      --accent-to: #0a84ff;
+      --link-color: #7BBEFF;
+      --link-hover: #ABD3FF;
+      --focus-ring: #5AB1FF;
+      --selection-bg: rgba(10,132,255,0.30);
+      --selection-fg: #f0f0f5;
+      --check-bg: rgba(10,132,255,0.22);
+      --check-stroke: '%237BBEFF';
+      --color-scheme: dark;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.6);
+    }
+  }
+  /* Manual override — wins over the system preference */
+  :root[data-theme="dark"] {
+    --ink: #f0f0f5;
+    --slate: #c7d2dc;
+    --muted: #a0a0b0;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.18);
+    --surface: #111118;
+    --surface-soft: #18181f;
+    --surface-softer: #1e1e26;
+
+    --navy: #5AB1FF;
+    --blue: #0a84ff;
+    --blue-hover: #5AB1FF;
+    --blue-soft: rgba(10,132,255,0.18);
+    --blue-softer: rgba(10,132,255,0.10);
+
+    --hero-bg:
+      radial-gradient(1200px 500px at 80% -10%, rgba(10,132,255,0.18), transparent 65%),
+      radial-gradient(900px 400px at 5% 20%, rgba(30,58,138,0.16), transparent 60%),
+      linear-gradient(180deg, #14141d 0%, #08080f 100%);
+    --nav-bg: rgba(8,8,15,0.72);
+    --nav-bg-scrolled: rgba(8,8,15,0.88);
+    --help-card-bg: linear-gradient(135deg, #18181f 0%, #111118 100%);
+    --help-glow: rgba(10,132,255,0.18);
+    --step-bg: #18181f;
+    --accent-from: #7BBEFF;
+    --accent-to: #0a84ff;
+    --link-color: #7BBEFF;
+    --link-hover: #ABD3FF;
+    --focus-ring: #5AB1FF;
+    --selection-bg: rgba(10,132,255,0.30);
+    --selection-fg: #f0f0f5;
+    --check-bg: rgba(10,132,255,0.22);
+    --check-stroke: '%237BBEFF';
+    --color-scheme: dark;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,.6);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  html { color-scheme: var(--color-scheme); }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+    overflow-x: hidden;
+    transition: background-color 200ms var(--ease), color 200ms var(--ease);
+  }
+  ::selection { background: var(--selection-bg); color: var(--selection-fg); }
+
+  /* Links — colour and hover both clear AA (4.5:1) on the surface in
+     both modes. Underline is also drawn so the affordance survives
+     contrast loss in unusual settings. */
+  a { color: var(--link-color); text-decoration: none; transition: color 150ms var(--ease); }
+  a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Focus ring — 3px solid + 3px offset = 6px total, ≥3:1 against
+     both surface tones. Required by WCAG 2.2 SC 2.4.13 (focus
+     appearance — minimum 2px and the new contrast rule). */
+  :focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  /* Sections that anchor links target need clearance under the sticky
+     nav so the focused heading isn't hidden behind it
+     (WCAG 2.2 SC 2.4.11 Focus Not Obscured). */
+  section[id], h2, h3 { scroll-margin-top: 84px; }
+
+  .skip-link {
+    position: absolute; left: 16px; top: -100px;
+    background: var(--navy-deep); color: #fff;
+    padding: 12px 16px; border-radius: 8px;
+    font-weight: 600; z-index: 1000;
+    transition: top 200ms var(--ease);
+  }
+  .skip-link:focus-visible { top: 16px; color: #fff; text-decoration: none; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 640px) { .container { padding: 0 20px; } }
+
+  /* ============================================================
+     Navigation
+     ============================================================ */
+  nav.topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: var(--nav-bg);
+    border-bottom: 1px solid transparent;
+    transition: background 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  nav.topnav.scrolled {
+    background: var(--nav-bg-scrolled);
+    border-bottom-color: var(--line);
+  }
+  nav.topnav .row {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .brand-lockup {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; color: var(--ink); font-size: 15px;
+    letter-spacing: -0.2px;
+  }
+  .brand-lockup:hover { text-decoration: none; color: var(--ink); }
+  .brand-lockup .mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px -4px rgba(10,132,255,0.4);
+  }
+  .brand-lockup .mark img { width: 100%; height: 100%; display: block; }
+  .brand-lockup .name { color: var(--ink); }
+  .brand-lockup .name .accent {
+    background-image: linear-gradient(180deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  nav.topnav ul.links {
+    list-style: none; display: flex; gap: 28px; margin: 0; padding: 0;
+  }
+  nav.topnav ul.links a {
+    color: var(--slate); font-size: 14px; font-weight: 500;
+  }
+  nav.topnav ul.links a:hover { color: var(--ink); text-decoration: none; }
+  @media (max-width: 980px) {
+    nav.topnav ul.links { gap: 18px; }
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px; border-radius: 999px;
+    font-weight: 600; font-size: 14px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform 120ms var(--ease), background 200ms var(--ease), color 200ms var(--ease), box-shadow 200ms var(--ease);
+    text-decoration: none;
+    font-family: inherit;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary {
+    background: linear-gradient(180deg, #0a84ff 0%, #0066d6 100%);
+    color: #fff !important;
+    box-shadow: 0 6px 18px -6px rgba(10,132,255,0.5);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(180deg, #2294ff 0%, #0a84ff 100%);
+    box-shadow: 0 10px 24px -6px rgba(10,132,255,0.6);
+  }
+  .btn-ghost { background: transparent; color: var(--ink) !important; border-color: var(--line-strong); }
+  .btn-ghost:hover { background: var(--surface-soft); }
+  .btn-lg { padding: 13px 26px; font-size: 15px; }
+
+  /* Theme toggle — icon-only button, ≥36×36 target.
+     Sun visible in dark mode (it offers light), moon in light.
+     Hidden by aria-label so screen readers get a meaningful action. */
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    margin-right: 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .theme-toggle:hover { background: var(--surface-soft); border-color: var(--ink); }
+  .theme-toggle .icon-sun, .theme-toggle .icon-moon { display: block; }
+  /* When the resolved theme is dark we show the sun (so the user can
+     return to light); when light we show the moon. The body picks up
+     a class from the JS so SVGs swap without :has() support concerns. */
+  body.theme-dark .theme-toggle .icon-moon { display: none; }
+  body:not(.theme-dark) .theme-toggle .icon-sun { display: none; }
+
+  @media (max-width: 860px) {
+    nav.topnav ul.links { display: none; }
+  }
+
+  /* ============================================================
+     Hero
+     ============================================================ */
+  .hero {
+    padding: 112px 0 64px;
+    background: var(--hero-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .eyebrow {
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--navy); font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .hero .eyebrow::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue); box-shadow: 0 0 0 4px rgba(10,132,255,0.18);
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5.5vw, 68px);
+    font-weight: 700; letter-spacing: -1.4px;
+    margin: 14px 0 16px; line-height: 1.05;
+    max-width: 22ch;
+  }
+  /* On true desktop the tighter -2px tracking + 1.02 line-height is
+     punchy; below 720px the headline is smaller and the same metrics
+     start to feel cramped. */
+  @media (min-width: 720px) {
+    .hero h1 { letter-spacing: -2px; line-height: 1.02; }
+  }
+  .hero h1 .accent {
+    background-image: linear-gradient(180deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .hero p.lede {
+    font-size: clamp(17px, 1.6vw, 21px);
+    color: var(--slate);
+    max-width: 52ch; margin: 0 0 26px;
+    line-height: 1.5;
+  }
+  .hero .cta-row {
+    display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+    margin-bottom: 34px;
+  }
+  .hero .cta-meta {
+    color: var(--muted); font-size: 13px;
+    display: flex; align-items: center; gap: 8px;
+    max-width: min(100%, 52ch);
+    line-height: 1.4;
+  }
+  .hero .cta-meta::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue); box-shadow: 0 0 0 4px rgba(10,132,255,0.15);
+  }
+
+  /* ============================================================
+     Mockup Window — shared dark-app frame
+     Mirrors the privacytracker app UI
+     ============================================================ */
+  .mock-window {
+    background: var(--mock-bg-2);
+    border-radius: 18px;
+    padding: 0;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 1px solid var(--mock-border-strong);
+  }
+  .mock-titlebar {
+    display: flex; align-items: center; gap: 6px;
+    height: 36px;
+    padding: 0 14px;
+    background: var(--mock-bg-3);
+    border-bottom: 1px solid var(--mock-border);
+  }
+  .mock-titlebar .dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: #3A3A45;
+  }
+  .mock-titlebar .dot.r { background: #FF5F57; }
+  .mock-titlebar .dot.y { background: #FEBC2E; }
+  .mock-titlebar .dot.g { background: #28C840; }
+  .mock-titlebar .title {
+    margin-left: 14px; color: var(--mock-text-2); font-size: 12px;
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Cascadia Code', 'DejaVu Sans Mono', monospace; letter-spacing: 0.3px;
+    min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mock-canvas {
+    background: var(--mock-bg);
+    color: var(--mock-text);
+    min-height: 280px;
+    padding: 0;
+  }
+
+  /* App nav inside mockup */
+  .mock-nav {
+    height: 50px;
+    border-bottom: 1px solid var(--mock-border);
+    display: flex; align-items: center; gap: 18px;
+    padding: 0 18px;
+    background: rgba(8,8,15,0.85);
+    backdrop-filter: blur(20px);
+  }
+  .mock-nav .logo {
+    width: 24px; height: 24px; border-radius: 6px; overflow: hidden;
+    flex-shrink: 0;
+  }
+  .mock-nav .logo img { width: 100%; height: 100%; }
+  .mock-nav .name { font-size: 13px; font-weight: 600; color: var(--mock-text); letter-spacing: -0.01em; }
+  .mock-nav .tabs { display: flex; gap: 2px; margin-left: 12px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .mock-nav .tabs::-webkit-scrollbar { display: none; }
+  .mock-nav .tab {
+    font-size: 12px; font-weight: 500;
+    color: var(--mock-text-3); padding: 7px 12px; border-radius: 7px;
+    min-height: 28px;                              /* WCAG 2.2 SC 2.5.8 */
+    background: transparent; border: 0; cursor: pointer; font-family: inherit;
+    transition: background 120ms var(--ease), color 120ms var(--ease);
+  }
+  .mock-nav .tab:hover { background: var(--mock-surface-hover); color: var(--mock-text); }
+  .mock-nav .tab.active {
+    background: var(--mock-surface-active);
+    color: var(--mock-text);
+  }
+  .mock-nav .right {
+    margin-left: auto; display: flex; gap: 12px; align-items: center;
+    flex-shrink: 0;
+  }
+  .mock-bell {
+    position: relative; width: 32px; height: 32px;
+    border-radius: 50%; background: var(--mock-surface);
+    display: grid; place-items: center;
+    color: var(--mock-text-2);
+  }
+  .mock-bell .badge {
+    position: absolute; top: -2px; right: -2px;
+    background: var(--sev-red); color: #fff;
+    font-size: 9px; font-weight: 700;
+    padding: 2px 5px; border-radius: 999px;
+    border: 2px solid var(--mock-bg-2);
+    line-height: 1;
+  }
+
+  /* ============================================================
+     App Card list (interactive — exact replica of .app-card)
+     ============================================================ */
+  .mock-body { padding: 18px 20px 22px; }
+  .mock-toolbar {
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .filter-chip {
+    font-size: 11px; font-weight: 600;
+    padding: 6px 12px; border-radius: 999px;
+    min-height: 28px; min-width: 28px;            /* WCAG 2.2 SC 2.5.8 target size */
+    background: var(--mock-surface); border: 1px solid var(--mock-border);
+    color: var(--mock-text-2); cursor: pointer; font-family: inherit;
+    transition: all 150ms var(--ease);
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .filter-chip:hover { background: var(--mock-surface-hover); color: var(--mock-text); }
+  .filter-chip.active {
+    background: var(--mock-blue-dim); border-color: rgba(10,132,255,0.4);
+    color: var(--mock-blue);
+  }
+  .filter-chip.sev-red.active   { background: var(--sev-red-dim); border-color: rgba(255,69,58,0.4); color: var(--sev-red); }
+  .filter-chip.sev-orange.active{ background: var(--sev-orange-dim); border-color: rgba(255,159,10,0.4); color: var(--sev-orange); }
+  .filter-chip.sev-yellow.active{ background: var(--sev-yellow-dim); border-color: rgba(255,214,10,0.4); color: var(--sev-yellow); }
+  .filter-chip.sev-green.active { background: var(--sev-green-dim); border-color: rgba(48,209,88,0.4); color: var(--sev-green); }
+
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .app-card {
+    background: var(--mock-surface);
+    border: 1px solid var(--mock-border);
+    border-radius: var(--radius-lg);
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px;
+    transition: transform 0.18s, box-shadow 0.18s, background 0.15s, border-color 0.15s, opacity 0.2s;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .app-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--mock-surface-hover);
+    border-color: var(--mock-border-strong);
+  }
+  .app-card.dim { opacity: 0.25; }
+  .app-card .icon-wrap { position: relative; flex-shrink: 0; }
+  .app-icon {
+    width: 48px; height: 48px; border-radius: 11px;
+    background: linear-gradient(135deg, #6B7280, #9CA3AF);
+    display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 18px;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+  .app-icon.ig { background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+  .app-icon.li { background: linear-gradient(135deg, #0077B5 0%, #00669B 100%); }
+  .app-icon.sp { background: linear-gradient(135deg, #1DB954 0%, #168F40 100%); }
+  .app-icon.st { background: linear-gradient(135deg, #FC4C02 0%, #D63D00 100%); }
+  .app-icon.vn { background: linear-gradient(135deg, #008CFF 0%, #0070D0 100%); }
+  .app-icon.sg { background: linear-gradient(135deg, #2592E9 0%, #1A6EAD 100%); }
+  .app-icon.tk { background: linear-gradient(135deg, #69C9D0 0%, #EE1D52 100%); }
+  .app-icon.uber { background: linear-gradient(135deg, #1F1F1F 0%, #000000 100%); }
+
+  .change-dot-group {
+    position: absolute; top: -3px; right: -3px;
+    display: inline-flex; gap: 3px; pointer-events: none;
+  }
+  .change-dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--sev-orange);
+    border: 2px solid var(--mock-bg);
+    animation: dot-pulse 2s infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,159,10,0.5); }
+    50% { box-shadow: 0 0 0 5px rgba(255,159,10,0); }
+  }
+
+  .app-card-body { flex: 1; min-width: 0; }
+  .app-name {
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--mock-text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .app-developer {
+    font-size: 11.5px; color: var(--mock-text-2);
+    margin-top: 1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .app-meta {
+    display: flex; align-items: center; gap: 6px; margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .severity-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  .severity-badge.linked   { background: var(--sev-orange-dim); color: var(--sev-orange); }
+  .severity-badge.track    { background: var(--sev-red-dim);    color: var(--sev-red); }
+  .severity-badge.unlinked { background: var(--sev-cream-dim);  color: var(--sev-cream); }
+  .severity-badge.none     { background: var(--sev-green-dim);  color: var(--sev-green); }
+  .privacy-type-icon {
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 auto;
+    overflow: visible;
+    color: currentColor;
+    vertical-align: -0.16em;
+  }
+  .privacy-type-icon__node {
+    fill: currentColor;
+    stroke: none;
+  }
+  .severity-badge .privacy-type-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .freshness-badge {
+    font-size: 10px; font-weight: 500;
+    padding: 2px 7px; border-radius: 999px;
+  }
+  .freshness-badge.fresh { background: var(--sev-green-dim); color: var(--sev-green); }
+  .freshness-badge.aging { background: var(--sev-yellow-dim); color: var(--sev-yellow); }
+  .freshness-badge.stale { background: var(--sev-red-dim); color: var(--sev-red); }
+  .permission-count {
+    font-size: 10.5px; color: var(--mock-text-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ============================================================
+     Hero video demo
+     ============================================================ */
+  .hero-video-stage {
+    margin-top: 12px;
+    perspective: 2400px;
+  }
+  .hero-video-frame {
+    max-width: 920px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid var(--mock-border-strong);
+    border-radius: 20px;
+    background: var(--mock-bg-2);
+    box-shadow: var(--shadow-lg), var(--shadow-blue);
+    transform: rotateX(2deg) translateY(0);
+    transition: transform 1200ms var(--ease);
+  }
+  .hero-video-frame.lifted { transform: rotateX(0deg); }
+  .hero-video-shell {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background:
+      radial-gradient(circle at 78% 18%, rgba(10,132,255,0.18), transparent 34%),
+      var(--mock-bg);
+  }
+  .hero-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: var(--mock-bg);
+  }
+  .hero-video-poster {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-items: center;
+    padding: 28px;
+    color: var(--mock-text);
+    background:
+      linear-gradient(180deg, rgba(8,8,15,0.08), rgba(8,8,15,0.55)),
+      url("assets/hero/privacytracker-demo-poster.jpg") center / cover no-repeat,
+      var(--mock-bg);
+    text-align: center;
+  }
+  .hero-video-poster strong {
+    display: block;
+    font-size: clamp(18px, 2.4vw, 28px);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .hero-video-poster span {
+    color: var(--mock-text-2);
+    font-size: 13px;
+  }
+  .hero-video-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 12px;
+    border-top: 1px solid var(--mock-border);
+    background: rgba(8,8,15,0.88);
+  }
+  .hero-video-control {
+    position: relative;
+    overflow: hidden;
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid var(--mock-border);
+    border-radius: 999px;
+    background: var(--mock-surface);
+    color: var(--mock-text-2);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease), transform 150ms var(--ease);
+  }
+  .hero-video-control > span {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-video-control::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--chapter-progress, 0%);
+    background: linear-gradient(90deg, rgba(10,132,255,0.30), rgba(90,177,255,0.18));
+    transition: width 120ms linear;
+  }
+  .hero-video-control:hover {
+    background: var(--mock-surface-hover);
+    color: var(--mock-text);
+    transform: translateY(-1px);
+  }
+  .hero-video-control.active {
+    border-color: rgba(10,132,255,0.45);
+    background: var(--mock-blue-dim);
+    color: #7BBEFF;
+  }
+  .hero-video-progress-meta {
+    flex-basis: 100%;
+    color: var(--mock-text-3);
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .hero-video-progress-meta strong {
+    color: var(--mock-text-2);
+    font-weight: 650;
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 112px 0 52px; }
+    .hero p.lede { margin-bottom: 24px; }
+    .hero .cta-row { margin-bottom: 28px; }
+    .hero-video-frame { border-radius: 14px; }
+    .hero-video-controls { justify-content: flex-start; overflow-x: visible; flex-wrap: wrap; }
+    .hero-video-control { flex: 1 1 calc(50% - 8px); }
+    .hero-video-progress-meta {
+      flex: 1 1 100%;
+      min-width: 100%;
+      text-align: left;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video { display: none; }
+    .hero-video-poster { display: grid; }
+  }
+
+  /* ============================================================
+     Section scaffolding
+     ============================================================ */
+  section {
+    padding: 100px 0;
+    position: relative;
+  }
+  section.tight { padding: 64px 0; }
+  section.bg-soft { background: var(--surface-soft); }
+  section.bg-dark {
+    background: linear-gradient(180deg, #08080f 0%, #111118 100%);
+    color: #E2E8F0;
+  }
+  section.bg-dark h2, section.bg-dark h3 { color: #fff; }
+  section.bg-dark p { color: #C7D2DC; }
+  section.bg-dark .kicker { color: var(--mock-blue); }
+
+  .kicker {
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--navy); font-weight: 600; margin-bottom: 14px;
+    display: block;
+  }
+  h2 {
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 700; letter-spacing: -1.4px;
+    margin: 0 0 16px; line-height: 1.05;
+    max-width: 22ch;
+  }
+  h2 .accent {
+    background-image: linear-gradient(180deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  section.bg-dark h2 .accent {
+    background-image: linear-gradient(180deg, #5AB1FF 0%, #0a84ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  p.intro {
+    color: var(--slate); font-size: clamp(16px, 1.4vw, 19px);
+    max-width: 60ch; line-height: 1.55; margin: 0 0 36px;
+  }
+  section.bg-dark p.intro { color: #C7D2DC; }
+
+  /* ============================================================
+     Reveal-on-scroll
+     ============================================================ */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal.delay-1 { transition-delay: 100ms; }
+  .reveal.delay-2 { transition-delay: 200ms; }
+  .reveal.delay-3 { transition-delay: 300ms; }
+  .reveal.delay-4 { transition-delay: 400ms; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* ============================================================
+     Stage layout
+     ============================================================ */
+  .stage-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .stage-grid.reverse { grid-template-columns: 1fr 1.05fr; }
+  .stage-grid.reverse .stage-copy { order: 2; }
+  @media (max-width: 940px) {
+    .stage-grid, .stage-grid.reverse { grid-template-columns: 1fr; gap: 40px; }
+    .stage-grid.reverse .stage-copy { order: 0; }
+  }
+  .stage-copy h2 { margin-bottom: 16px; }
+  .stage-copy ul.checks {
+    list-style: none; padding: 0; margin: 24px 0 0;
+  }
+  .stage-copy ul.checks li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 8px 0; color: var(--slate); font-size: 16px;
+  }
+  section.bg-dark .stage-copy ul.checks li { color: #C7D2DC; }
+  .stage-copy ul.checks li::before {
+    content: ""; flex-shrink: 0;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--blue-soft) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3.5 8.5l3 3 6-7' fill='none' stroke='%231E3A8A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/12px no-repeat;
+    margin-top: 1px;
+  }
+  /* Dark page surfaces (auto + manual + the always-dark .bg-dark
+     section) — swap the checkmark stroke to the light-blue token so
+     it stays ≥3:1 against the tinted blue background. */
+  section.bg-dark .stage-copy ul.checks li::before,
+  :root[data-theme="dark"] .stage-copy ul.checks li::before {
+    background-color: rgba(10,132,255,0.22);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3.5 8.5l3 3 6-7' fill='none' stroke='%237BBEFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .stage-copy ul.checks li::before {
+      background-color: rgba(10,132,255,0.22);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3.5 8.5l3 3 6-7' fill='none' stroke='%237BBEFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    }
+  }
+
+  /* ============================================================
+     Privacy Map mockup — exact .pmap-card replica with
+     click-to-expand interaction
+     ============================================================ */
+  .pmap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 540px) { .pmap-grid { grid-template-columns: 1fr; } }
+  .pmap-card {
+    background: var(--mock-surface);
+    border: 1px solid var(--mock-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .pmap-card:hover {
+    border-color: var(--mock-border-strong);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+  .pmap-card.is-expanded {
+    border-color: var(--mock-border-strong);
+    box-shadow: var(--shadow-md);
+  }
+  .pmap-card-header {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center; gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    background: transparent; border: 0; text-align: left;
+    cursor: pointer; color: inherit; font: inherit;
+    transition: background 120ms ease;
+  }
+  .pmap-card-header:hover { background: var(--mock-surface-hover); }
+  .pmap-card-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--mock-surface-active);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .pmap-card-title-block { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .pmap-card-title { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--mock-text); }
+  .pmap-card-subtitle { font-size: 11.5px; color: var(--mock-text-3); font-variant-numeric: tabular-nums; }
+  .pmap-card-chevron {
+    width: 26px; height: 26px; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--mock-text-3); background: var(--mock-surface-active);
+    transition: transform 0.2s ease, color 0.15s ease;
+    flex-shrink: 0;
+  }
+  .pmap-card.is-expanded .pmap-card-chevron { transform: rotate(180deg); color: var(--mock-text); }
+  .pmap-card-preview {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 0 14px 12px;
+  }
+  .pmap-preview-stack {
+    display: inline-flex; flex-direction: row-reverse; align-items: center;
+  }
+  .pmap-preview-stack-item {
+    width: 26px; height: 26px; border-radius: 7px;
+    border: 2px solid var(--mock-bg-2);
+    background: var(--mock-bg-3);
+    overflow: hidden;
+    margin-left: -7px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; color: var(--mock-text-2);
+    flex-shrink: 0;
+  }
+  .pmap-preview-more {
+    background: var(--mock-surface-active);
+    color: var(--mock-text-2);
+    font-size: 10px; font-weight: 700;
+  }
+  .pmap-preview-hint { font-size: 11px; color: var(--mock-text-3); }
+  .pmap-card-apps {
+    display: none;
+    border-top: 1px solid var(--mock-border);
+    padding: 6px;
+    flex-direction: column; gap: 2px;
+  }
+  .pmap-card.is-expanded .pmap-card-apps { display: flex; animation: pmap-apps-in 0.18s ease; }
+  @keyframes pmap-apps-in {
+    from { opacity: 0; transform: translateY(-2px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .pmap-app-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 9px; border-radius: var(--radius);
+    text-decoration: none; color: inherit;
+    transition: background 120ms ease;
+  }
+  .pmap-app-row:hover { background: var(--mock-surface-active); }
+  .pmap-app-row .ic {
+    width: 26px; height: 26px; border-radius: 7px; flex-shrink: 0;
+    background: linear-gradient(135deg, #6B7280, #9CA3AF);
+  }
+  .pmap-app-row .name {
+    flex: 1; font-size: 12.5px; font-weight: 500; color: var(--mock-text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .pmap-app-row .arrow { color: var(--mock-text-3); font-size: 12px; transition: transform 120ms ease; }
+  .pmap-app-row:hover .arrow { transform: translateX(2px); color: var(--mock-text-2); }
+
+  /* Section header inside privacy map */
+  .pmap-section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--mock-border);
+    flex-wrap: wrap;
+  }
+  .pmap-section-title {
+    font-size: 16px; font-weight: 700; letter-spacing: -0.02em;
+    color: var(--mock-text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pmap-section-title .swatch {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .pmap-section-count {
+    margin-left: auto; font-size: 12px;
+    color: var(--mock-text-3); font-variant-numeric: tabular-nums;
+  }
+
+  .change-alert-header,
+  .change-alert-row,
+  .change-alert-main {
+    min-width: 0;
+  }
+  .change-alert-header > div:nth-child(2),
+  .change-alert-main > span:not(.severity-badge) {
+    min-width: 0;
+  }
+  .change-alert-main {
+    flex: 1 1 auto;
+  }
+  .change-alert-tail {
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  /* ============================================================
+     Policy Summary mockup
+     ============================================================ */
+  .policy-summary-panel {
+    padding: 24px;
+    background:
+      radial-gradient(circle at top right, rgba(10,132,255,0.18), transparent 38%),
+      var(--mock-surface);
+    border-bottom: 1px solid var(--mock-border);
+  }
+  .policy-summary-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px; margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .policy-summary-kicker {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mock-blue);
+    margin-bottom: 6px;
+  }
+  .policy-summary-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+  .policy-summary-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .policy-meta-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 5px 10px; border-radius: 999px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--mock-border);
+    font-size: 11.5px; color: var(--mock-text-2);
+  }
+  .policy-meta-pill.link { color: var(--mock-blue); border-color: rgba(10,132,255,0.3); background: rgba(10,132,255,0.08); }
+  .policy-meta-pill.model {
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Cascadia Code', 'DejaVu Sans Mono', monospace; font-size: 10.5px;
+  }
+  .policy-summary-overview {
+    font-size: 13.5px; line-height: 1.65; color: var(--mock-text);
+    max-width: 100%;
+  }
+  .policy-highlight-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin-top: 18px;
+  }
+  @media (max-width: 600px) { .policy-highlight-list { grid-template-columns: 1fr; } }
+  .policy-highlight-pill {
+    padding: 10px 12px; border-radius: var(--radius-md);
+    border: 1px solid var(--mock-border);
+    background: rgba(255,255,255,0.04);
+    color: var(--mock-text-2); font-size: 12px; line-height: 1.5;
+  }
+  .policy-highlight-pill strong { color: var(--mock-text); font-weight: 600; }
+
+  .policy-lens-list {
+    padding: 18px 24px 24px;
+  }
+  .policy-lens {
+    display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--mock-border);
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+  }
+  .policy-lens.in { opacity: 1; transform: none; }
+  .policy-lens:last-child { border-bottom: 0; }
+  @media (max-width: 600px) { .policy-lens { grid-template-columns: 1fr; gap: 4px; } }
+  .policy-lens .lens-label {
+    font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mock-blue); font-weight: 700;
+    padding-top: 2px;
+  }
+  .policy-lens .lens-text { font-size: 13px; color: var(--mock-text-2); line-height: 1.6; }
+  .policy-lens .lens-text strong { color: var(--mock-text); font-weight: 600; }
+
+  /* ============================================================
+     Timeline mockup — exact .timeline replica with scroll-driven progress
+     ============================================================ */
+  .timeline-wrap { padding: 22px 24px; }
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: var(--mock-border);
+    border-radius: 2px;
+  }
+  .timeline-progress {
+    position: absolute; left: 5px; top: 8px;
+    width: 2px; height: 0%;
+    background: linear-gradient(180deg, var(--mock-blue) 0%, var(--navy) 100%);
+    border-radius: 2px;
+    transition: height 200ms linear;
+    z-index: 1;
+  }
+  .timeline-item {
+    position: relative;
+    padding: 12px 0 14px;
+    opacity: 0.45;
+    transform: translateX(-6px);
+    transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+  }
+  .timeline-item.active { opacity: 1; transform: none; }
+  .timeline-dot {
+    position: absolute; left: -23px; top: 18px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--mock-text-3);
+    border: 2px solid var(--mock-bg);
+    box-shadow: 0 0 0 3px var(--mock-bg);
+    z-index: 2;
+    transition: background 300ms var(--ease);
+  }
+  .timeline-dot.has-changes { background: var(--sev-orange); }
+  .timeline-dot.first-sync  { background: var(--mock-blue); }
+  .timeline-dot.wayback     { background: #B07CD8; }
+  .timeline-date {
+    font-size: 11px; color: var(--mock-text-3);
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Cascadia Code', 'DejaVu Sans Mono', monospace; letter-spacing: 0.4px;
+    margin-bottom: 4px;
+    line-height: 1.55;
+  }
+  .timeline-card {
+    background: var(--mock-surface);
+    border: 1px solid var(--mock-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+  }
+  .timeline-card-title { font-size: 13.5px; font-weight: 600; color: var(--mock-text); margin-bottom: 6px; letter-spacing: -0.01em; }
+  .timeline-change {
+    display: flex; align-items: center; gap: 8px;
+    padding: 3px 0; font-size: 12px; color: var(--mock-text-2);
+  }
+  .timeline-change-icon {
+    width: 14px; flex-shrink: 0;
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Cascadia Code', 'DejaVu Sans Mono', monospace; font-weight: 700;
+    text-align: center;
+  }
+  .timeline-change-icon.added   { color: var(--sev-red); }
+  .timeline-change-icon.removed { color: var(--sev-green); }
+  .timeline-change-icon.modified{ color: var(--sev-orange); }
+  .trigger-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 9.5px; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .trigger-pill.scheduled { background: rgba(10,132,255,0.12); color: var(--mock-blue); }
+  .trigger-pill.manual { background: var(--mock-surface-active); color: var(--mock-text-2); }
+  .trigger-pill.wayback { background: rgba(176,124,216,0.15); color: #C9A0E8; }
+  .matches-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px;
+    background: var(--sev-green-dim); color: var(--sev-green);
+    margin-top: 4px;
+  }
+
+  /* ============================================================
+     Stat strip
+     ============================================================ */
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding: 30px 0 24px;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 720px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } }
+  .stat { text-align: center; padding: 10px 8px; }
+  .stat .num {
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+    color: var(--ink); letter-spacing: -1px; line-height: 1.05;
+  }
+  .stat .num .accent {
+    background-image: linear-gradient(180deg, var(--accent-from) 0%, var(--accent-to) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .stat .lbl {
+    font-size: 12px; color: var(--muted);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-top: 6px; font-weight: 500;
+  }
+  .stat-source-note {
+    margin: 14px auto 0;
+    max-width: 68ch;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* ============================================================
+     Feature cards
+     ============================================================ */
+  .feature-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px;
+  }
+  @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    transition: transform 250ms var(--ease), box-shadow 250ms var(--ease), border-color 250ms var(--ease);
+  }
+  .feature:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--line-strong);
+  }
+  .feature .icon-wrap {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--blue-soft);
+    display: grid; place-items: center;
+    margin-bottom: 16px;
+    color: var(--navy);
+  }
+  .feature .icon-wrap svg { width: 22px; height: 22px; }
+  .feature h3 { margin: 0 0 6px; font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px; }
+  .feature p { color: var(--muted); font-size: 14px; margin: 0; line-height: 1.55; }
+
+  /* ============================================================
+     Help-a-friend
+     ============================================================ */
+  .help-card {
+    background: var(--help-card-bg);
+    border: 1px solid var(--line);
+    border-radius: 28px; padding: 56px;
+    box-shadow: var(--shadow-md);
+    position: relative; overflow: hidden;
+  }
+  @media (max-width: 700px) { .help-card { padding: 36px 24px; } }
+  .help-card::before {
+    content: ""; position: absolute; top: -120px; right: -120px;
+    width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, var(--help-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; margin-top: 36px;
+  }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    position: relative; padding: 24px;
+    border: 1px solid var(--line); border-radius: 18px;
+    background: var(--step-bg);
+    transition: transform 250ms var(--ease), box-shadow 250ms var(--ease);
+  }
+  .step:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .step .num {
+    position: absolute; top: -14px; left: 24px;
+    width: 28px; height: 28px;
+    background: linear-gradient(180deg, var(--accent-from), var(--accent-to));
+    color: #fff; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 700;
+    box-shadow: 0 4px 12px rgba(10,132,255,0.35);
+  }
+  .step h4 { margin: 8px 0 6px; font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px; }
+  .step p { color: var(--muted); font-size: 13.5px; margin: 0; line-height: 1.55; }
+  .step .step-vis {
+    height: 70px; margin: 4px 0 14px;
+    border-radius: 12px;
+    background: var(--blue-softer);
+    border: 1px solid var(--blue-soft);
+    display: grid; place-items: center;
+    color: var(--link-color); overflow: hidden;
+  }
+
+  /* ============================================================
+     Install
+     ============================================================ */
+  .install-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .install-grid { grid-template-columns: 1fr; } }
+  .install-card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 20px; padding: 28px;
+    display: flex; flex-direction: column;
+    transition: transform 250ms var(--ease), box-shadow 250ms var(--ease), border-color 250ms var(--ease);
+  }
+  .install-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--line-strong); }
+  .install-card.featured {
+    background: linear-gradient(180deg, #08080f 0%, #14141d 100%);
+    color: #E2E8F0;
+    border-color: transparent;
+    box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .install-card.featured::before {
+    content: ""; position: absolute; top: -80px; right: -80px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(10,132,255,0.22) 0%, transparent 70%);
+  }
+  .install-card .platform {
+    font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--navy); font-weight: 600; margin-bottom: 8px;
+  }
+  .install-card.featured .platform { color: var(--mock-blue); }
+  .install-card h3 { margin: 0 0 10px; font-size: 22px; font-weight: 600; letter-spacing: -0.4px; }
+  .install-card.featured h3 { color: #fff; }
+  .install-card p { color: var(--muted); margin: 0 0 22px; font-size: 14px; }
+  .install-card.featured p { color: #C7D2DC; }
+  .install-card .terminal {
+    background: #0B0B12; border-radius: 10px;
+    padding: 14px 16px;
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Cascadia Code', 'DejaVu Sans Mono', monospace; font-size: 12.5px;
+    color: #E2E8F0; line-height: 1.7;
+    margin-bottom: 22px; overflow-x: auto;
+  }
+  .install-card .terminal .pr { color: var(--mock-blue); }
+  .install-card .terminal .cm { color: #fff; }
+  .install-card .terminal .ar { color: #94A3B8; }
+  .install-card .footer-meta {
+    margin-top: auto; color: var(--muted); font-size: 12px;
+    font-family: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Cascadia Code', 'DejaVu Sans Mono', monospace;
+    padding-top: 12px; border-top: 1px solid var(--line);
+  }
+  .install-card.featured .footer-meta { color: #94A3B8; border-top-color: rgba(255,255,255,0.08); }
+  .install-card .btn { align-self: flex-start; }
+
+  /* ============================================================
+     Footer
+     ============================================================ */
+  footer.site-footer {
+    background: linear-gradient(180deg, #08080f 0%, #050509 100%);
+    color: #C7D2DC;
+    padding: 60px 0 40px;
+  }
+  footer.site-footer .row {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px;
+  }
+  @media (max-width: 800px) { footer.site-footer .row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { footer.site-footer .row { grid-template-columns: 1fr; } }
+  footer.site-footer h5 {
+    color: #fff; font-size: 12px; letter-spacing: 1.6px;
+    text-transform: uppercase; font-weight: 600; margin: 0 0 12px;
+  }
+  footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
+  footer.site-footer li { padding: 4px 0; }
+  footer.site-footer a { color: #C7D2DC; font-size: 14px; }
+  footer.site-footer a:hover { color: #fff; }
+  footer.site-footer .credit {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    color: #94A3B8; font-size: 12px;
+  }
+  footer.site-footer .brand-foot {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  footer.site-footer .brand-foot .mark {
+    width: 40px; height: 40px; border-radius: 10px; overflow: hidden;
+    flex-shrink: 0;
+  }
+  footer.site-footer .brand-foot .mark img { width: 100%; height: 100%; }
+  footer.site-footer .brand-foot .name { color: #fff; font-weight: 600; font-size: 16px; letter-spacing: -0.2px; }
+  footer.site-footer .brand-foot .name .accent {
+    background-image: linear-gradient(180deg, #5AB1FF 0%, #0a84ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  footer.site-footer .desc { color: #94A3B8; font-size: 13.5px; max-width: 32ch; line-height: 1.55; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ============================================================
+     FAQ — accordion of <details> rows. The native disclosure
+     widget gives us keyboard support, screen-reader expand/collapse
+     announcements, and "find on page" search inside collapsed
+     answers for free. We just style the marker and transitions.
+     If you edit the questions or answers, mirror the change in
+     the FAQPage JSON-LD blob in <head> — Google strips the rich
+     result if the on-page text and the schema disagree.
+     ============================================================ */
+  .faq-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 820px;
+  }
+  .faq-item {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  .faq-item[open] {
+    border-color: var(--line-strong);
+    box-shadow: 0 4px 16px rgba(15,23,42,0.06);
+  }
+  [data-theme="dark"] .faq-item[open],
+  html:not([data-theme="light"]) .faq-item[open] {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  }
+  .faq-item > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 24px;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+  }
+  .faq-item > summary::-webkit-details-marker { display: none; }
+  /* Chevron rendered with two borders + rotation — keeps it crisp
+     at any size, no SVG payload, follows --muted in both themes. */
+  .faq-item > summary::after {
+    content: "";
+    width: 10px; height: 10px;
+    flex-shrink: 0;
+    border-right: 2px solid var(--muted);
+    border-bottom: 2px solid var(--muted);
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 220ms var(--ease);
+  }
+  .faq-item[open] > summary::after {
+    transform: rotate(-135deg) translateY(2px);
+  }
+  .faq-item > summary:hover { color: var(--navy); }
+  .faq-item > summary:hover::after {
+    border-color: var(--navy);
+  }
+  .faq-item > summary:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: -3px;
+  }
+  .faq-answer {
+    padding: 0 24px 22px;
+    color: var(--slate);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .faq-answer p { margin: 0 0 12px; }
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 640px) {
+    .faq-item > summary { padding: 18px 18px; font-size: 16px; }
+    .faq-answer { padding: 0 18px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item,
+    .faq-item > summary::after { transition: none; }
+  }
+
+  /* ─── Mobile + iOS polish ───
+     Placed last so it overrides the design rules above without
+     editing them. Covers the common iOS-Safari quirks:
+       1. Auto text-resize on rotation (text-size-adjust).
+       2. Grey tap flash on touch (tap-highlight-color).
+       3. Notched-device side insets (env(safe-area-inset-*)).
+       4. Touch targets too tight for fingertaps (44×44 minimum). */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body { -webkit-tap-highlight-color: transparent; }
+  .container {
+    padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right));
+  }
+  .stage-grid > *,
+  .stage-vis,
+  .mock-window,
+  .mock-canvas,
+  .hero-video-frame,
+  .help-card,
+  .install-card,
+  .feature,
+  .faq-item {
+    min-width: 0;
+  }
+  @media (max-width: 640px) {
+    .container {
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+    }
+  }
+  @media (max-width: 600px) {
+    section { padding: 76px 0; }
+    section.tight { padding: 54px 0; }
+    .mock-body { padding: 14px; }
+    .mock-nav {
+      gap: 10px;
+      padding: 0 12px;
+    }
+    .mock-nav .name { display: none; }
+    .mock-nav .tabs { margin-left: 0; }
+    .mock-nav .tab { padding: 7px 9px; }
+    .policy-summary-panel { padding: 20px; }
+    .policy-lens-list { padding: 14px 20px 20px; }
+    .timeline-wrap { padding: 18px; }
+    .pmap-section-count {
+      flex-basis: 100%;
+      margin-left: 16px;
+    }
+    .change-alert-header {
+      align-items: flex-start !important;
+      gap: 12px !important;
+      padding: 16px !important;
+    }
+    .change-alert-header > div:nth-child(2) {
+      flex: 1 1 170px !important;
+    }
+    .change-alert-count {
+      flex: 0 0 auto;
+      margin-left: 56px;
+      white-space: nowrap;
+    }
+    .change-alert-list { padding: 8px 16px 16px !important; }
+    .change-alert-row {
+      align-items: flex-start !important;
+      gap: 10px;
+    }
+    .change-alert-main {
+      flex-wrap: wrap;
+      gap: 6px 10px !important;
+    }
+    .change-alert-main > span:not(.severity-badge) {
+      flex: 1 1 130px;
+      line-height: 1.35;
+    }
+  }
+  @media (max-width: 390px) {
+    .hero .cta-row .btn {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+    .hero .cta-meta { flex-basis: 100%; }
+    .change-alert-row { flex-wrap: wrap; }
+    .change-alert-tail {
+      margin-left: auto;
+      padding-top: 2px;
+    }
+  }
+  @media (pointer: coarse) {
+    .btn { min-height: 44px; }
+    .theme-toggle { width: 44px; height: 44px; }
+    nav.topnav ul.links a { padding: 10px 0; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ====================== NAV ====================== -->
+<nav class="topnav" aria-label="Primary">
+  <div class="container row">
+    <a href="#" class="brand-lockup" aria-label="privacytracker home">
+      <span class="mark" aria-hidden="true">
+        <img src="assets/logo/privacytracker-128.png" alt="" />
+      </span>
+      <span class="name">privacy<span class="accent">tracker</span></span>
+    </a>
+    <ul class="links" role="list">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#help">Help a friend</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#install">Install</a></li>
+    </ul>
+    <span style="display:inline-flex;align-items:center;gap:6px;">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="#install" class="btn btn-primary" aria-label="Download privacytracker">
+        Download
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M7 1.5v8M3.5 6L7 9.5 10.5 6M2 12.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </span>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ====================== HERO ====================== -->
+<header class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <span class="eyebrow reveal">A privacykey project</span>
+    <h1 id="hero-title" class="reveal delay-1">Privacy labels change. <span class="accent">Now you'll know.</span></h1>
+    <p class="lede reveal delay-2">The apps on your phone quietly change what they collect about you — your location, your contacts, your photos. privacytracker watches them for you and tells you, in plain English, when something shifts.</p>
+    <div class="cta-row reveal delay-3">
+      <a href="#install" class="btn btn-primary btn-lg">
+        Download for Mac
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M7 1.5v8M3.5 6L7 9.5 10.5 6M2 12.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+      <span class="cta-meta">27 apps tracked · 248 label checks · 30 changes detected</span>
+    </div>
+
+    <!-- Hero demo — real app recording with keyboard-accessible chapters -->
+    <div class="hero-video-stage reveal delay-4">
+      <div class="hero-video-frame" id="heroMedia" aria-label="privacytracker app demo video">
+        <div class="hero-video-shell">
+          <video
+            class="hero-video"
+            id="heroDemoVideo"
+            aria-label="privacytracker demo showing the dashboard, Privacy Map, stats, and timeline"
+            data-video-src="assets/hero/privacytracker-demo.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="assets/hero/privacytracker-demo-poster.jpg"
+            width="1920"
+            height="1080"
+          >
+            <source src="assets/hero/privacytracker-demo.mp4" type="video/mp4" />
+            <source src="assets/hero/privacytracker-demo.webm" type="video/webm" />
+          </video>
+          <div class="hero-video-poster" aria-hidden="true">
+            <div>
+              <strong>Watch privacy labels change.</strong>
+              <span>Dashboard, Privacy Map, Stats, and Timeline in one quick pass.</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-video-controls" aria-label="Jump to demo section">
+          <button class="hero-video-control active" type="button" data-video-time="0"><span>Dashboard</span></button>
+          <button class="hero-video-control" type="button" data-video-time="4"><span>Privacy Map</span></button>
+          <button class="hero-video-control" type="button" data-video-time="8"><span>Stats</span></button>
+          <button class="hero-video-control" type="button" data-video-time="12"><span>Timeline</span></button>
+          <div class="hero-video-progress-meta" id="heroVideoProgress" aria-live="polite">
+            Showing <strong>Dashboard</strong>. Next up: Privacy Map.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ====================== STAT STRIP ====================== -->
+<section class="tight" aria-label="Tracking stats">
+  <div class="container">
+    <div class="stat-strip reveal">
+      <div class="stat"><div class="num"><span class="accent">27</span></div><div class="lbl">Apps tracked</div></div>
+      <div class="stat"><div class="num">248</div><div class="lbl">Label checks</div></div>
+      <div class="stat"><div class="num">180</div><div class="lbl">Label entries</div></div>
+      <div class="stat"><div class="num">30</div><div class="lbl">Changes detected</div></div>
+    </div>
+    <p class="stat-source-note reveal">Snapshot from the local demo library. privacytracker does not collect usage telemetry.</p>
+  </div>
+</section>
+
+<!-- ====================== PROBLEM ====================== -->
+<section class="bg-soft" id="why">
+  <div class="container">
+    <div class="stage-grid">
+      <div class="stage-copy reveal">
+        <span class="kicker">The problem</span>
+        <h2>Apps quietly start collecting more. <span class="accent">You never get told.</span></h2>
+        <p class="intro">Every app on the App Store has a "privacy nutrition label" that says what it collects. The catch: apps update those labels whenever they want. One day Instagram doesn't track your precise location. The next morning, it does — and nobody emails you about it. privacytracker checks every day, and lets you know when something changes.</p>
+        <ul class="checks">
+          <li>Spots when an app starts collecting something new</li>
+          <li>Flags when something gets more invasive (like location going from rough to exact)</li>
+          <li>Notices when an app drops a permission too — sometimes that's good news</li>
+        </ul>
+      </div>
+
+      <div class="stage-vis reveal delay-2">
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
+            <span class="title">change-detected · instagram</span>
+          </div>
+          <div class="mock-canvas">
+            <div class="change-alert-header" style="padding:18px 22px;border-bottom:1px solid var(--mock-border);display:flex;align-items:center;gap:14px;background:rgba(255,159,10,0.08);">
+              <div class="app-icon ig" style="width:44px;height:44px;border-radius:11px;" aria-hidden="true">Ig</div>
+              <div style="flex:1;">
+                <div style="font-weight:600;font-size:14px;color:var(--mock-text);">Privacy labels changed</div>
+                <div style="font-size:11.5px;color:var(--mock-text-2);font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;margin-top:2px;">Instagram · 18 April 2026 · v345.0</div>
+              </div>
+              <div class="change-alert-count" style="background:var(--sev-orange-dim);color:var(--sev-orange);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:600;">2 changes</div>
+            </div>
+            <div class="change-alert-list" style="padding:8px 22px 18px;">
+              <div class="change-alert-row" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--mock-border);">
+                <div class="change-alert-main" style="display:flex;align-items:center;gap:10px;">
+                  <span class="severity-badge track" style="font-size:9.5px;"><svg class="privacy-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.9 8.25V5.35h2.9"></path><path d="M16.2 5.35h2.9v2.9"></path><path d="M19.1 15.75v2.9h-2.9"></path><path d="M7.8 18.65H4.9v-2.9"></path><circle class="privacy-type-icon__node" cx="12" cy="9.45" r="2.3"></circle><path class="privacy-type-icon__node" d="M7.55 18.2c.46-3.25 2.15-4.85 4.45-4.85s3.99 1.6 4.45 4.85c.1.73-.45 1.27-1.2 1.27h-6.5c-.75 0-1.3-.54-1.2-1.27Z"></path></svg>Data Used to Track You</span>
+                  <span style="font-size:13px;color:var(--mock-text);"><strong>Location</strong> · used for tracking</span>
+                </div>
+                <span class="timeline-change-icon added change-alert-tail" style="font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-weight:700;">+</span>
+              </div>
+              <div class="change-alert-row" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--mock-border);">
+                <div class="change-alert-main" style="display:flex;align-items:center;gap:10px;">
+                  <span class="severity-badge linked" style="font-size:9.5px;"><svg class="privacy-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.15"></circle><path d="M7.9 17.05c.85-3.25 7.35-3.25 8.2 0"></path><circle class="privacy-type-icon__node" cx="12" cy="9.1" r="2.05"></circle></svg>Data Linked to You</span>
+                  <span style="font-size:13px;color:var(--mock-text);"><strong>Contacts</strong> · for Analytics</span>
+                </div>
+                <span class="timeline-change-icon added change-alert-tail" style="font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-weight:700;">+</span>
+              </div>
+              <div class="change-alert-row" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;">
+                <div class="change-alert-main" style="display:flex;align-items:center;gap:10px;">
+                  <span class="severity-badge unlinked" style="font-size:9.5px;"><svg class="privacy-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.15"></circle><path d="M7.9 17.05c.85-3.25 7.35-3.25 8.2 0"></path><circle class="privacy-type-icon__node" cx="12" cy="9.1" r="2.05"></circle><path d="M7.25 18.65 16.75 5.35" stroke-width="2.25"></path></svg>Data Not Linked to You</span>
+                  <span style="font-size:13px;color:var(--mock-text);"><strong>Search History</strong></span>
+                </div>
+                <span class="change-alert-tail" style="font-size:11px;color:var(--mock-text-3);">unchanged</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PRIVACY MAP ====================== -->
+<section id="features">
+  <div class="container">
+    <div class="stage-grid reverse">
+      <div class="stage-copy reveal">
+        <span class="kicker">Privacy Map</span>
+        <h2>See which apps want <span class="accent">the same things.</span></h2>
+        <p class="intro">Wonder how many of your apps want your location? Or your contacts? Click a category and find out instantly. It's the easiest way to spot the apps that ask for more than they need.</p>
+        <ul class="checks">
+          <li>Grouped by what's most sensitive — location, contacts, financial info, health</li>
+          <li>Tap any category to see every app that wants it</li>
+          <li>Spot patterns at a glance — which apps are asking for the same data</li>
+        </ul>
+        <p style="margin-top:18px;font-size:13px;color:var(--muted);font-style:italic;">↳ Try it: click any card on the right to expand it.</p>
+      </div>
+
+      <div class="stage-vis reveal delay-2">
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
+            <span class="title">privacytracker — Privacy Map</span>
+          </div>
+          <div class="mock-canvas">
+            <div class="mock-body">
+              <div class="pmap-section-header">
+                <div class="pmap-section-title">
+                  <span class="swatch" style="background:var(--sev-orange);" aria-hidden="true"></span>
+                  Data Linked to You
+                </div>
+                <span class="pmap-section-count">4 categories · 14 apps</span>
+              </div>
+
+              <div class="pmap-grid" id="pmapGrid">
+                <article class="pmap-card is-expanded" data-cat="location">
+                  <button class="pmap-card-header" type="button" aria-expanded="true" aria-controls="pmap-loc">
+                    <span class="pmap-card-icon" aria-hidden="true">📍</span>
+                    <span class="pmap-card-title-block">
+                      <span class="pmap-card-title">Location</span>
+                      <span class="pmap-card-subtitle">5 apps · Data Linked to You</span>
+                    </span>
+                    <span class="pmap-card-chevron" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </button>
+                  <div class="pmap-card-preview">
+                    <span class="pmap-preview-stack" aria-hidden="true">
+                      <span class="pmap-preview-stack-item pmap-preview-more">+2</span>
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#FC4C02,#D63D00);color:#fff;">St</span>
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#0077B5,#00669B);color:#fff;">in</span>
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#f09433,#dc2743);color:#fff;">Ig</span>
+                    </span>
+                    <span class="pmap-preview-hint">Tap to expand</span>
+                  </div>
+                  <div class="pmap-card-apps" id="pmap-loc" role="list" aria-label="Apps that collect location data">
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#f09433,#dc2743);" aria-hidden="true"></span><span class="name">Instagram</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#0077B5,#00669B);" aria-hidden="true"></span><span class="name">LinkedIn</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#FC4C02,#D63D00);" aria-hidden="true"></span><span class="name">Strava</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#69C9D0,#EE1D52);" aria-hidden="true"></span><span class="name">TikTok</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#1F1F1F,#000);" aria-hidden="true"></span><span class="name">Uber</span><span class="arrow" aria-hidden="true">›</span></div>
+                  </div>
+                </article>
+
+                <article class="pmap-card" data-cat="contacts">
+                  <button class="pmap-card-header" type="button" aria-expanded="false" aria-controls="pmap-con">
+                    <span class="pmap-card-icon" aria-hidden="true">👥</span>
+                    <span class="pmap-card-title-block">
+                      <span class="pmap-card-title">Contacts</span>
+                      <span class="pmap-card-subtitle">3 apps · Data Linked to You</span>
+                    </span>
+                    <span class="pmap-card-chevron" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </button>
+                  <div class="pmap-card-preview">
+                    <span class="pmap-preview-stack" aria-hidden="true">
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#008CFF,#0070D0);color:#fff;">V</span>
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#0077B5,#00669B);color:#fff;">in</span>
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#f09433,#dc2743);color:#fff;">Ig</span>
+                    </span>
+                    <span class="pmap-preview-hint">Tap to expand</span>
+                  </div>
+                  <div class="pmap-card-apps" id="pmap-con" role="list" aria-label="Apps that collect contacts">
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#f09433,#dc2743);" aria-hidden="true"></span><span class="name">Instagram</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#0077B5,#00669B);" aria-hidden="true"></span><span class="name">LinkedIn</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#008CFF,#0070D0);" aria-hidden="true"></span><span class="name">Venmo</span><span class="arrow" aria-hidden="true">›</span></div>
+                  </div>
+                </article>
+
+                <article class="pmap-card" data-cat="financial">
+                  <button class="pmap-card-header" type="button" aria-expanded="false" aria-controls="pmap-fin">
+                    <span class="pmap-card-icon" aria-hidden="true">💳</span>
+                    <span class="pmap-card-title-block">
+                      <span class="pmap-card-title">Financial Info</span>
+                      <span class="pmap-card-subtitle">2 apps · Data Linked to You</span>
+                    </span>
+                    <span class="pmap-card-chevron" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </button>
+                  <div class="pmap-card-preview">
+                    <span class="pmap-preview-stack" aria-hidden="true">
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#1F1F1F,#000);color:#fff;">U</span>
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#008CFF,#0070D0);color:#fff;">V</span>
+                    </span>
+                    <span class="pmap-preview-hint">Tap to expand</span>
+                  </div>
+                  <div class="pmap-card-apps" id="pmap-fin" role="list" aria-label="Apps that collect financial info">
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#008CFF,#0070D0);" aria-hidden="true"></span><span class="name">Venmo</span><span class="arrow" aria-hidden="true">›</span></div>
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#1F1F1F,#000);" aria-hidden="true"></span><span class="name">Uber</span><span class="arrow" aria-hidden="true">›</span></div>
+                  </div>
+                </article>
+
+                <article class="pmap-card" data-cat="health">
+                  <button class="pmap-card-header" type="button" aria-expanded="false" aria-controls="pmap-hth">
+                    <span class="pmap-card-icon" aria-hidden="true">💖</span>
+                    <span class="pmap-card-title-block">
+                      <span class="pmap-card-title">Health &amp; Fitness</span>
+                      <span class="pmap-card-subtitle">1 app · Data Linked to You</span>
+                    </span>
+                    <span class="pmap-card-chevron" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </button>
+                  <div class="pmap-card-preview">
+                    <span class="pmap-preview-stack" aria-hidden="true">
+                      <span class="pmap-preview-stack-item" style="background:linear-gradient(135deg,#FC4C02,#D63D00);color:#fff;">St</span>
+                    </span>
+                    <span class="pmap-preview-hint">Tap to expand</span>
+                  </div>
+                  <div class="pmap-card-apps" id="pmap-hth" role="list" aria-label="Apps that collect health and fitness data">
+                    <div class="pmap-app-row" role="listitem"><span class="ic" style="background:linear-gradient(135deg,#FC4C02,#D63D00);" aria-hidden="true"></span><span class="name">Strava</span><span class="arrow" aria-hidden="true">›</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== AI POLICY SUMMARIES ====================== -->
+<section class="bg-soft">
+  <div class="container">
+    <div class="stage-grid">
+      <div class="stage-copy reveal">
+        <span class="kicker">Plain-English summaries</span>
+        <h2>Privacy policies, <span class="accent">written for humans.</span></h2>
+        <p class="intro">Privacy policies are written for lawyers. Nobody reads them — and that's the point. privacytracker rewrites every one in plain English, answering the same five questions for every app, so you can actually compare them.</p>
+        <ul class="checks">
+          <li>What data does it collect, and how much?</li>
+          <li>Does it share with advertisers?</li>
+          <li>Who else gets your data?</li>
+          <li>How long do they keep it?</li>
+          <li>Can you ask them to delete it?</li>
+        </ul>
+      </div>
+
+      <div class="stage-vis reveal delay-2">
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
+            <span class="title">privacy-policy · linkedin.com</span>
+          </div>
+          <div class="mock-canvas">
+            <div class="policy-summary-panel">
+              <div class="policy-summary-header">
+                <div>
+                  <div class="policy-summary-kicker">Policy · AI summary</div>
+                  <div class="policy-summary-title">LinkedIn — Privacy Policy</div>
+                </div>
+              </div>
+              <div class="policy-summary-meta">
+                <span class="policy-meta-pill link">↗ Read the original</span>
+                <span class="policy-meta-pill">Updated 18 Apr 2026</span>
+                <span class="policy-meta-pill">5-minute read</span>
+              </div>
+              <p class="policy-summary-overview">LinkedIn collects a lot — your profile, your posts, who you talk to, what device you're on, and guesses about your job and interests. It combines all of this with what Microsoft already knows about you from Bing and Office.</p>
+              <div class="policy-highlight-list">
+                <div class="policy-highlight-pill"><strong>Worth knowing:</strong> the things LinkedIn guesses about you are shared with Bing and Office — even if you don't use them.</div>
+                <div class="policy-highlight-pill"><strong>Worth asking:</strong> the policy doesn't say how long they keep the things they've guessed about you.</div>
+              </div>
+            </div>
+            <div class="policy-lens-list" id="aiLenses">
+              <div class="policy-lens">
+                <div class="lens-label">What it collects</div>
+                <div class="lens-text">Your profile, posts, messages, device info, and guesses about your job and interests — combined with what Microsoft already knows from Bing and Office.</div>
+              </div>
+              <div class="policy-lens">
+                <div class="lens-label">Ads</div>
+                <div class="lens-text">Used for targeted ads on LinkedIn and on other sites. You can turn this off under <strong>Settings → Advertising data</strong>.</div>
+              </div>
+              <div class="policy-lens">
+                <div class="lens-label">Who else sees it</div>
+                <div class="lens-text">Shared with other Microsoft companies, advertising partners, and analytics vendors. The full list is in section 3.4 of the policy.</div>
+              </div>
+              <div class="policy-lens">
+                <div class="lens-label">How long they keep it</div>
+                <div class="lens-text">As long as your account exists. If you delete your account, most data is gone within 30 days.</div>
+              </div>
+              <div class="policy-lens">
+                <div class="lens-label">Your rights</div>
+                <div class="lens-text">You can ask to see, correct, delete, or download your data — anywhere in the world.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TIMELINE ====================== -->
+<section id="how" class="bg-dark">
+  <div class="container">
+    <div class="stage-grid reverse">
+      <div class="stage-copy reveal">
+        <span class="kicker">History &amp; alerts</span>
+        <h2>The full story, <span class="accent">in one scroll.</span></h2>
+        <p class="intro">Every change to an app's privacy gets saved with the date. So when a friend asks "wait, when did Instagram start tracking my location?" — you have the answer. privacytracker can even pull back history from before you installed it.</p>
+        <ul class="checks">
+          <li>See exactly when each change happened, in order</li>
+          <li>Automatic check-ins — daily or weekly, your choice</li>
+          <li>Pulls historical data so you don't start from scratch</li>
+        </ul>
+      </div>
+
+      <div class="stage-vis reveal delay-2">
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
+            <span class="title">app · instagram · timeline</span>
+          </div>
+          <div class="mock-canvas">
+            <div class="timeline-wrap">
+              <div class="timeline" id="timelineTrack" role="list" aria-label="Privacy label change timeline for Instagram">
+                <div class="timeline-progress" id="tlProgress" aria-hidden="true"></div>
+
+                <div class="timeline-item" role="listitem">
+                  <span class="timeline-dot has-changes" aria-hidden="true"></span>
+                  <div class="timeline-date">18 April 2026 · 2:14 am<span class="trigger-pill scheduled">auto check</span></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-title">Started collecting two new things</div>
+                    <div class="timeline-change"><span class="timeline-change-icon added">+</span><span><strong>Your exact location</strong> — used to follow you around</span></div>
+                    <div class="timeline-change"><span class="timeline-change-icon added">+</span><span><strong>Your contacts</strong> — linked to your name</span></div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" role="listitem">
+                  <span class="timeline-dot has-changes" aria-hidden="true"></span>
+                  <div class="timeline-date">3 February 2026 · 9:48 am<span class="trigger-pill manual">you checked</span></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-title">Started collecting two new things</div>
+                    <div class="timeline-change"><span class="timeline-change-icon added">+</span><span><strong>What you search for</strong></span></div>
+                    <div class="timeline-change"><span class="timeline-change-icon added">+</span><span><strong>Audio you record in the app</strong></span></div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" role="listitem">
+                  <span class="timeline-dot has-changes" aria-hidden="true"></span>
+                  <div class="timeline-date">12 November 2025 · 2:01 pm<span class="trigger-pill scheduled">auto check</span></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-title">Stopped collecting one thing</div>
+                    <div class="timeline-change"><span class="timeline-change-icon removed">−</span><span><strong>Health &amp; fitness data</strong> — no longer listed</span></div>
+                  </div>
+                </div>
+
+                <div class="timeline-item" role="listitem">
+                  <span class="timeline-dot wayback" aria-hidden="true"></span>
+                  <div class="timeline-date">27 August 2025<span class="trigger-pill wayback">archive</span></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-title">Pulled from web archive</div>
+                    <div class="timeline-change"><span style="color:var(--mock-text-3);font-size:11.5px;">A snapshot from before you started tracking</span></div>
+                    <span class="matches-badge">✓ Matches what's live now</span>
+                  </div>
+                </div>
+
+                <div class="timeline-item" role="listitem">
+                  <span class="timeline-dot first-sync" aria-hidden="true"></span>
+                  <div class="timeline-date">Late 2025<span class="trigger-pill scheduled">first check</span></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-title">First time we looked</div>
+                    <div class="timeline-change"><span style="color:var(--mock-text-3);font-size:11.5px;">The earliest record we have for this app</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SUPPORTING FEATURES ====================== -->
+<section>
+  <div class="container">
+    <span class="kicker reveal">More inside</span>
+    <h2 class="reveal delay-1">Made for everyday use.</h2>
+    <p class="intro reveal delay-2">privacytracker isn't a tool you check once and forget. It runs quietly in the background and only speaks up when something actually changes.</p>
+
+    <div class="feature-grid">
+      <div class="feature reveal">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M11 3v8m0 0L7 7m4 4l4-4M5 17h12M3 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Add apps the easy way</h3>
+        <p>Just type names — Instagram, TikTok, your bank. Or plug in your iPhone and load every app at once. No App Store password needed.</p>
+      </div>
+      <div class="feature reveal delay-1">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Checks while you sleep</h3>
+        <p>Pick daily or weekly and forget about it. privacytracker checks on its own and only nudges you when something actually changes.</p>
+      </div>
+      <div class="feature reveal delay-2">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a8 8 0 0 0-8 8v3l-2 3h20l-2-3v-3a8 8 0 0 0-8-8zM9 19a3 3 0 0 0 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>No spam, no nags</h3>
+        <p>You'll only see a notification when an app you actually track does something new. No marketing emails — there's no email signup at all.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Stays on your computer</h3>
+        <p>privacytracker doesn't send anything to us. There's no "us." Your list of apps and the changes it spots stay on your Mac.</p>
+      </div>
+      <div class="feature reveal delay-1">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Open-source &amp; free</h3>
+        <p>Anyone can read the code that powers privacytracker. Free forever — no premium tier, no upgrade prompts, no surprise charges.</p>
+      </div>
+      <div class="feature reveal delay-2">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Take your data with you</h3>
+        <p>Export everything to a regular spreadsheet whenever you want. Share with a friend, save it for your records, or just take a look in Excel. There's a proper backup too — one file with everything in it, so you can put it all back if you change Macs.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.4 2.5 15.6 0 18M12 3c-2.5 2.4-2.5 15.6 0 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>English and 中文</h3>
+        <p>The whole app is translated into Simplified Chinese — every screen, not just the menus. Switch language in Settings and it stays that way. More languages are on the way.</p>
+      </div>
+      <div class="feature reveal delay-1">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4-3 7.2-7 9-4-1.8-7-5-7-9V6l7-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Checking a child's phone</h3>
+        <p>Tell privacytracker you're looking after a child's device and it changes what it shows you — age ratings get checked alongside the privacy labels, and there's a plain-English walkthrough of Apple's parental controls.</p>
+      </div>
+      <div class="feature reveal delay-2">
+        <div class="icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="4.5" r="2" stroke="currentColor" stroke-width="2"/><path d="M4.5 9h15M12 9v5m0 0l-3.5 6.5M12 14l3.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Readable for everyone</h3>
+        <p>There's an accessibility mode where colour is never the only signal — every warning carries a shape and a word too. Text contrast meets WCAG AA throughout, and automated checks run on the main screens with every change, so it doesn't quietly regress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== HELP A FRIEND ====================== -->
+<section id="help" class="bg-soft">
+  <div class="container">
+    <div class="help-card reveal">
+      <span class="kicker">Help someone you love</span>
+      <h2 style="max-width:24ch;">Set it up for someone <span class="accent">in five minutes.</span></h2>
+      <p class="intro">privacytracker is built for everyone, but most people will never go looking for it on their own. If you've already got it installed, the kindest thing you can do is set it up <em>with</em> them — once. After that, it runs by itself and only speaks up when it has something useful to say.</p>
+
+      <ol class="steps" role="list">
+        <li class="step">
+          <span class="num" aria-hidden="true">1</span>
+          <div class="step-vis" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="8" y="6" width="32" height="36" rx="6" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M16 18h16M16 24h16M16 30h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h4>Send them this page</h4>
+          <p>Text or email them the link. The download button is right there — no signup, no account, no App Store password.</p>
+        </li>
+        <li class="step">
+          <span class="num" aria-hidden="true">2</span>
+          <div class="step-vis" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="8" width="36" height="28" rx="4" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M14 28l8-8 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="32" cy="16" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Help them install</h4>
+          <p>Open the file, drag the privacytracker icon into the Applications folder, launch it. It's signed by Apple, so no scary warnings pop up.</p>
+        </li>
+        <li class="step">
+          <span class="num" aria-hidden="true">3</span>
+          <div class="step-vis" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 8l4 8 9 1-7 6 2 9-8-4-8 4 2-9-7-6 9-1 4-8z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h4>Add their apps</h4>
+          <p>Type in the apps they actually use — Instagram, TikTok, their bank, their fitness tracker. Or plug their iPhone in and load everything in one go.</p>
+        </li>
+        <li class="step">
+          <span class="num" aria-hidden="true">4</span>
+          <div class="step-vis" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M12 24l8 8 16-16" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h4>Turn on auto-checks</h4>
+          <p>Open Settings, choose "weekly". From now on privacytracker checks on its own — and only buzzes when something actually worth knowing happens.</p>
+        </li>
+      </ol>
+
+      <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+        <button type="button" class="btn btn-primary btn-lg" id="shareBtn" aria-label="Share privacytracker">
+          Share privacytracker
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M9.5 1.5L13 5l-3.5 3.5M13 5H5.5A4 4 0 001.5 9v3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="cta-meta" role="status" id="shareStatus" aria-live="polite">Copies a link they'll actually click.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FAQ ====================== -->
+<!-- Native <details>/<summary> accordion. Keyboard, screen-reader,
+     and Cmd-F search-in-page all work without JS. If you edit a
+     question or answer here, mirror it in the FAQPage JSON-LD in
+     <head> or the Google rich result will be suppressed. -->
+<section id="faq">
+  <div class="container">
+    <span class="kicker reveal">Common questions</span>
+    <h2 class="reveal delay-1">The things <span class="accent">people usually ask.</span></h2>
+    <p class="intro reveal delay-2">If you've got a question that isn't here, the source code is open and the maintainers read every issue on GitHub.</p>
+
+    <div class="faq-list reveal delay-2">
+      <details class="faq-item">
+        <summary>Is privacytracker really free?</summary>
+        <div class="faq-answer">
+          <p>Yes. It's free and open-source under the Apache 2.0 licence. No accounts, no subscriptions, no upsells. The full source is on <a href="https://github.com/privacykey/privacytracker" rel="noopener">GitHub</a> for anyone to read or fork.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does privacytracker need access to my iPhone?</summary>
+        <div class="faq-answer">
+          <p>No. It only reads the public App Store pages for apps you tell it about — exactly what you'd see if you opened the App Store yourself. Nothing on your phone is touched, paired, or copied across.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Where does my data go?</summary>
+        <div class="faq-answer">
+          <p>Onto your computer, and nowhere else by default. privacytracker keeps a small local database in its own folder. There's no cloud account, no analytics, no telemetry phoning home — that's the point.</p>
+          <p>If you'd like the full breakdown of every network call the app makes, see the <a href="privacy.html">privacy disclosure</a>.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What's different from looking at the App Store myself?</summary>
+        <div class="faq-answer">
+          <p>The App Store only shows you what an app says today. privacytracker remembers what every app said yesterday, last month, last year — and tells you when something quietly changes. It also reads each developer's privacy policy and translates the legalese into plain English.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do I have to be technical to use it?</summary>
+        <div class="faq-answer">
+          <p>Not at all. The recommended install is a single file: double-click, drag it into Applications, you're done. The Terminal-style options on the install page are there for people who prefer them — they're not required.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does it work on Windows or Linux?</summary>
+        <div class="faq-answer">
+          <p>The desktop app is Mac-only for now. If you're on Windows or Linux, the "Run it yourself" option lets you spin up the same app in Docker — that works on any operating system and takes about a minute of setup.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Will it watch Android apps too?</summary>
+        <div class="faq-answer">
+          <p>Not yet. iOS first because Apple's privacy labels are uniquely structured — Google Play doesn't publish the same kind of disclosure. We'd love to add Android once that data is reliably available in a comparable form.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I help a parent or partner without taking over their phone?</summary>
+        <div class="faq-answer">
+          <p>Yes — that's what the <a href="#help">Help a friend</a> section is about. privacytracker runs on your computer; your friend just tells you which apps they use and you keep an eye on the labels for them. No remote access, no shared accounts, no awkward setup on their phone.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== INSTALL ====================== -->
+<section id="install">
+  <div class="container">
+    <span class="kicker reveal">Get privacytracker</span>
+    <h2 class="reveal delay-1">Pick the way <span class="accent">that works for you.</span></h2>
+    <p class="intro reveal delay-2">Most people just need the first one. The other two are there for the curious — they all run the same app, just installed differently.</p>
+
+    <div class="install-grid">
+      <article class="install-card featured reveal" aria-labelledby="install-mac">
+        <div class="platform">For everyone · Recommended</div>
+        <h3 id="install-mac">Download for Mac</h3>
+        <p>One file. Double-click to open it, drag privacytracker into your Applications folder, you're done. Works on every Mac from the last decade. Updates itself when there's a new version.</p>
+        <a href="https://github.com/privacykey/privacytracker/releases/latest" class="btn btn-primary btn-lg" rel="noopener">
+          Download for Mac
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 1.5v8M3.5 6L7 9.5 10.5 6M2 12.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="footer-meta">~28 MB · Apple Silicon &amp; Intel</div>
+      </article>
+
+      <article class="install-card reveal delay-1" aria-labelledby="install-brew">
+        <div class="platform">If you use Homebrew</div>
+        <h3 id="install-brew">One-line install</h3>
+        <p>Already comfortable in the Terminal? Two commands and you're set. Same app, just installed the way developers like it.</p>
+        <div class="terminal" role="img" aria-label="brew tap privacykey/tap, then brew install --cask privacytracker">
+          <div><span class="pr">$</span> <span class="cm">brew tap</span> <span class="ar">privacykey/tap</span></div>
+          <div><span class="pr">$</span> <span class="cm">brew install --cask</span> <span class="ar">privacytracker</span></div>
+        </div>
+        <a href="https://github.com/privacykey/homebrew-tap" class="btn btn-ghost" rel="noopener">Tap details</a>
+        <div class="footer-meta">Updates with brew upgrade</div>
+      </article>
+
+      <article class="install-card reveal delay-2" aria-labelledby="install-host">
+        <div class="platform">For tinkerers</div>
+        <h3 id="install-host">Run it yourself</h3>
+        <p>Want to run privacytracker on your own server, or share it with the family on your home network? The full source is on GitHub with setup instructions.</p>
+        <div class="terminal" role="img" aria-label="git clone privacykey/privacytracker, docker compose up build, dash d.">
+          <div><span class="pr">$</span> <span class="cm">git clone</span> <span class="ar">privacykey/privacytracker</span></div>
+          <div><span class="pr">$</span> <span class="cm">docker compose up</span> <span class="ar">--build -d</span></div>
+        </div>
+        <a href="https://github.com/privacykey/privacytracker#running-with-docker" class="btn btn-ghost" rel="noopener">Setup guide</a>
+        <div class="footer-meta">Runs on Mac, Windows, or Linux</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="brand-foot">
+          <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-256.png" alt="" /></span>
+          <span class="name">privacy<span class="accent">tracker</span></span>
+        </div>
+        <p class="desc">A privacykey project. Free, open-source, made for people who want answers — not warnings.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#help">Help a friend</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#install">Install</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>About this site</h5>
+        <ul>
+          <li><a href="about.html">About privacykey</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="legal.html">Legal &amp; licences</a></li>
+          <li><a href="/.well-known/security.txt" rel="noopener">security.txt</a></li>
+          <li><a href="/llms.txt" rel="noopener">llms.txt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Source &amp; community</h5>
+        <ul>
+          <li><a href="https://github.com/privacykey/privacytracker" rel="noopener">Source code</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/releases/latest" rel="noopener">Latest version</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/LICENSE" rel="noopener">License (Apache 2.0)</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">Report a security issue</a></li>
+          <li><a href="https://github.com/privacykey/.github/blob/main/CONTRIBUTING.md" rel="noopener">Contributing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="credit">
+      <div>© 2026 privacykey. privacytracker is free and open-source software.</div>
+      <div>Made with care, in plain English.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============================================================
+  //  Theme management — picks system pref by default, lets the
+  //  user override via the toggle, and persists the override.
+  //  (Stored under 'pt-theme' so we never collide with whatever
+  //  else might live in localStorage.)
+  // ============================================================
+  (function () {
+    var STORAGE_KEY = 'pt-theme';
+    var html = document.documentElement;
+    var body = document.body;
+    var btn = document.getElementById('themeToggle');
+    var mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function resolved () {
+      var explicit = html.getAttribute('data-theme');
+      if (explicit === 'dark' || explicit === 'light') return explicit;
+      return mql.matches ? 'dark' : 'light';
+    }
+    function syncBodyClass () {
+      if (resolved() === 'dark') body.classList.add('theme-dark');
+      else body.classList.remove('theme-dark');
+      if (btn) {
+        var isDark = resolved() === 'dark';
+        btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      }
+    }
+    // Apply any persisted user preference up front (already done in
+    // the inline boot script in <head>, but re-sync the body class).
+    syncBodyClass();
+    // React to system changes when no manual override is set
+    if (mql.addEventListener) {
+      mql.addEventListener('change', function () {
+        if (!html.getAttribute('data-theme')) syncBodyClass();
+      });
+    }
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var next = resolved() === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { /* private mode */ }
+        syncBodyClass();
+      });
+    }
+  })();
+
+  // ============================================================
+  //  Reveal-on-scroll
+  // ============================================================
+  (function () {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+      document.querySelectorAll('.timeline-item').forEach(function (el) { el.classList.add('active'); });
+      document.querySelectorAll('.policy-lens').forEach(function (el) { el.classList.add('in'); });
+      var media = document.getElementById('heroMedia');
+      if (media) media.classList.add('lifted');
+      return;
+    }
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+    var media = document.getElementById('heroMedia');
+    if (media) {
+      window.addEventListener('load', function () {
+        setTimeout(function () { media.classList.add('lifted'); }, 250);
+      });
+    }
+  })();
+
+  // ============================================================
+  //  Sticky nav background
+  // ============================================================
+  (function () {
+    var nav = document.querySelector('nav.topnav');
+    function onScroll () {
+      if (window.scrollY > 12) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // ============================================================
+  //  Hero — video chapter controls
+  // ============================================================
+  (function () {
+    var video = document.getElementById('heroDemoVideo');
+    var controls = document.querySelectorAll('.hero-video-control');
+    var progressLabel = document.getElementById('heroVideoProgress');
+    if (!video || !controls.length) return;
+    var chapters = Array.prototype.map.call(controls, function (button) {
+      return {
+        button: button,
+        label: button.textContent.trim(),
+        time: Number(button.getAttribute('data-video-time') || 0)
+      };
+    }).sort(function (a, b) { return a.time - b.time; });
+
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      video.removeAttribute('autoplay');
+      try { video.pause(); } catch (e) { /* ignore */ }
+    }
+
+    function setActive (button) {
+      controls.forEach(function (control) { control.classList.remove('active'); });
+      button.classList.add('active');
+    }
+    function updateProgress (timeOverride) {
+      var duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : 20;
+      var current = typeof timeOverride === 'number' ? timeOverride : video.currentTime;
+      var activeIndex = 0;
+      chapters.forEach(function (chapter, index) {
+        if (current >= chapter.time) activeIndex = index;
+      });
+      chapters.forEach(function (chapter, index) {
+        var nextTime = index < chapters.length - 1 ? chapters[index + 1].time : duration;
+        var progress = 0;
+        if (index < activeIndex) progress = 100;
+        else if (index === activeIndex) {
+          progress = ((current - chapter.time) / Math.max(nextTime - chapter.time, 0.1)) * 100;
+        }
+        chapter.button.style.setProperty('--chapter-progress', Math.max(0, Math.min(100, progress)) + '%');
+      });
+      var active = chapters[activeIndex];
+      var next = chapters[(activeIndex + 1) % chapters.length];
+      setActive(active.button);
+      if (progressLabel) {
+        progressLabel.innerHTML = 'Showing <strong>' + active.label + '</strong>. Next up: ' + next.label + '.';
+      }
+    }
+    function playVideo () {
+      if (!prefersReduced) {
+        video.play().catch(function () { /* autoplay may be blocked */ });
+      }
+    }
+    function seekTo (time) {
+      var baseSrc = video.getAttribute('data-video-src');
+      try { video.currentTime = time; } catch (e) { /* fallback below */ }
+      updateProgress(time);
+      window.setTimeout(function () {
+        if (!baseSrc || time === 0 || Math.abs(video.currentTime - time) < 0.75) return;
+        video.src = baseSrc + '#t=' + time;
+        video.load();
+        video.addEventListener('loadedmetadata', function () {
+          updateProgress(time);
+          playVideo();
+        }, { once: true });
+      }, 80);
+      playVideo();
+    }
+
+    controls.forEach(function (button) {
+      button.addEventListener('click', function () {
+        var time = Number(button.getAttribute('data-video-time') || 0);
+        seekTo(time);
+      });
+    });
+
+    video.addEventListener('timeupdate', function () {
+      updateProgress();
+      var baseSrc = video.getAttribute('data-video-src');
+      if (baseSrc && video.currentSrc.indexOf('#t=') !== -1 && video.duration && video.currentTime > video.duration - 0.35) {
+        video.src = baseSrc;
+        video.load();
+        playVideo();
+      }
+    });
+    video.addEventListener('loadedmetadata', updateProgress);
+    updateProgress();
+  })();
+
+  // ============================================================
+  //  Privacy Map — click to expand / collapse
+  // ============================================================
+  (function () {
+    var cards = document.querySelectorAll('.pmap-card');
+    cards.forEach(function (card) {
+      var header = card.querySelector('.pmap-card-header');
+      var preview = card.querySelector('.pmap-card-preview');
+      function toggle () {
+        var open = card.classList.toggle('is-expanded');
+        if (header) header.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      if (header) header.addEventListener('click', toggle);
+      // Make the preview row clickable too (matches the real app)
+      if (preview) {
+        preview.addEventListener('click', toggle);
+        preview.style.cursor = 'pointer';
+      }
+    });
+  })();
+
+  // ============================================================
+  //  AI lenses — sequential reveal
+  // ============================================================
+  (function () {
+    var wrap = document.getElementById('aiLenses');
+    if (!wrap) return;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var lenses = wrap.querySelectorAll('.policy-lens');
+    if (prefersReduced) { lenses.forEach(function (l) { l.classList.add('in'); }); return; }
+    var aiObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          lenses.forEach(function (l, i) { setTimeout(function () { l.classList.add('in'); }, i * 110); });
+          aiObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    aiObs.observe(wrap);
+  })();
+
+  // ============================================================
+  //  Timeline — scroll-driven progress + active items
+  // ============================================================
+  (function () {
+    var track = document.getElementById('timelineTrack');
+    var progress = document.getElementById('tlProgress');
+    if (!track || !progress) return;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var events = track.querySelectorAll('.timeline-item');
+    if (prefersReduced) {
+      events.forEach(function (ev) { ev.classList.add('active'); });
+      progress.style.height = '100%';
+      return;
+    }
+    function update () {
+      var rect = track.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var startY = vh * 0.7;
+      var endY = vh * 0.3;
+      var total = (rect.height + (startY - endY));
+      var travelled = (startY - rect.top);
+      var pct = Math.max(0, Math.min(1, travelled / total));
+      progress.style.height = (pct * 100) + '%';
+      events.forEach(function (ev) {
+        var er = ev.getBoundingClientRect();
+        var dotCenter = er.top + 22;
+        if (dotCenter < vh * 0.6) ev.classList.add('active');
+        else ev.classList.remove('active');
+      });
+    }
+    document.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ============================================================
+  //  Share button
+  // ============================================================
+  (function () {
+    var btn = document.getElementById('shareBtn');
+    var status = document.getElementById('shareStatus');
+    if (!btn) return;
+    btn.addEventListener('click', async function () {
+      var url = window.location.href.split('#')[0];
+      var text = 'privacytracker — see what your iOS apps quietly changed.';
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'privacytracker', text: text, url: url });
+          status.textContent = 'Thanks for sharing.';
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(url);
+          status.textContent = 'Link copied to clipboard.';
+        } else {
+          status.textContent = url;
+        }
+      } catch (err) {
+        status.textContent = 'Couldn\u2019t share — copy this link: ' + url;
+      }
+    });
+  })();
+
+  // ============================================================
+  //  Smooth-scroll for in-page anchors
+  // ============================================================
+  (function () {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1);
+        if (!id) return;
+        var target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.scrollY - 60;
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, '', '#' + id);
+        } else {
+          window.location.hash = id;
+        }
+        window.scrollTo({ top: top, behavior: prefersReduced ? 'auto' : 'smooth' });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

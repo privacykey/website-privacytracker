@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+<title>Legal — Open-source libraries &amp; licences · privacytracker</title>
+<meta name="description" content="Third-party libraries bundled with privacytracker, their versions, licences, and what each one is used for. Grouped by SPDX licence identifier." />
+<meta name="application-name" content="privacytracker" />
+<meta name="author" content="privacykey" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://privacytracker.privacykey.org/legal.html" />
+
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08080f" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" href="assets/logo/privacytracker-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/logo/privacytracker-128.png" type="image/png" sizes="128x128" />
+<link rel="apple-touch-icon" href="assets/logo/privacytracker-180.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Legal — Open-source libraries &amp; licences" />
+<meta property="og:description" content="Third-party libraries bundled with privacytracker, grouped by SPDX licence." />
+<meta property="og:url" content="https://privacytracker.privacykey.org/legal.html" />
+<meta property="og:image" content="https://privacytracker.privacykey.org/assets/social/og-image.png" />
+
+<link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
+
+<link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('pt-theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  /* ── Self-hosted Inter (v4.1, SIL OFL-1.1) ── */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable-Italic.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  }
+
+  /* ─── Brand tokens (mirrors index.html) ─── */
+  :root {
+    --ink: #0F172A;
+    --slate: #334155;
+    --muted: #475569;
+    --line: #E2E8F0;
+    --line-strong: #CBD5E1;
+    --surface: #FFFFFF;
+    --surface-soft: #F8FAFC;
+    --navy-deep: #08080f;
+    --navy: #1E3A8A;
+    --blue: #0a84ff;
+    --blue-soft: #DBEAFE;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+    --shadow-md: 0 8px 24px -8px rgba(15,23,42,.12), 0 2px 6px rgba(15,23,42,.05);
+    --duration: 600ms;
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --link-color: var(--navy);
+    --link-hover: #0066d6;
+    --focus-ring: var(--blue);
+    --color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
+      --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
+      --surface: #111118; --surface-soft: #18181f;
+      --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
+      --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
+      --color-scheme: dark;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
+    --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
+    --surface: #111118; --surface-soft: #18181f;
+    --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
+    --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
+    --color-scheme: dark;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { color-scheme: var(--color-scheme); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--ink); background: var(--surface);
+    -webkit-font-smoothing: antialiased; line-height: 1.6;
+    transition: background-color 200ms var(--ease), color 200ms var(--ease);
+  }
+  ::selection { background: var(--blue-soft); color: var(--navy); }
+  a { color: var(--link-color); text-decoration: none; transition: color 150ms var(--ease); }
+  a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+  h2, h3 { scroll-margin-top: 84px; }
+
+  .skip-link {
+    position: absolute; left: 16px; top: -100px;
+    background: var(--navy-deep); color: #fff;
+    padding: 12px 16px; border-radius: 8px; font-weight: 600; z-index: 1000;
+    transition: top 200ms var(--ease);
+  }
+  .skip-link:focus-visible { top: 16px; color: #fff; text-decoration: none; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 640px) { .container { padding: 0 20px; } }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ─── Sticky nav (mirrors index.html) ─── */
+  nav.topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    transition: background 220ms var(--ease), border-color 220ms var(--ease);
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.topnav .row { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  nav.topnav .brand-lockup {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; letter-spacing: -0.2px;
+    color: var(--ink);
+  }
+  nav.topnav .brand-lockup:hover { text-decoration: none; }
+  nav.topnav .mark {
+    width: 32px; height: 32px; border-radius: 8px; overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 4px 10px -4px rgba(10,132,255,0.4);
+  }
+  nav.topnav .mark img { width: 100%; height: 100%; display: block; }
+  nav.topnav .name .accent {
+    background-image: linear-gradient(180deg, #0a84ff 0%, #1E3A8A 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  nav.topnav ul.links { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav.topnav ul.links a { color: var(--slate); font-size: 14px; font-weight: 500; }
+  nav.topnav ul.links a:hover { color: var(--ink); text-decoration: none; }
+  @media (max-width: 760px) { nav.topnav ul.links { display: none; } }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px; border-radius: 999px;
+    font-weight: 600; font-size: 14px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform 120ms var(--ease), background 200ms var(--ease), box-shadow 200ms var(--ease);
+    text-decoration: none; font-family: inherit;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary {
+    background: linear-gradient(180deg, #0a84ff 0%, #0066d6 100%);
+    color: #fff !important;
+    box-shadow: 0 6px 18px -6px rgba(10,132,255,0.5);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(180deg, #2294ff 0%, #0a84ff 100%);
+    box-shadow: 0 10px 24px -6px rgba(10,132,255,0.6);
+  }
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--line-strong); background: transparent;
+    border-radius: 999px; color: var(--ink); cursor: pointer;
+    transition: background 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .theme-toggle:hover { background: var(--surface-soft); border-color: var(--ink); }
+  body.theme-dark .theme-toggle .icon-moon { display: none; }
+  body:not(.theme-dark) .theme-toggle .icon-sun { display: none; }
+
+  /* ─── Page-specific ─── */
+  .page-hero {
+    padding: 130px 0 50px;
+    background:
+      radial-gradient(800px 320px at 50% 0%, rgba(10,132,255,0.07), transparent 65%),
+      var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  .page-hero .crumb {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--navy); font-weight: 600; margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .page-hero .crumb::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue); box-shadow: 0 0 0 4px rgba(10,132,255,0.18);
+  }
+  .page-hero h1 {
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 700; letter-spacing: -1.4px; line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .page-hero p {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: var(--slate);
+    max-width: 60ch; margin: 0; line-height: 1.55;
+  }
+
+  /* ─── Two-column legal layout ─── */
+  .doc-layout {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 56px;
+  }
+  @media (max-width: 880px) {
+    .doc-layout {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 40px 20px 72px;
+    }
+  }
+
+  /* Sidebar */
+  aside.doc-sidebar {
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  @media (max-width: 880px) {
+    aside.doc-sidebar {
+      position: static;
+      max-height: none;
+      overflow: visible;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+  }
+  .doc-sidebar .sidebar-title {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .doc-sidebar ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  @media (max-width: 880px) {
+    .doc-sidebar ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  }
+  .doc-sidebar li { margin: 0; }
+  .doc-sidebar a {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--slate);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease);
+  }
+  .doc-sidebar a:hover {
+    background: var(--surface-soft);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .doc-sidebar a.is-active {
+    background: var(--blue-soft);
+    color: var(--navy);
+    border-color: rgba(10,132,255,0.18);
+  }
+  .doc-sidebar .count {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 1px 7px;
+    border-radius: 999px;
+    min-width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .doc-sidebar a.is-active .count {
+    background: rgba(10,132,255,0.10);
+    border-color: rgba(10,132,255,0.25);
+    color: var(--navy);
+  }
+
+  /* Content column */
+  .doc-content {
+    color: var(--ink);
+    font-size: 17px; line-height: 1.7;
+    min-width: 0;
+  }
+  @media (max-width: 640px) { .doc-content { font-size: 16px; } }
+  .doc-content > section + section { margin-top: 56px; }
+  .doc-content h2 {
+    font-size: 24px; font-weight: 700; letter-spacing: -0.4px;
+    margin: 0 0 6px; color: var(--ink);
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px;
+  }
+  .doc-content h2 .count {
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .doc-content h2 a.anchor {
+    color: var(--muted); margin-left: 8px;
+    opacity: 0; text-decoration: none; font-weight: 400;
+    transition: opacity 150ms var(--ease);
+  }
+  .doc-content h2:hover a.anchor { opacity: 0.6; }
+  .doc-content h2 a.anchor:hover { opacity: 1; }
+  .doc-content p { margin: 0 0 18px; color: var(--slate); }
+  .doc-content strong { color: var(--ink); font-weight: 600; }
+  .doc-content code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em; padding: 2px 6px;
+    background: var(--surface-soft); border: 1px solid var(--line);
+    border-radius: 5px; color: var(--ink);
+  }
+  .doc-content hr {
+    margin: 48px 0; border: 0; border-top: 1px solid var(--line);
+  }
+
+  .license-blurb {
+    margin: 8px 0 22px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--blue);
+    background: var(--surface-soft);
+    border-radius: 0 10px 10px 0;
+    color: var(--slate); font-size: 14.5px; line-height: 1.55;
+  }
+  .license-blurb a { font-weight: 500; }
+
+  .dep-card {
+    margin: 12px 0;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    transition: border-color 200ms var(--ease);
+  }
+  .dep-card:hover { border-color: var(--line-strong); }
+  .dep-card .head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .dep-card h3 {
+    margin: 0; font-size: 15px; font-weight: 600;
+    color: var(--ink); letter-spacing: -0.2px;
+    display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .dep-card .version {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px; color: var(--muted); font-weight: 500;
+    padding: 2px 8px;
+    background: var(--surface-soft); border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .dep-card .dev-chip {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px;
+    background: var(--blue-soft); color: var(--navy);
+  }
+  .dep-card .usage {
+    margin: 0 0 8px; font-size: 14.5px; line-height: 1.55;
+  }
+  .dep-card .about {
+    margin: 0 0 10px; font-size: 14px; color: var(--muted); line-height: 1.55;
+  }
+  .dep-card .links {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin: 0; padding-top: 8px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px;
+  }
+  .dep-card .links a { white-space: nowrap; }
+
+  /* ─── Footer (mirrors index.html) ─── */
+  footer.site-footer {
+    background: linear-gradient(180deg, #08080f 0%, #050509 100%);
+    color: #C7D2DC; padding: 60px 0 40px;
+  }
+  footer.site-footer .row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
+  @media (max-width: 800px) { footer.site-footer .row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { footer.site-footer .row { grid-template-columns: 1fr; } }
+  footer.site-footer h5 { color: #fff; font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 600; margin: 0 0 12px; }
+  footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
+  footer.site-footer li { padding: 4px 0; }
+  footer.site-footer a { color: #C7D2DC; font-size: 14px; }
+  footer.site-footer a:hover { color: #fff; }
+  footer.site-footer .credit {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    color: #94A3B8; font-size: 12px;
+  }
+  footer.site-footer .brand-foot { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  footer.site-footer .brand-foot .mark { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+  footer.site-footer .brand-foot .mark img { width: 100%; height: 100%; }
+  footer.site-footer .brand-foot .name { color: #fff; font-weight: 600; font-size: 16px; letter-spacing: -0.2px; }
+  footer.site-footer .brand-foot .name .accent {
+    background-image: linear-gradient(180deg, #5AB1FF 0%, #0a84ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  footer.site-footer .desc { color: #94A3B8; font-size: 13.5px; max-width: 32ch; line-height: 1.55; }
+
+  /* ─── Mobile + iOS polish ───
+     Placed last so it overrides the design rules above without
+     editing them. Covers the common iOS-Safari quirks:
+       1. Auto text-resize on rotation (text-size-adjust).
+       2. Grey tap flash on touch (tap-highlight-color).
+       3. Notched-device side insets (env(safe-area-inset-*)).
+       4. Touch targets too tight for fingertaps (44×44 minimum). */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body { -webkit-tap-highlight-color: transparent; }
+  .container {
+    padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right));
+  }
+  @media (max-width: 640px) {
+    .container {
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+    }
+  }
+  @media (pointer: coarse) {
+    .btn { min-height: 44px; }
+    .theme-toggle { width: 44px; height: 44px; }
+    nav.topnav ul.links a { padding: 10px 0; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav class="topnav" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand-lockup" aria-label="privacytracker home">
+      <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-128.png" alt="" /></span>
+      <span class="name">privacy<span class="accent">tracker</span></span>
+    </a>
+    <ul class="links" role="list">
+      <li><a href="index.html#how">How it helps</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#install">Install</a></li>
+    </ul>
+    <span style="display:inline-flex;align-items:center;gap:6px;">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="index.html#install" class="btn btn-primary" aria-label="Download privacytracker">Download</a>
+    </span>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="container">
+    <span class="crumb">Legal</span>
+    <h1>Open-source libraries &amp; licences.</h1>
+    <p>privacytracker is built on open-source software. This page lists every third-party library bundled with the app, grouped by SPDX licence identifier, with a short description, how we use it, and links to the source. The app itself is released under the Apache&nbsp;2.0 licence.</p>
+  </div>
+</header>
+
+<div class="doc-layout">
+
+  <aside class="doc-sidebar" aria-label="Licence navigation">
+    <p class="sidebar-title">Jump to</p>
+    <ul>
+      <li><a href="#app-license"   data-target="app-license"><span>This app's licence</span></a></li>
+      <li><a href="#license-mit"   data-target="license-mit"><span>MIT</span><span class="count">10</span></a></li>
+      <li><a href="#license-apache" data-target="license-apache"><span>Apache 2.0</span><span class="count">4</span></a></li>
+      <li><a href="#license-ofl"   data-target="license-ofl"><span>OFL 1.1</span><span class="count">1</span></a></li>
+      <li><a href="#license-bsv"   data-target="license-bsv"><span>Bitstream Vera</span><span class="count">1</span></a></li>
+    </ul>
+  </aside>
+
+  <div class="doc-content">
+
+    <section id="app-license">
+      <h2>privacytracker's own licence<a href="#app-license" class="anchor" aria-label="Link">#</a></h2>
+      <p>The privacytracker source code is released under the <strong><a href="https://github.com/privacykey/privacytracker/blob/main/LICENSE" rel="noopener">Apache License 2.0</a></strong>. You may use, modify, redistribute, or build commercial products on top of it. The licence requires that you preserve the copyright notice + licence text in derivative works, and the explicit patent grant carries forward.</p>
+      <p>This website is part of the same project and falls under the same licence.</p>
+    </section>
+
+    <!-- ──────────────── MIT ──────────────── -->
+    <section id="license-mit">
+      <h2>MIT License <span class="count">10 deps</span><a href="#license-mit" class="anchor" aria-label="Link">#</a></h2>
+      <div class="license-blurb">
+        Permissive licence — use, modify, distribute, and sublicense freely, provided the original copyright + licence notice is preserved. No warranty.
+        <a href="https://opensource.org/license/mit" rel="noopener">Full licence text ↗</a>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>next <span class="version" data-pkg="next">v16.2.4</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> The entire app is a Next.js App Router project. Every page, every <code>/api/</code> route, the background scheduler bootstrap, and the build/serve toolchain come from Next.</p>
+        <p class="about">React framework from Vercel — file-system routing, server components, API routes, dev server, production build pipeline.</p>
+        <p class="links">
+          <a href="https://nextjs.org" rel="noopener">Website ↗</a>
+          <a href="https://github.com/vercel/next.js" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/next" rel="noopener">npm ↗</a>
+          <a href="https://vercel.com/legal/privacy-policy" rel="noopener">Privacy ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>next-intl <span class="version" data-pkg="next-intl">v4.9.1</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Internationalisation for the app's UI strings — message catalogues, locale-aware formatting, route segmentation by locale.</p>
+        <p class="about">i18n library purpose-built for Next.js App Router. Server- and client-component aware.</p>
+        <p class="links">
+          <a href="https://next-intl.dev" rel="noopener">Website ↗</a>
+          <a href="https://github.com/amannn/next-intl" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/next-intl" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>react <span class="version" data-pkg="react">v19.2.3</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Powers every interactive surface — the onboarding wizard, settings, the app detail view, the bell, the task centre.</p>
+        <p class="about">Core React library — component model, hooks, reconciler primitives.</p>
+        <p class="links">
+          <a href="https://react.dev" rel="noopener">Website ↗</a>
+          <a href="https://github.com/facebook/react" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/react" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>react-dom <span class="version" data-pkg="react-dom">v19.2.3</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Mounts components into the browser DOM and server-renders pages for the initial HTML response.</p>
+        <p class="about">React's DOM renderer + hydration entry points.</p>
+        <p class="links">
+          <a href="https://github.com/facebook/react" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/react-dom" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>react-joyride <span class="version" data-pkg="react-joyride">v3.0.2</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Powers the optional first-run guided tour ("coachmarks") that walks new users through the dashboard, privacy map, and settings on first launch.</p>
+        <p class="about">React component library for in-app product tours and step-by-step walkthroughs.</p>
+        <p class="links">
+          <a href="https://docs.react-joyride.com" rel="noopener">Website ↗</a>
+          <a href="https://github.com/gilbarbara/react-joyride" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/react-joyride" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>better-sqlite3 <span class="version" data-pkg="better-sqlite3">v12.9.0</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> The entire persistence layer. Apps, privacy types, change snapshots, notifications, settings — all of it. WAL journal mode, foreign keys on, 5-second busy timeout.</p>
+        <p class="about">Synchronous, zero-config SQLite binding for Node — binary wheel built against N-API.</p>
+        <p class="links">
+          <a href="https://github.com/WiseLibs/better-sqlite3" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/better-sqlite3" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>echarts-for-react <span class="version" data-pkg="echarts-for-react">v3.0.2</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Used by every chart component to declaratively bind ECharts options to React state.</p>
+        <p class="about">Thin React wrapper around ECharts — handles mount/unmount and option diffing.</p>
+        <p class="links">
+          <a href="https://github.com/hustcc/echarts-for-react" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/echarts-for-react" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>marked <span class="version" data-pkg="marked">v14.1.0</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Renders the markdown returned by the AI policy summariser into HTML for the app detail page.</p>
+        <p class="about">Fast markdown parser and compiler. Supports CommonMark and most GFM extensions.</p>
+        <p class="links">
+          <a href="https://marked.js.org" rel="noopener">Website ↗</a>
+          <a href="https://github.com/markedjs/marked" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/marked" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>@types/* <span class="version" data-pkg="@types/react">v19.2.3</span> <span class="dev-chip">dev only</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> TypeScript type definitions for React, Node, better-sqlite3, etc. Dev-time only — provides autocomplete and type checking. Not shipped to users.</p>
+        <p class="about">DefinitelyTyped community-maintained types. The version shown matches <code>@types/react</code>; the rest track their own packages.</p>
+        <p class="links">
+          <a href="https://github.com/DefinitelyTyped/DefinitelyTyped" rel="noopener">Source ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>cross-env <span class="version" data-pkg="cross-env">v7.0.3</span> <span class="dev-chip">dev only</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Sets <code>BUILD_STANDALONE=1</code> before <code>next build</code> so the same npm script works on macOS, Linux, and Windows.</p>
+        <p class="about">Tiny shim that sets environment variables the same way across Unix and Windows shells.</p>
+        <p class="links">
+          <a href="https://github.com/kentcdodds/cross-env" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/cross-env" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ──────────────── Apache 2.0 ──────────────── -->
+    <section id="license-apache">
+      <h2>Apache License 2.0 <span class="count">4 deps</span><a href="#license-apache" class="anchor" aria-label="Link">#</a></h2>
+      <div class="license-blurb">
+        Permissive licence with an explicit patent grant and trademark notice. Preserve the licence text and attribution; mark any modified files as changed.
+        <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener">Full licence text ↗</a>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>echarts <span class="version" data-pkg="echarts">v5.5.1</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Powers the data-viz panels — privacy heatmap, category frequency bars, stacked area timeline, per-app severity strips, the small multiples on the stats page.</p>
+        <p class="about">Apache ECharts — interactive charting library originally from Baidu, now an Apache top-level project.</p>
+        <p class="links">
+          <a href="https://echarts.apache.org" rel="noopener">Website ↗</a>
+          <a href="https://github.com/apache/echarts" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/echarts" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>tesseract.js <span class="version" data-pkg="tesseract.js">v7.0.0</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Optional, local-only OCR. Used in onboarding when the user imports iOS app screenshots — Tesseract extracts the visible app names so we can look them up. <strong>No image leaves your device.</strong></p>
+        <p class="about">WebAssembly port of the Tesseract OCR engine. Runs entirely in the browser or in Node.</p>
+        <p class="links">
+          <a href="https://tesseract.projectnaptha.com" rel="noopener">Website ↗</a>
+          <a href="https://github.com/naptha/tesseract.js" rel="noopener">Source ↗</a>
+          <a href="https://www.npmjs.com/package/tesseract.js" rel="noopener">npm ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>typescript <span class="version" data-pkg="typescript">v6.0.3</span> <span class="dev-chip">dev only</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Every source file under <code>app/</code> and <code>lib/</code> is TypeScript. The compiler runs at build time only — it isn't shipped to users.</p>
+        <p class="about">Typed superset of JavaScript from Microsoft; compiles to JS.</p>
+        <p class="links">
+          <a href="https://www.typescriptlang.org" rel="noopener">Website ↗</a>
+          <a href="https://github.com/microsoft/TypeScript" rel="noopener">Source ↗</a>
+        </p>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>@tauri-apps/cli <span class="version" data-pkg="@tauri-apps/cli">v2.1.0</span> <span class="dev-chip">dev only</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Optional desktop-build path. Used by <code>npm run tauri:build</code> to package the app as a native desktop binary. Not shipped to end-users of the web build.</p>
+        <p class="about">Command-line tool for building Tauri desktop apps (Rust-backed webview wrappers).</p>
+        <p class="links">
+          <a href="https://tauri.app" rel="noopener">Website ↗</a>
+          <a href="https://github.com/tauri-apps/tauri" rel="noopener">Source ↗</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ──────────────── OFL 1.1 ──────────────── -->
+    <section id="license-ofl">
+      <h2>SIL Open Font License 1.1 <span class="count">1 dep</span><a href="#license-ofl" class="anchor" aria-label="Link">#</a></h2>
+      <div class="license-blurb">
+        Permissive font licence. You may use, study, modify, and redistribute the font — including bundled in commercial products — provided the font itself is not sold on its own and the licence + reserved-font-name notice travel with it.
+        <a href="https://openfontlicense.org/open-font-license-official-text/" rel="noopener">Full licence text ↗</a>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>Inter typeface <span class="version" data-pkg="inter-typeface">v4.1</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Primary UI typeface for both the app and this website. Shipped as two woff2 files in <code>/assets/fonts/</code> with the licence file alongside, declared via <code>@font-face</code>. Served from the same origin — no Google Fonts round-trip.</p>
+        <p class="about">Sans-serif typeface designed for UI by Rasmus Andersson. Variable-font release shipping upright + italic axes across weights 100–900.</p>
+        <p class="links">
+          <a href="https://rsms.me/inter/" rel="noopener">Website ↗</a>
+          <a href="https://github.com/rsms/inter" rel="noopener">Source ↗</a>
+          <a href="assets/fonts/Inter-LICENSE.txt">Licence file ↗</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ──────────────── Bitstream Vera ──────────────── -->
+    <section id="license-bsv">
+      <h2>Bitstream Vera Fonts License <span class="count">1 dep</span><a href="#license-bsv" class="anchor" aria-label="Link">#</a></h2>
+      <div class="license-blurb">
+        Permissive font licence. You may copy, merge, distribute, and modify the font — including bundling it in commercial software — provided the licence notice travels with every copy, the font is not sold on its own, and any modifications drop the "Bitstream" / "Vera" reserved names.
+        <a href="https://spdx.org/licenses/Bitstream-Vera.html" rel="noopener">Full licence text ↗</a>
+      </div>
+
+      <div class="dep-card">
+        <div class="head">
+          <h3>OpenDyslexic typeface <span class="version" data-pkg="opendyslexic-typeface">v1.0.3</span></h3>
+        </div>
+        <p class="usage"><strong>How we use it:</strong> Optional accessibility font in the app. Activated via the footer accessibility toggles (Dyslexia-friendly font). Shipped self-hosted alongside the rest of the fonts — no third-party CDN round-trip, so the feature works offline.</p>
+        <p class="about">Typeface with weighted letterforms designed to improve readability for some readers with dyslexia. Originally designed by Abelardo Gonzalez, derived from Bitstream Vera Sans.</p>
+        <p class="links">
+          <a href="https://opendyslexic.org" rel="noopener">Website ↗</a>
+          <a href="https://github.com/antijingoist/opendyslexic" rel="noopener">Source ↗</a>
+        </p>
+      </div>
+    </section>
+
+    <hr />
+
+    <p style="font-size:14px;color:var(--muted);font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
+      Versions on this page are auto-synced from the app's <code>package.json</code> via a weekly GitHub Action — see <code>scripts/update-versions.py</code> in this repo. If you spot one that's stale, please <a href="https://github.com/privacykey/privacytracker/issues" rel="noopener">open an issue</a>.
+    </p>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="brand-foot">
+          <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-256.png" alt="" /></span>
+          <span class="name">privacy<span class="accent">tracker</span></span>
+        </div>
+        <p class="desc">A privacykey project. Free, open-source, made for people who want answers — not warnings.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#how">How it helps</a></li>
+          <li><a href="index.html#install">Install</a></li>
+          <li><a href="index.html#help">Help a friend</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>About this site</h5>
+        <ul>
+          <li><a href="about.html">About privacykey</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="legal.html">Legal &amp; licences</a></li>
+          <li><a href="/.well-known/security.txt" rel="noopener">security.txt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Source &amp; community</h5>
+        <ul>
+          <li><a href="https://github.com/privacykey/privacytracker" rel="noopener">Source code</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/LICENSE" rel="noopener">License (Apache 2.0)</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">Report a security issue</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="credit">
+      <div>© 2026 privacykey. privacytracker is free and open-source.</div>
+      <div>Made with care, in plain English.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (mirrors index.html)
+  (function () {
+    var STORAGE_KEY = 'pt-theme';
+    var html = document.documentElement;
+    var body = document.body;
+    var btn  = document.getElementById('themeToggle');
+    var mql  = window.matchMedia('(prefers-color-scheme: dark)');
+    function resolved () {
+      var explicit = html.getAttribute('data-theme');
+      if (explicit === 'dark' || explicit === 'light') return explicit;
+      return mql.matches ? 'dark' : 'light';
+    }
+    function sync () {
+      var isDark = resolved() === 'dark';
+      body.classList.toggle('theme-dark', isDark);
+      if (btn) {
+        btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      }
+    }
+    sync();
+    if (mql.addEventListener) mql.addEventListener('change', function () { if (!html.getAttribute('data-theme')) sync(); });
+    if (btn) btn.addEventListener('click', function () {
+      var next = resolved() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+      sync();
+    });
+  })();
+
+  // Sidebar scrollspy — highlight the current licence section as the
+  // user scrolls. IntersectionObserver fires when each <section>'s
+  // top crosses an offset; we map the most-recently-entered section
+  // to the matching sidebar anchor and apply .is-active.
+  (function () {
+    var sidebarLinks = Array.from(document.querySelectorAll('aside.doc-sidebar a[data-target]'));
+    if (!sidebarLinks.length) return;
+    var sections = sidebarLinks
+      .map(function (a) { return document.getElementById(a.dataset.target); })
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    function setActive (id) {
+      sidebarLinks.forEach(function (a) {
+        a.classList.toggle('is-active', a.dataset.target === id);
+      });
+    }
+    // Top-of-viewport rectangle so the spy "ahead" of the section
+    // boundaries — the active link is the one whose section's top
+    // has just crossed below the nav.
+    var io = new IntersectionObserver(function (entries) {
+      // Pick the entry currently nearest the top of the viewport
+      var visible = entries
+        .filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+      if (visible.length) setActive(visible[0].target.id);
+    }, {
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0,
+    });
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
+</body>
+</html>

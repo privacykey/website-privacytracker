@@ -1,0 +1,209 @@
+name: Check for upstream privacy-policy drift
+
+# Watches the privacytracker app's authoritative privacy-policy source
+# file. If the upstream subprocessor list / "going offline" steps /
+# wording shift, the website's privacy.html may have drifted out of
+# date. We don't auto-rewrite privacy.html (its prose is too nuanced
+# to safely regex into) — instead we open a GitHub issue asking a
+# human to compare upstream against the website and update.
+#
+# Triggers:
+#   - Weekly schedule (Mondays 07:00 UTC, one hour after the version
+#     bump) so coupled reviews can land in the same session.
+#   - workflow_dispatch with optional override URL for forks/branches.
+#
+# State is held in .github/upstream-hashes/privacy-policy.sha256.
+# First run records the current hash without raising a flag — only
+# subsequent changes trigger an issue, so we don't get a spurious
+# alert the moment we wire this up.
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+    inputs:
+      source_url:
+        description: "URL of the upstream privacy-policy page.tsx"
+        required: false
+        default: "https://raw.githubusercontent.com/privacykey/privacytracker/main/app/privacy-policy/page.tsx"
+      compare_url:
+        description: "Browseable URL of the same file (used in the issue body)"
+        required: false
+        default: "https://github.com/privacykey/privacytracker/blob/main/app/privacy-policy/page.tsx"
+
+# One run at a time — if the schedule + a manual run race, second waits.
+concurrency:
+  group: check-privacy-drift-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # to commit the new hash
+  issues: write     # to open + close drift issues
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out the website repo
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Resolve URLs
+        id: src
+        run: |
+          SRC="${{ github.event.inputs.source_url }}"
+          CMP="${{ github.event.inputs.compare_url }}"
+          [ -z "$SRC" ] && SRC="https://raw.githubusercontent.com/privacykey/privacytracker/main/app/privacy-policy/page.tsx"
+          [ -z "$CMP" ] && CMP="https://github.com/privacykey/privacytracker/blob/main/app/privacy-policy/page.tsx"
+          echo "source=$SRC"  >> "$GITHUB_OUTPUT"
+          echo "compare=$CMP" >> "$GITHUB_OUTPUT"
+          echo "→ source $SRC"
+          echo "→ compare $CMP"
+
+      - name: Fetch upstream privacy-policy
+        # --fail-with-body turns any non-2xx into an exit code, so a
+        # rename or deletion upstream surfaces as a failed workflow
+        # via GitHub's standard run-failed notification — exactly
+        # what we want (it's drift in itself).
+        run: |
+          curl -fsSL --fail-with-body \
+            -H 'User-Agent: privacytracker-drift-check/1' \
+            "${{ steps.src.outputs.source }}" \
+            -o /tmp/upstream-privacy.tsx
+          BYTES=$(wc -c < /tmp/upstream-privacy.tsx)
+          echo "fetched $BYTES bytes"
+
+      - name: Compare against stored hash
+        id: check
+        # Three outcomes:
+        #   first-run  — no stored hash, just record it. No issue.
+        #   no-drift   — hashes match. No issue.
+        #   drift      — hashes differ. Update store + raise issue.
+        run: |
+          mkdir -p .github/upstream-hashes
+          STORE=.github/upstream-hashes/privacy-policy.sha256
+          NEW=$(sha256sum /tmp/upstream-privacy.tsx | awk '{print $1}')
+          OLD=$(cat "$STORE" 2>/dev/null || echo "")
+
+          echo "new_hash=$NEW" >> "$GITHUB_OUTPUT"
+          echo "old_hash=$OLD" >> "$GITHUB_OUTPUT"
+
+          if [ -z "$OLD" ]; then
+            echo "outcome=first-run" >> "$GITHUB_OUTPUT"
+            echo "→ first run — recording $NEW"
+            echo "$NEW" > "$STORE"
+          elif [ "$NEW" = "$OLD" ]; then
+            echo "outcome=no-drift" >> "$GITHUB_OUTPUT"
+            echo "→ no drift, privacy.html still matches upstream"
+          else
+            echo "outcome=drift" >> "$GITHUB_OUTPUT"
+            echo "→ DRIFT detected"
+            echo "  old: $OLD"
+            echo "  new: $NEW"
+            echo "$NEW" > "$STORE"
+          fi
+
+      - name: Commit updated hash
+        if: steps.check.outputs.outcome != 'no-drift'
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/upstream-hashes/privacy-policy.sha256
+          if git diff --cached --quiet; then
+            echo "no hash file change to commit"
+          else
+            git commit -m "chore: record upstream privacy-policy hash
+
+          Outcome: ${{ steps.check.outputs.outcome }}
+          Source:  ${{ steps.src.outputs.source }}"
+            git push
+          fi
+
+      - name: Close any existing drift issue
+        # We dedupe — at most one open privacy-drift issue at a time.
+        # The previous one (if any) gets a "superseded" comment and a
+        # close, then we open a fresh issue below for the new state.
+        if: steps.check.outputs.outcome == 'drift'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'privacy-drift',
+              state: 'open',
+              per_page: 50,
+            });
+            for (const issue of open) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: 'Superseded by a newer drift detection — closing automatically.',
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+                state_reason: 'not_planned',
+              });
+              core.info(`Closed prior issue #${issue.number}`);
+            }
+
+      - name: Open drift issue
+        if: steps.check.outputs.outcome == 'drift'
+        uses: actions/github-script@v7
+        env:
+          OLD_HASH: ${{ steps.check.outputs.old_hash }}
+          NEW_HASH: ${{ steps.check.outputs.new_hash }}
+          SOURCE:   ${{ steps.src.outputs.source }}
+          COMPARE:  ${{ steps.src.outputs.compare }}
+        with:
+          script: |
+            const { OLD_HASH, NEW_HASH, SOURCE, COMPARE } = process.env;
+            const repo = `${context.repo.owner}/${context.repo.repo}`;
+            const compareCommits = COMPARE
+              .replace('/blob/main/', '/commits/main/')
+              .replace(/\?.*$/, '');
+
+            const body = [
+              "## Upstream privacy-policy page has changed",
+              "",
+              "The privacytracker app's privacy disclosure source file has been updated. The website's `privacy.html` may need a corresponding update.",
+              "",
+              "### What to check",
+              "- **Subprocessor list** — has any endpoint been added, removed, or renamed?",
+              "- **Necessity flags** — has anything moved between `required` / `optional` / `on-demand`?",
+              "- **Trigger / sends / receives** — is the wording on the website still accurate?",
+              "- **\"Going fully offline\"** — are the steps still correct?",
+              "- **Alternative summarisers** — are ToSDR / PrivacySpy still the right pointers?",
+              "",
+              "### Compare",
+              `- [Upstream source](${COMPARE})`,
+              `- [Recent commits](${compareCommits})`,
+              `- [Our \`privacy.html\`](https://github.com/${repo}/blob/main/privacy.html)`,
+              "",
+              "### Hash drift",
+              "```",
+              `old: ${OLD_HASH}`,
+              `new: ${NEW_HASH}`,
+              "```",
+              "",
+              "### After updating",
+              "When `privacy.html` is up to date, just close this issue. The next scheduled run will pick up the new hash automatically — no manual hash bump needed.",
+              "",
+              "_Opened automatically by `.github/workflows/check-privacy-drift.yml`._",
+            ].join("\n");
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Privacy disclosure drift detected — review privacy.html",
+              body,
+              labels: ['privacy-drift'],
+            });
+            core.notice(`Opened drift issue #${issue.data.number}: ${issue.data.html_url}`);

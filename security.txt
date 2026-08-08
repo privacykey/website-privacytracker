@@ -1,0 +1,28 @@
+# privacytracker — Security disclosure policy
+# RFC 9116 — https://www.rfc-editor.org/rfc/rfc9116
+# Last updated: 2026-04-26
+
+# Preferred channel: GitHub Private Vulnerability Reporting
+Contact: https://github.com/privacykey/privacytracker/security/advisories/new
+
+# Encrypted email fallback. Plaintext security reports are NOT accepted —
+# see the policy URL below for the PGP key fingerprint.
+Contact: mailto:security@privacykey.org
+
+# Full disclosure policy, scope, safe-harbor terms, and what to include
+# in a report — please read this before submitting.
+Policy: https://github.com/privacykey/privacytracker/blob/main/SECURITY.md
+
+# Researchers who reported confirmed issues are credited in the
+# "Hall of fame" section of the policy and on the GitHub advisory.
+Acknowledgments: https://github.com/privacykey/privacytracker/blob/main/SECURITY.md#hall-of-fame
+
+# Canonical location for this file
+Canonical: https://privacytracker.privacykey.org/.well-known/security.txt
+
+# Languages we can respond in
+Preferred-Languages: en
+
+# Expires one year from "Last updated" — refresh annually. RFC 9116
+# requires this; clients (and bug-bounty platforms) reject expired files.
+Expires: 2027-04-26T00:00:00Z

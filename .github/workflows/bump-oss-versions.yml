@@ -1,0 +1,105 @@
+name: Bump OSS versions in legal.html
+
+# Pulls the upstream app's package.json and rewrites the version
+# pills on /legal so they don't drift when deps are bumped in the
+# app repo. The script is intentionally idempotent — running it
+# against unchanged input is a no-op.
+#
+# Triggers:
+#   - Weekly schedule (Mondays 06:00 UTC) so the page never goes
+#     more than ~7 days stale on its own.
+#   - Manual dispatch from the Actions tab — useful right after
+#     bumping a dep in the app repo.
+#   - On push to main when the script or workflow itself changes,
+#     so a refactor is exercised against real input.
+
+on:
+  schedule:
+    # Mondays 06:00 UTC — quiet hour, well before a typical work day.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      package_url:
+        description: "URL or path to the upstream package.json (default: privacykey/privacytracker main)"
+        required: false
+        default: "https://raw.githubusercontent.com/privacykey/privacytracker/main/package.json"
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update-versions.py'
+      - '.github/workflows/bump-oss-versions.yml'
+
+# Only one run at a time on main — if a manual run + the schedule
+# fire close together, the second waits.
+concurrency:
+  group: bump-oss-versions-${{ github.ref }}
+  cancel-in-progress: false
+
+# We commit + push directly from the workflow, so we need write
+# access to the repo. Read is enough for forks/PRs (which we don't
+# auto-bump anyway — only main).
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out the website repo
+        uses: actions/checkout@v6
+        with:
+          # Fetch the full ref so the commit lands on the same branch
+          # we checked out, not a detached HEAD.
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          # update-versions.py is stdlib-only — nothing to install,
+          # so no requirements file or pip cache needed.
+
+      - name: Determine upstream package.json URL
+        id: src
+        # Use the workflow_dispatch input when present, otherwise
+        # the canonical app repo on the main branch.
+        run: |
+          URL="${{ github.event.inputs.package_url }}"
+          if [ -z "$URL" ]; then
+            URL="https://raw.githubusercontent.com/privacykey/privacytracker/main/package.json"
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "→ syncing from $URL"
+
+      - name: Run update-versions.py
+        run: python3 scripts/update-versions.py "${{ steps.src.outputs.url }}"
+
+      - name: Detect changes
+        id: changed
+        # `git diff --quiet` returns 1 when the file changed, 0 when it
+        # didn't. We invert that into a boolean output the next step
+        # can branch on, instead of relying on the diff exit code
+        # bubbling up and failing the step.
+        run: |
+          if git diff --quiet -- legal.html; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "no version changes — skipping commit"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "version pills updated:"
+            git --no-pager diff -- legal.html | sed -n '1,80p'
+          fi
+
+      - name: Commit and push
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add legal.html
+          git commit -m "chore(legal): sync OSS versions from app's package.json
+
+          Source: ${{ steps.src.outputs.url }}
+          Triggered by: ${{ github.event_name }}"
+          git push

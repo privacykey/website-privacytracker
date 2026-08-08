@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+<title>About — privacytracker · privacykey</title>
+<meta name="description" content="privacykey is an independent project building tools that help people understand and control how their personal data is collected. privacytracker is the first." />
+<meta name="application-name" content="privacytracker" />
+<meta name="author" content="privacykey" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://privacytracker.privacykey.org/about.html" />
+
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08080f" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" href="assets/logo/privacytracker-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/logo/privacytracker-128.png" type="image/png" sizes="128x128" />
+<link rel="apple-touch-icon" href="assets/logo/privacytracker-180.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="About — privacytracker · privacykey" />
+<meta property="og:description" content="Why we built privacytracker, how we work, and how to get involved." />
+<meta property="og:url" content="https://privacytracker.privacykey.org/about.html" />
+<meta property="og:image" content="https://privacytracker.privacykey.org/assets/social/og-image.png" />
+
+<link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
+
+<link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('pt-theme');
+      if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  /* ── Self-hosted Inter (v4.1, SIL OFL-1.1) ── */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('assets/fonts/InterVariable-Italic.woff2') format('woff2-variations'),
+         url('assets/fonts/InterVariable-Italic.woff2') format('woff2');
+  }
+
+  /* ─── Brand tokens (mirrors index.html) ─── */
+  :root {
+    --ink: #0F172A;
+    --slate: #334155;
+    --muted: #475569;
+    --line: #E2E8F0;
+    --line-strong: #CBD5E1;
+    --surface: #FFFFFF;
+    --surface-soft: #F8FAFC;
+    --navy-deep: #08080f;
+    --navy: #1E3A8A;
+    --blue: #0a84ff;
+    --blue-soft: #DBEAFE;
+    --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+    --shadow-md: 0 8px 24px -8px rgba(15,23,42,.12), 0 2px 6px rgba(15,23,42,.05);
+    --duration: 600ms;
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --link-color: var(--navy);
+    --link-hover: #0066d6;
+    --focus-ring: var(--blue);
+    --color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
+      --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
+      --surface: #111118; --surface-soft: #18181f;
+      --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
+      --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
+      --color-scheme: dark;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
+    --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
+    --surface: #111118; --surface-soft: #18181f;
+    --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
+    --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
+    --color-scheme: dark;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { color-scheme: var(--color-scheme); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--ink); background: var(--surface);
+    -webkit-font-smoothing: antialiased; line-height: 1.6;
+    transition: background-color 200ms var(--ease), color 200ms var(--ease);
+  }
+  ::selection { background: var(--blue-soft); color: var(--navy); }
+  a { color: var(--link-color); text-decoration: none; transition: color 150ms var(--ease); }
+  a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+  h2, h3 { scroll-margin-top: 84px; }
+
+  .skip-link {
+    position: absolute; left: 16px; top: -100px;
+    background: var(--navy-deep); color: #fff;
+    padding: 12px 16px; border-radius: 8px; font-weight: 600; z-index: 1000;
+    transition: top 200ms var(--ease);
+  }
+  .skip-link:focus-visible { top: 16px; color: #fff; text-decoration: none; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 640px) { .container { padding: 0 20px; } }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ─── Sticky nav (mirrors index.html) ─── */
+  nav.topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    transition: background 220ms var(--ease), border-color 220ms var(--ease);
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.topnav .row { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  nav.topnav .brand-lockup {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; letter-spacing: -0.2px;
+    color: var(--ink);
+  }
+  nav.topnav .brand-lockup:hover { text-decoration: none; }
+  nav.topnav .mark {
+    width: 32px; height: 32px; border-radius: 8px; overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 4px 10px -4px rgba(10,132,255,0.4);
+  }
+  nav.topnav .mark img { width: 100%; height: 100%; display: block; }
+  nav.topnav .name .accent {
+    background-image: linear-gradient(180deg, #0a84ff 0%, #1E3A8A 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  nav.topnav ul.links { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav.topnav ul.links a { color: var(--slate); font-size: 14px; font-weight: 500; }
+  nav.topnav ul.links a:hover { color: var(--ink); text-decoration: none; }
+  @media (max-width: 760px) { nav.topnav ul.links { display: none; } }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px; border-radius: 999px;
+    font-weight: 600; font-size: 14px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform 120ms var(--ease), background 200ms var(--ease), box-shadow 200ms var(--ease);
+    text-decoration: none; font-family: inherit;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary {
+    background: linear-gradient(180deg, #0a84ff 0%, #0066d6 100%);
+    color: #fff !important;
+    box-shadow: 0 6px 18px -6px rgba(10,132,255,0.5);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(180deg, #2294ff 0%, #0a84ff 100%);
+    box-shadow: 0 10px 24px -6px rgba(10,132,255,0.6);
+  }
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--line-strong); background: transparent;
+    border-radius: 999px; color: var(--ink); cursor: pointer;
+    transition: background 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .theme-toggle:hover { background: var(--surface-soft); border-color: var(--ink); }
+  body.theme-dark .theme-toggle .icon-moon { display: none; }
+  body:not(.theme-dark) .theme-toggle .icon-sun { display: none; }
+
+  /* ─── Page-specific: long-form trust page (mirrors privacy.html) ─── */
+  .page-hero {
+    padding: 130px 0 50px;
+    background:
+      radial-gradient(800px 320px at 50% 0%, rgba(10,132,255,0.07), transparent 65%),
+      var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  .page-hero .crumb {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--navy); font-weight: 600; margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .page-hero .crumb::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue); box-shadow: 0 0 0 4px rgba(10,132,255,0.18);
+  }
+  .page-hero h1 {
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 700; letter-spacing: -1.4px; line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .page-hero p {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: var(--slate);
+    max-width: 60ch; margin: 0; line-height: 1.55;
+  }
+
+  article.prose {
+    max-width: 720px; margin: 0 auto;
+    padding: 64px 28px 96px;
+    color: var(--ink);
+    font-size: 17px; line-height: 1.7;
+  }
+  @media (max-width: 640px) {
+    article.prose { padding: 48px 20px 72px; font-size: 16px; }
+  }
+  article.prose h2 {
+    font-size: 24px; font-weight: 700; letter-spacing: -0.4px;
+    margin: 56px 0 16px; color: var(--ink);
+  }
+  article.prose h2:first-child { margin-top: 0; }
+  article.prose h3 {
+    font-size: 18px; font-weight: 600; margin: 32px 0 12px;
+    color: var(--ink); letter-spacing: -0.2px;
+  }
+  article.prose p { margin: 0 0 18px; color: var(--slate); }
+  article.prose strong { color: var(--ink); font-weight: 600; }
+  article.prose em { color: var(--ink); }
+  article.prose ul, article.prose ol { margin: 0 0 22px; padding-left: 24px; }
+  article.prose li { margin-bottom: 10px; color: var(--slate); }
+  article.prose li strong { color: var(--ink); }
+  article.prose code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em; padding: 2px 6px;
+    background: var(--surface-soft); border: 1px solid var(--line);
+    border-radius: 5px; color: var(--ink);
+  }
+  article.prose blockquote {
+    margin: 24px 0; padding: 14px 20px;
+    border-left: 3px solid var(--blue);
+    background: var(--surface-soft);
+    border-radius: 0 10px 10px 0;
+    color: var(--slate); font-style: italic;
+  }
+  article.prose blockquote p:last-child { margin-bottom: 0; }
+  article.prose hr {
+    margin: 48px 0; border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  article.prose h2 a.anchor, article.prose h3 a.anchor {
+    color: var(--muted); margin-left: 8px;
+    opacity: 0; text-decoration: none; font-weight: 400;
+    transition: opacity 150ms var(--ease);
+  }
+  article.prose h2:hover a.anchor, article.prose h3:hover a.anchor { opacity: 0.6; }
+  article.prose h2 a.anchor:hover, article.prose h3 a.anchor:hover { opacity: 1; }
+
+  /* Brand mark hero accent */
+  .brand-mark-row {
+    display: flex; align-items: center; gap: 18px; margin-bottom: 26px;
+  }
+  .brand-mark-row .mark {
+    width: 64px; height: 64px;
+    border-radius: 14px; overflow: hidden; flex-shrink: 0;
+    /* Green glow — mark belongs to privacykey, not privacytracker */
+    box-shadow: 0 8px 20px -6px rgba(48,209,88,0.35);
+  }
+  .brand-mark-row .mark img { width: 100%; height: 100%; display: block; }
+  .brand-mark-row .lockup {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
+    color: var(--ink);
+  }
+  /* "key" in the privacykey lockup carries the privacykey wordmark gradient */
+  .brand-mark-row .lockup .accent {
+    background-image: linear-gradient(180deg, #30D158 0%, #30D158 60%, #166534 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* ─── Footer (mirrors index.html) ─── */
+  footer.site-footer {
+    background: linear-gradient(180deg, #08080f 0%, #050509 100%);
+    color: #C7D2DC; padding: 60px 0 40px;
+  }
+  footer.site-footer .row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
+  @media (max-width: 800px) { footer.site-footer .row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { footer.site-footer .row { grid-template-columns: 1fr; } }
+  footer.site-footer h5 { color: #fff; font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 600; margin: 0 0 12px; }
+  footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
+  footer.site-footer li { padding: 4px 0; }
+  footer.site-footer a { color: #C7D2DC; font-size: 14px; }
+  footer.site-footer a:hover { color: #fff; }
+  footer.site-footer .credit {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    color: #94A3B8; font-size: 12px;
+  }
+  footer.site-footer .brand-foot { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  footer.site-footer .brand-foot .mark { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+  footer.site-footer .brand-foot .mark img { width: 100%; height: 100%; }
+  footer.site-footer .brand-foot .name { color: #fff; font-weight: 600; font-size: 16px; letter-spacing: -0.2px; }
+  footer.site-footer .brand-foot .name .accent {
+    background-image: linear-gradient(180deg, #5AB1FF 0%, #0a84ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  footer.site-footer .desc { color: #94A3B8; font-size: 13.5px; max-width: 32ch; line-height: 1.55; }
+
+  /* ─── Mobile + iOS polish ───
+     Placed last so it overrides the design rules above without
+     editing them. Covers the common iOS-Safari quirks:
+       1. Auto text-resize on rotation (text-size-adjust).
+       2. Grey tap flash on touch (tap-highlight-color).
+       3. Notched-device side insets (env(safe-area-inset-*)).
+       4. Touch targets too tight for fingertaps (44×44 minimum). */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body { -webkit-tap-highlight-color: transparent; }
+  .container {
+    padding-left: max(28px, env(safe-area-inset-left));
+    padding-right: max(28px, env(safe-area-inset-right));
+  }
+  @media (max-width: 640px) {
+    .container {
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+    }
+  }
+  @media (pointer: coarse) {
+    .btn { min-height: 44px; }
+    .theme-toggle { width: 44px; height: 44px; }
+    nav.topnav ul.links a { padding: 10px 0; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav class="topnav" aria-label="Primary">
+  <div class="container row">
+    <a href="index.html" class="brand-lockup" aria-label="privacytracker home">
+      <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-128.png" alt="" /></span>
+      <span class="name">privacy<span class="accent">tracker</span></span>
+    </a>
+    <ul class="links" role="list">
+      <li><a href="index.html#how">How it helps</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#install">Install</a></li>
+    </ul>
+    <span style="display:inline-flex;align-items:center;gap:6px;">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <a href="index.html#install" class="btn btn-primary" aria-label="Download privacytracker">Download</a>
+    </span>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="page-hero">
+  <div class="container">
+    <span class="crumb">About</span>
+    <h1>About privacytracker.</h1>
+    <p>A small <a href="https://github.com/privacykey" rel="noopener">privacykey</a> project, built to close the gap between what apps say on the App Store and what they actually do on your phone.</p>
+  </div>
+</header>
+
+<article class="prose">
+
+  <div class="brand-mark-row">
+    <span class="mark" aria-hidden="true"><img src="assets/logos/privacykey-icon-green.svg" alt="" /></span>
+    <div class="lockup">privacy<span class="accent">key</span></div>
+  </div>
+
+  <p>privacytracker is a <a href="https://github.com/privacykey" rel="noopener">privacykey</a> project. The maintainer is Adam, with contributors visible <a href="https://github.com/orgs/privacykey/people" rel="noopener">on GitHub</a>.</p>
+
+  <p>We built it to close a small but important gap. Every iOS app has a privacy label on the App Store — a checklist of what it collects and what it does with that data. Those labels can change at any time, often quietly, and the developer privacy policies they reference are written for lawyers rather than the people who actually use the apps. So most people never read them, and even those who do can't easily tell when something has shifted.</p>
+
+  <p>privacytracker fills that gap. It checks the labels for you, translates each policy into plain English, and tells you when something changes. That's the whole product.</p>
+
+  <p>The app is free, open source under <a href="https://github.com/privacykey/privacytracker/blob/main/LICENSE" rel="noopener">Apache&nbsp;2.0</a>, and runs entirely on your computer — there is no privacytracker server, no account, no telemetry. The code is at <a href="https://github.com/privacykey/privacytracker" rel="noopener">github.com/privacykey/privacytracker</a>.</p>
+
+  <p>For bugs or feature ideas, <a href="https://github.com/privacykey/privacytracker/issues" rel="noopener">open an issue</a>. For security concerns, please follow <a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a> instead of a public report.</p>
+
+  <hr />
+
+  <p style="font-size:14px;color:var(--muted);font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">© 2026 privacykey. Made for people who want answers — not warnings.</p>
+
+</article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="brand-foot">
+          <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-256.png" alt="" /></span>
+          <span class="name">privacy<span class="accent">tracker</span></span>
+        </div>
+        <p class="desc">A privacykey project. Free, open-source, made for people who want answers — not warnings.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#how">How it helps</a></li>
+          <li><a href="index.html#install">Install</a></li>
+          <li><a href="index.html#help">Help a friend</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>About this site</h5>
+        <ul>
+          <li><a href="about.html">About privacykey</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="legal.html">Legal &amp; licences</a></li>
+          <li><a href="/.well-known/security.txt" rel="noopener">security.txt</a></li>
+          <li><a href="/llms.txt" rel="noopener">llms.txt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Source</h5>
+        <ul>
+          <li><a href="https://github.com/privacykey/privacytracker" rel="noopener">GitHub repo</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/LICENSE" rel="noopener">License (Apache 2.0)</a></li>
+          <li><a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">Report a security issue</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="credit">
+      <div>© 2026 privacykey. privacytracker is free and open-source.</div>
+      <div>Made with care, in plain English.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var STORAGE_KEY = 'pt-theme';
+    var html = document.documentElement;
+    var body = document.body;
+    var btn  = document.getElementById('themeToggle');
+    var mql  = window.matchMedia('(prefers-color-scheme: dark)');
+    function resolved () {
+      var explicit = html.getAttribute('data-theme');
+      if (explicit === 'dark' || explicit === 'light') return explicit;
+      return mql.matches ? 'dark' : 'light';
+    }
+    function sync () {
+      var isDark = resolved() === 'dark';
+      body.classList.toggle('theme-dark', isDark);
+      if (btn) {
+        btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      }
+    }
+    sync();
+    if (mql.addEventListener) mql.addEventListener('change', function () { if (!html.getAttribute('data-theme')) sync(); });
+    if (btn) btn.addEventListener('click', function () {
+      var next = resolved() === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+      sync();
+    });
+  })();
+</script>
+</body>
+</html>
