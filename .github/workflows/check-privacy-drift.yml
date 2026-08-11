@@ -42,10 +42,15 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, repo-ci]
     timeout-minutes: 5
 
     steps:
+      # Before checkout: nothing is fetched onto the runner until the
+      # context is proven trusted. A no-op on GitHub-hosted runners.
+      - name: Assert trusted runner context
+        uses: privacykey/gh-workflows/actions/assert-trusted-runner@v1
+
       - name: Check out the website repo
         uses: actions/checkout@v6
         with:
