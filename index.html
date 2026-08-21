@@ -593,16 +593,10 @@
     background: var(--blue); box-shadow: 0 0 0 4px rgba(10,132,255,0.18);
   }
   .hero h1 {
-    font-size: clamp(32px, 5.5vw, 68px);
-    font-weight: 700; letter-spacing: -1.4px;
-    margin: 14px 0 16px; line-height: 1.05;
+    font-size: clamp(34px, 5vw, 64px);
+    font-weight: 800; letter-spacing: -.04em;
+    margin: 14px 0 16px; line-height: 1.03;
     max-width: 22ch;
-  }
-  /* On true desktop the tighter -2px tracking + 1.02 line-height is
-     punchy; below 720px the headline is smaller and the same metrics
-     start to feel cramped. */
-  @media (min-width: 720px) {
-    .hero h1 { letter-spacing: -2px; line-height: 1.02; }
   }
   .hero h1 .accent {
     background-image: linear-gradient(180deg, var(--accent-from) 0%, var(--accent-to) 100%);
@@ -1009,7 +1003,7 @@
   }
   h2 {
     font-size: clamp(30px, 4vw, 52px);
-    font-weight: 700; letter-spacing: -1.4px;
+    font-weight: 700; letter-spacing: -.027em;
     margin: 0 0 16px; line-height: 1.05;
     max-width: 22ch;
   }
@@ -1396,7 +1390,7 @@
   .stat { text-align: center; padding: 10px 8px; }
   .stat .num {
     font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
-    color: var(--ink); letter-spacing: -1px; line-height: 1.05;
+    color: var(--ink); letter-spacing: -.025em; line-height: 1.05;
   }
   .stat .num .accent {
     background-image: linear-gradient(180deg, var(--accent-from) 0%, var(--accent-to) 100%);
@@ -1445,7 +1439,7 @@
     color: var(--navy);
   }
   .feature .icon-wrap svg { width: 22px; height: 22px; }
-  .feature h3 { margin: 0 0 6px; font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px; }
+  .feature h3 { margin: 0 0 6px; font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -.012em; }
   .feature p { color: var(--muted); font-size: 14px; margin: 0; line-height: 1.55; }
 
   /* ============================================================
@@ -1487,7 +1481,7 @@
     font-size: 13px; font-weight: 700;
     box-shadow: 0 4px 12px rgba(10,132,255,0.35);
   }
-  .step h4 { margin: 8px 0 6px; font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px; }
+  .step h4 { margin: 8px 0 6px; font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -.013em; }
   .step p { color: var(--muted); font-size: 13.5px; margin: 0; line-height: 1.55; }
   .step .step-vis {
     height: 70px; margin: 4px 0 14px;
@@ -1527,7 +1521,7 @@
     color: var(--navy); font-weight: 600; margin-bottom: 8px;
   }
   .install-card.featured .platform { color: var(--mock-blue); }
-  .install-card h3 { margin: 0 0 10px; font-size: 22px; font-weight: 600; letter-spacing: -0.4px; }
+  .install-card h3 { margin: 0 0 10px; font-size: 22px; font-weight: 600; letter-spacing: -.018em; }
   .install-card.featured h3 { color: #fff; }
   .install-card p { color: var(--muted); margin: 0 0 22px; font-size: 14px; }
   .install-card.featured p { color: #C7D2DC; }
