@@ -19,7 +19,7 @@
 <!-- Theme colour — matches the active scheme so iOS Safari's
      status bar and Android's chrome bar stay consistent. -->
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#08080f" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0B0B12" media="(prefers-color-scheme: dark)" />
 <meta name="color-scheme" content="light dark" />
 
 <!-- ─────────────────────────────────────────────────────────
@@ -39,7 +39,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="privacytracker" />
-<meta name="msapplication-TileColor" content="#08080f" />
+<meta name="msapplication-TileColor" content="#0B0B12" />
 <meta name="msapplication-TileImage" content="assets/logo/privacytracker-256.png" />
 
 <!-- ─────────────────────────────────────────────────────────
@@ -260,7 +260,7 @@
     --surface-softer: #F1F5F9;
 
     /* Blue brand — primary accent (replaces green) */
-    --navy-deep: #08080f;       /* matches app --bg */
+    --navy-deep: #0B0B12;       /* void ground — family page bg */
     --navy: #1E3A8A;            /* privacykey navy */
     --blue: #0a84ff;            /* Apple system blue — used in app */
     --blue-hover: #409cff;
@@ -302,7 +302,7 @@
 
     --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
     --shadow-md: 0 8px 24px -8px rgba(15,23,42,.10), 0 2px 6px rgba(15,23,42,.04);
-    --shadow-lg: 0 30px 60px -30px rgba(8,8,15,.45), 0 12px 32px -12px rgba(8,8,15,.30);
+    --shadow-lg: 0 30px 60px -30px rgba(11,11,18,.45), 0 12px 32px -12px rgba(11,11,18,.30);
     --shadow-blue: 0 20px 60px -20px rgba(10,132,255,.45);
 
     --duration: 600ms;
@@ -339,14 +339,14 @@
      ============================================================ */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ink: #f0f0f5;             /* 17.6:1 on --surface */
-      --slate: #c7d2dc;           /* 11.5:1 on --surface */
-      --muted: #a0a0b0;           /* 5.9:1 on --surface */
-      --line: rgba(255,255,255,0.08);
+      --ink: #E8E8F2;
+      --slate: #A0A0B4;
+      --muted: #6E6E85;
+      --line: #242430;
       --line-strong: rgba(255,255,255,0.18);
-      --surface: #111118;
-      --surface-soft: #18181f;
-      --surface-softer: #1e1e26;
+      --surface: #0B0B12;
+      --surface-soft: #14141C;
+      --surface-softer: #191922;
 
       --navy: #5AB1FF;            /* 8.7:1 on --surface */
       --blue: #0a84ff;            /* 6.5:1 on --surface */
@@ -357,19 +357,19 @@
       --hero-bg:
         radial-gradient(1200px 500px at 80% -10%, rgba(10,132,255,0.18), transparent 65%),
         radial-gradient(900px 400px at 5% 20%, rgba(30,58,138,0.16), transparent 60%),
-        linear-gradient(180deg, #14141d 0%, #08080f 100%);
-      --nav-bg: rgba(8,8,15,0.72);
-      --nav-bg-scrolled: rgba(8,8,15,0.88);
-      --help-card-bg: linear-gradient(135deg, #18181f 0%, #111118 100%);
+        linear-gradient(180deg, #14141C 0%, #0B0B12 100%);
+      --nav-bg: rgba(11,11,18,0.72);
+      --nav-bg-scrolled: rgba(11,11,18,0.88);
+      --help-card-bg: linear-gradient(135deg, #14141C 0%, #0B0B12 100%);
       --help-glow: rgba(10,132,255,0.18);
-      --step-bg: #18181f;
+      --step-bg: #14141C;
       --accent-from: #7BBEFF;
       --accent-to: #0a84ff;
       --link-color: #7BBEFF;
       --link-hover: #ABD3FF;
       --focus-ring: #5AB1FF;
       --selection-bg: rgba(10,132,255,0.30);
-      --selection-fg: #f0f0f5;
+      --selection-fg: #E8E8F2;
       --check-bg: rgba(10,132,255,0.22);
       --check-stroke: '%237BBEFF';
       --color-scheme: dark;
@@ -381,14 +381,14 @@
   }
   /* Manual override — wins over the system preference */
   :root[data-theme="dark"] {
-    --ink: #f0f0f5;
-    --slate: #c7d2dc;
-    --muted: #a0a0b0;
-    --line: rgba(255,255,255,0.08);
+    --ink: #E8E8F2;
+    --slate: #A0A0B4;
+    --muted: #6E6E85;
+    --line: #242430;
     --line-strong: rgba(255,255,255,0.18);
-    --surface: #111118;
-    --surface-soft: #18181f;
-    --surface-softer: #1e1e26;
+    --surface: #0B0B12;
+    --surface-soft: #14141C;
+    --surface-softer: #191922;
 
     --navy: #5AB1FF;
     --blue: #0a84ff;
@@ -399,19 +399,19 @@
     --hero-bg:
       radial-gradient(1200px 500px at 80% -10%, rgba(10,132,255,0.18), transparent 65%),
       radial-gradient(900px 400px at 5% 20%, rgba(30,58,138,0.16), transparent 60%),
-      linear-gradient(180deg, #14141d 0%, #08080f 100%);
-    --nav-bg: rgba(8,8,15,0.72);
-    --nav-bg-scrolled: rgba(8,8,15,0.88);
-    --help-card-bg: linear-gradient(135deg, #18181f 0%, #111118 100%);
+      linear-gradient(180deg, #14141C 0%, #0B0B12 100%);
+    --nav-bg: rgba(11,11,18,0.72);
+    --nav-bg-scrolled: rgba(11,11,18,0.88);
+    --help-card-bg: linear-gradient(135deg, #14141C 0%, #0B0B12 100%);
     --help-glow: rgba(10,132,255,0.18);
-    --step-bg: #18181f;
+    --step-bg: #14141C;
     --accent-from: #7BBEFF;
     --accent-to: #0a84ff;
     --link-color: #7BBEFF;
     --link-hover: #ABD3FF;
     --focus-ring: #5AB1FF;
     --selection-bg: rgba(10,132,255,0.30);
-    --selection-fg: #f0f0f5;
+    --selection-fg: #E8E8F2;
     --check-bg: rgba(10,132,255,0.22);
     --check-stroke: '%237BBEFF';
     --color-scheme: dark;
@@ -674,7 +674,7 @@
     border-bottom: 1px solid var(--mock-border);
     display: flex; align-items: center; gap: 18px;
     padding: 0 18px;
-    background: rgba(8,8,15,0.85);
+    background: rgba(11,11,18,0.85);
     backdrop-filter: blur(20px);
   }
   .mock-nav .logo {
@@ -894,7 +894,7 @@
     padding: 28px;
     color: var(--mock-text);
     background:
-      linear-gradient(180deg, rgba(8,8,15,0.08), rgba(8,8,15,0.55)),
+      linear-gradient(180deg, rgba(11,11,18,0.08), rgba(11,11,18,0.55)),
       url("assets/hero/privacytracker-demo-poster.jpg") center / cover no-repeat,
       var(--mock-bg);
     text-align: center;
@@ -917,7 +917,7 @@
     flex-wrap: wrap;
     padding: 12px;
     border-top: 1px solid var(--mock-border);
-    background: rgba(8,8,15,0.88);
+    background: rgba(11,11,18,0.88);
   }
   .hero-video-control {
     position: relative;
@@ -995,7 +995,7 @@
   section.tight { padding: 64px 0; }
   section.bg-soft { background: var(--surface-soft); }
   section.bg-dark {
-    background: linear-gradient(180deg, #08080f 0%, #111118 100%);
+    background: linear-gradient(180deg, #0B0B12 0%, #14141C 100%);
     color: #E2E8F0;
   }
   section.bg-dark h2, section.bg-dark h3 { color: #fff; }
@@ -1511,7 +1511,7 @@
   }
   .install-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--line-strong); }
   .install-card.featured {
-    background: linear-gradient(180deg, #08080f 0%, #14141d 100%);
+    background: linear-gradient(180deg, #0B0B12 0%, #14141C 100%);
     color: #E2E8F0;
     border-color: transparent;
     box-shadow: var(--shadow-lg);
@@ -1553,7 +1553,7 @@
      Footer
      ============================================================ */
   footer.site-footer {
-    background: linear-gradient(180deg, #08080f 0%, #050509 100%);
+    background: linear-gradient(180deg, #0B0B12 0%, #050509 100%);
     color: #C7D2DC;
     padding: 60px 0 40px;
   }
@@ -1575,6 +1575,27 @@
     border-top: 1px solid rgba(255,255,255,0.08);
     display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
     color: #94A3B8; font-size: 12px;
+  }
+  footer.site-footer .credit { align-items: center; }
+  /* Maker pill — footer credit chip linking to the maker's GitHub
+     profile. Fixed void-dark colours so the avatar always sits on the
+     family ground. */
+  .maker-pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 6px 15px 6px 6px;
+    background: #14141C;
+    border: 1px solid #242430;
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: #E8E8F2;
+    text-decoration: none;
+  }
+  .maker-pill:hover { border-color: #3A3A44; }
+  .maker-pill img {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid #242430;
+    display: block;
   }
   footer.site-footer .brand-foot {
     display: flex; align-items: center; gap: 12px;
@@ -2561,6 +2582,7 @@
     </div>
     <div class="credit">
       <div>© 2026 privacykey. privacytracker is free and open-source software.</div>
+      <a class="maker-pill" href="https://github.com/AdamXweb" rel="noopener" aria-label="Made by adamxweb — GitHub profile"><img src="https://github.com/AdamXweb.png?size=128" alt="" width="26" height="26" loading="lazy" decoding="async" />adamxweb</a>
       <div>Made with care, in plain English.</div>
     </div>
   </div>
