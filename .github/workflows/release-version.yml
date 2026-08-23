@@ -2,8 +2,8 @@ name: Release version
 
 # Keeps the version in the footer (and version.json) in step with the
 # privacytracker GitHub Releases. Hourly; commits only when a release
-# changed; deploys itself afterwards because a bot commit never triggers
-# deploy.yml. Details: privacykey/gh-workflows/docs/site-release-version.md
+# changed. Cloudflare Workers Builds deploys the commit from the push
+# webhook. Details: privacykey/gh-workflows/docs/site-release-version.md
 
 on:
   schedule:
@@ -27,4 +27,3 @@ jobs:
     with:
       repo: privacykey/privacytracker
       tags: app=v*
-    secrets: inherit

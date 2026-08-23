@@ -7,6 +7,11 @@ quietly changes.
 Static HTML. No framework, no build step. Deploy by pointing any static host at
 the repository root.
 
+Production is a Cloudflare Worker serving the repository root as static
+assets ([`wrangler.jsonc`](wrangler.jsonc)). Cloudflare Workers Builds is
+connected to this repository and deploys every push to `main` with
+`npx wrangler deploy`; `just deploy` does the same by hand.
+
 **Hostname:** `privacytracker.privacykey.org` *(DNS not configured yet)*
 
 ## Layout

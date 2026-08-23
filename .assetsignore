@@ -11,6 +11,7 @@
 .github
 .gitignore
 .assetsignore
+wrangler.jsonc
 node_modules/
 README.md
 AGENTS.md
