@@ -12,7 +12,7 @@
 <link rel="canonical" href="https://privacytracker.privacykey.org/about.html" />
 
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#08080f" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0B0B12" media="(prefers-color-scheme: dark)" />
 <meta name="color-scheme" content="light dark" />
 
 <link rel="icon" href="favicon.ico" sizes="any" />
@@ -70,7 +70,7 @@
     --line-strong: #CBD5E1;
     --surface: #FFFFFF;
     --surface-soft: #F8FAFC;
-    --navy-deep: #08080f;
+    --navy-deep: #0B0B12;
     --navy: #1E3A8A;
     --blue: #0a84ff;
     --blue-soft: #DBEAFE;
@@ -85,9 +85,9 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
-      --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
-      --surface: #111118; --surface-soft: #18181f;
+      --ink: #E8E8F2; --slate: #A0A0B4; --muted: #6E6E85;
+      --line: #242430; --line-strong: rgba(255,255,255,0.18);
+      --surface: #0B0B12; --surface-soft: #14141C;
       --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
       --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
       --color-scheme: dark;
@@ -96,9 +96,9 @@
     }
   }
   :root[data-theme="dark"] {
-    --ink: #f0f0f5; --slate: #c7d2dc; --muted: #a0a0b0;
-    --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.18);
-    --surface: #111118; --surface-soft: #18181f;
+    --ink: #E8E8F2; --slate: #A0A0B4; --muted: #6E6E85;
+    --line: #242430; --line-strong: rgba(255,255,255,0.18);
+    --surface: #0B0B12; --surface-soft: #14141C;
     --navy: #5AB1FF; --blue: #0a84ff; --blue-soft: rgba(10,132,255,0.18);
     --link-color: #7BBEFF; --link-hover: #ABD3FF; --focus-ring: #5AB1FF;
     --color-scheme: dark;
@@ -217,7 +217,7 @@
   }
   .page-hero h1 {
     font-size: clamp(28px, 5vw, 56px);
-    font-weight: 700; letter-spacing: -1.4px; line-height: 1.05;
+    font-weight: 700; letter-spacing: -.025em; line-height: 1.05;
     margin: 0 0 16px;
   }
   .page-hero p {
@@ -236,13 +236,13 @@
     article.prose { padding: 48px 20px 72px; font-size: 16px; }
   }
   article.prose h2 {
-    font-size: 24px; font-weight: 700; letter-spacing: -0.4px;
+    font-size: 24px; font-weight: 700; letter-spacing: -.017em;
     margin: 56px 0 16px; color: var(--ink);
   }
   article.prose h2:first-child { margin-top: 0; }
   article.prose h3 {
     font-size: 18px; font-weight: 600; margin: 32px 0 12px;
-    color: var(--ink); letter-spacing: -0.2px;
+    color: var(--ink); letter-spacing: -.011em;
   }
   article.prose p { margin: 0 0 18px; color: var(--slate); }
   article.prose strong { color: var(--ink); font-weight: 600; }
@@ -301,7 +301,7 @@
 
   /* ─── Footer (mirrors index.html) ─── */
   footer.site-footer {
-    background: linear-gradient(180deg, #08080f 0%, #050509 100%);
+    background: linear-gradient(180deg, #0B0B12 0%, #050509 100%);
     color: #C7D2DC; padding: 60px 0 40px;
   }
   footer.site-footer .row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
@@ -317,6 +317,27 @@
     border-top: 1px solid rgba(255,255,255,0.08);
     display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
     color: #94A3B8; font-size: 12px;
+  }
+  footer.site-footer .credit { align-items: center; }
+  /* Maker pill — footer credit chip linking to the maker's GitHub
+     profile. Fixed void-dark colours so the avatar always sits on the
+     family ground. */
+  .maker-pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 6px 15px 6px 6px;
+    background: #14141C;
+    border: 1px solid #242430;
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: #E8E8F2;
+    text-decoration: none;
+  }
+  .maker-pill:hover { border-color: #3A3A44; }
+  .maker-pill img {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid #242430;
+    display: block;
   }
   footer.site-footer .brand-foot { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
   footer.site-footer .brand-foot .mark { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
@@ -462,6 +483,7 @@
     </div>
     <div class="credit">
       <div>© 2026 privacykey. privacytracker is free and open-source.</div>
+      <a class="maker-pill" href="https://github.com/AdamXweb" rel="noopener" aria-label="Made by adamxweb — GitHub profile"><img src="https://github.com/AdamXweb.png?size=128" alt="" width="26" height="26" loading="lazy" decoding="async" />adamxweb</a>
       <div>Made with care, in plain English.</div>
     </div>
   </div>
