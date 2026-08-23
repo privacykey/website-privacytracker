@@ -1,0 +1,11 @@
+{
+  "source": "privacykey/privacytracker",
+  "components": {
+    "app": {
+      "tag": "v0.1.2",
+      "version": "0.1.2",
+      "url": "https://github.com/privacykey/privacytracker/releases/tag/v0.1.2",
+      "published_at": "2026-06-12T17:09:23Z"
+    }
+  }
+}

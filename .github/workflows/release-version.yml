@@ -1,0 +1,30 @@
+name: Release version
+
+# Keeps the version in the footer (and version.json) in step with the
+# privacytracker GitHub Releases. Hourly; commits only when a release
+# changed; deploys itself afterwards because a bot commit never triggers
+# deploy.yml. Details: privacykey/gh-workflows/docs/site-release-version.md
+
+on:
+  schedule:
+    # :17 past the hour — on-the-hour schedules queue behind everyone else's.
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release-version.yml']
+
+concurrency:
+  group: release-version
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    uses: privacykey/gh-workflows/.github/workflows/site-release-version.yml@v1
+    with:
+      repo: privacykey/privacytracker
+      tags: app=v*
+    secrets: inherit
