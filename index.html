@@ -127,7 +127,7 @@
       "name": "Is privacytracker really free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. It's free and open-source under the Apache 2.0 licence. No accounts, no subscriptions, no upsells. The full source is on GitHub for anyone to read or fork."
+        "text": "Yes. It's free and open-source under the Apache 2.0 licence. There are no accounts, subscriptions, or upsells. The full source is on GitHub for anyone to read or fork."
       }
     },
     {
@@ -190,14 +190,6 @@
 }
 </script>
 
-<!-- ─────────────────────────────────────────────────────────
-     AI / LLM crawl etiquette
-     - robots.txt blocks training-data crawlers, allows on-demand
-       agents that cite their sources.
-     - llms.txt is a markdown summary of the site (per llmstxt.org)
-       so cooperating agents don't have to scrape this HTML.
-     ───────────────────────────────────────────────────────── -->
-<link rel="alternate" type="text/markdown" title="llms.txt — site summary for AI agents" href="/llms.txt" />
 
 <!-- ─────────────────────────────────────────────────────────
      Fonts — preconnect first so the request fans out early
@@ -1894,7 +1886,7 @@
       </div>
       <div class="value">
         <div class="value-title">Stays on your Mac</div>
-        <div class="value-note">No account, no sign-in, and nothing sent anywhere for us to look at.</div>
+        <div class="value-note">There is no account or sign-in, and nothing is sent anywhere for us to look at.</div>
       </div>
     </div>
   </div>
@@ -1967,7 +1959,7 @@
       <div class="stage-copy reveal">
         <span class="kicker">Privacy Map</span>
         <h2>See which apps want <span class="accent">the same things.</span></h2>
-        <p class="intro">Wonder how many of your apps want your location? Or your contacts? Click a category and find out instantly. It's the easiest way to spot the apps that ask for more than they need.</p>
+        <p class="intro">Click a category to see how many of your apps want your location, your contacts, or anything else. It's the easiest way to spot the apps that ask for more than they need.</p>
         <ul class="checks">
           <li>Grouped by what is most sensitive: location, contacts, financial info, health</li>
           <li>Tap any category to see every app that wants it</li>
@@ -2281,7 +2273,7 @@
         <div class="icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a8 8 0 0 0-8 8v3l-2 3h20l-2-3v-3a8 8 0 0 0-8-8zM9 19a3 3 0 0 0 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <h3>No spam, no nags</h3>
+        <h3>No nagging</h3>
         <p>You'll only see a notification when an app you track does something new. No marketing emails. There is no email signup at all.</p>
       </div>
       <div class="feature reveal">
@@ -2303,7 +2295,7 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Take your data with you</h3>
-        <p>Export everything to a regular spreadsheet whenever you want. Share with a friend, save it for your records, or just take a look in Excel. There is a proper backup too: one file with everything in it, so you can put it all back if you change Macs.</p>
+        <p>Export everything to a regular spreadsheet whenever you want. Share with a friend, save it for your records, or just take a look in Excel. There is a proper backup too, one file with everything in it, so you can put it all back if you change Macs.</p>
       </div>
       <div class="feature reveal">
         <div class="icon-wrap" aria-hidden="true">
@@ -2348,7 +2340,7 @@
             </svg>
           </div>
           <h4>Send them this page</h4>
-          <p>Text or email them the link. The download button is right there. No signup, no account, no App Store password.</p>
+          <p>Text or email them the link. The download button is right there. They don't need a signup, an account, or an App Store password.</p>
         </li>
         <li class="step">
           <span class="num" aria-hidden="true">2</span>
@@ -2412,7 +2404,7 @@
       <details class="faq-item">
         <summary>Is privacytracker really free?</summary>
         <div class="faq-answer">
-          <p>Yes. It's free and open-source under the Apache 2.0 licence. No accounts, no subscriptions, no upsells. The full source is on <a href="https://github.com/privacykey/privacytracker" rel="noopener">GitHub</a> for anyone to read or fork.</p>
+          <p>Yes. It's free and open-source under the Apache 2.0 licence. There are no accounts, subscriptions, or upsells. The full source is on <a href="https://github.com/privacykey/privacytracker" rel="noopener">GitHub</a> for anyone to read or fork.</p>
         </div>
       </details>
 
@@ -2493,7 +2485,7 @@
       <article class="install-card reveal delay-1" aria-labelledby="install-brew">
         <div class="platform">If you use Homebrew</div>
         <h3 id="install-brew">One-line install</h3>
-        <p>Already comfortable in the Terminal? Two commands and you're set. Same app, just installed the way developers like it.</p>
+        <p>If you're comfortable in the Terminal, two commands will set you up. Same app, just installed the way developers like it.</p>
         <div class="terminal" role="img" aria-label="brew tap privacykey/tap, then brew install --cask privacytracker">
           <div><span class="pr">$</span> <span class="cm">brew tap</span> <span class="ar">privacykey/tap</span></div>
           <div><span class="pr">$</span> <span class="cm">brew install --cask</span> <span class="ar">privacytracker</span></div>
@@ -2505,7 +2497,7 @@
       <article class="install-card reveal delay-2" aria-labelledby="install-host">
         <div class="platform">For tinkerers</div>
         <h3 id="install-host">Run it yourself</h3>
-        <p>Want to run privacytracker on your own server, or share it with the family on your home network? The full source is on GitHub with setup instructions.</p>
+        <p>To run privacytracker on your own server, or share it with the family on your home network, the full source is on GitHub with setup instructions.</p>
         <div class="terminal" role="img" aria-label="git clone privacykey/privacytracker, docker compose up build, dash d.">
           <div><span class="pr">$</span> <span class="cm">git clone</span> <span class="ar">privacykey/privacytracker</span></div>
           <div><span class="pr">$</span> <span class="cm">docker compose up</span> <span class="ar">--build -d</span></div>
@@ -2547,7 +2539,6 @@
           <li><a href="privacy.html">Privacy policy</a></li>
           <li><a href="legal.html">Legal &amp; licences</a></li>
           <li><a href="/.well-known/security.txt" rel="noopener">security.txt</a></li>
-          <li><a href="/llms.txt" rel="noopener">llms.txt</a></li>
         </ul>
       </div>
       <div>

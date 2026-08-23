@@ -1,10 +1,8 @@
 # privacytracker — robots.txt
 # ─────────────────────────────────────────────────────────────────────
-# Crawlers welcome. The site is a single static page about a free,
-# open-source app. We want regular search engines to index it freely,
-# and we welcome on-demand AI agents that visit a single page in
-# response to a user's question (and cite the source). What we do not
-# allow is bulk crawling for training-data ingestion.
+# The site is a single static page about a free, open-source app.
+# Regular search engines may index it freely. Bulk crawling for
+# training-data ingestion is not allowed.
 #
 # To flip a rule: change `Disallow: /` to `Allow: /` (or vice versa)
 # under the relevant User-agent block, and update the rationale comment.
@@ -15,10 +13,8 @@
 User-agent: *
 Allow: /
 
-# ────────── On-demand AI agents — ALLOWED ──────────
-# These bots fetch a page when a user asks a question, then cite the
-# answer back to that user. We want privacytracker to surface in those
-# answers, so we explicitly allow them.
+# ────────── On-demand fetchers: allowed ──────────
+# These bots fetch a page when a user asks a question and cite it back.
 
 User-agent: ChatGPT-User
 Allow: /
@@ -116,6 +112,3 @@ Disallow: /
 
 # Pointers
 Sitemap: https://privacytracker.privacykey.org/sitemap.xml
-
-# Machine-readable LLM site map (per llmstxt.org convention)
-# Lives at /llms.txt — please prefer it over scraping the HTML.
