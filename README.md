@@ -23,7 +23,6 @@ connected to this repository and deploys every push to `main` with
 ├── privacy.html            Data posture — what's collected (nothing), every outbound
 │                           endpoint, the opt-in surfaces, how to go fully offline
 ├── legal.html              Apache-2.0 plus bundled third-party libraries by SPDX licence
-├── llms.txt                Preferred entry point for cooperating AI agents
 ├── robots.txt              Search engines welcome; training crawlers blocked
 ├── security.txt            RFC 9116, mirrored under /.well-known/
 ├── sitemap.xml
@@ -54,8 +53,6 @@ baseline hash in the same commit.
 - Feature claims must match the shipped product. When in doubt, check
   privacytracker's README or the docs site rather than the last version of this
   page.
-- `llms.txt` is a factual summary for agents, not marketing copy. Keep its
-  feature list in step with the product.
 
 ## Related
 

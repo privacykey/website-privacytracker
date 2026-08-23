@@ -23,11 +23,10 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Privacy — privacytracker" />
-<meta property="og:description" content="No cookies, no analytics, no tracking. Here's exactly what this website does with your data." />
+<meta property="og:description" content="No cookies, analytics, or tracking. This page lists exactly what the website does with your data." />
 <meta property="og:url" content="https://privacytracker.privacykey.org/privacy.html" />
 <meta property="og:image" content="https://privacytracker.privacykey.org/assets/social/og-image.png" />
 
-<link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
 
 <link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
 
@@ -726,7 +725,7 @@
   <div class="container">
     <span class="crumb">Privacy policy</span>
     <h1>We don't collect your data.</h1>
-    <p>privacytracker runs on your machine. There's no server-side account system, no analytics pipeline, no data broker in the loop. Because "we don't collect anything" is cheap to say, this page also lists every third-party endpoint the app may contact while you use it — so the full shape of what actually goes over the wire is visible.</p>
+    <p>privacytracker runs on your machine. There is no server-side account system, analytics pipeline, or data broker in the loop. Because "we don't collect anything" is cheap to say, this page also lists every third-party endpoint the app may contact while you use it, so the full shape of what actually goes over the wire is visible.</p>
     <p style="font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:13px;color:var(--muted);margin-top:14px;">Last updated April 2026</p>
   </div>
 </header>
@@ -768,9 +767,9 @@
 
   <h2 id="subprocessors">Third parties the app talks to<a href="#subprocessors" class="anchor" aria-label="Link to this section">#</a></h2>
 
-  <p>When you use privacytracker, it calls a small number of public endpoints on your behalf. Nothing here sends your personal identifiers — but these hosts see standard HTTP request metadata (your IP, your User-Agent, the URL you're fetching), so we list them all.</p>
+  <p>When you use privacytracker, it calls a small number of public endpoints on your behalf. Nothing here sends your personal identifiers, but these hosts see standard HTTP request metadata (your IP, your User-Agent, the URL you're fetching), so we list them all.</p>
 
-  <p>Nothing in the <em>browser</em> talks to a third party — Inter, the icons, every script and stylesheet are served from the same origin as the app. The list below is everything the <em>server</em> fetches on your behalf.</p>
+  <p>Nothing in the <em>browser</em> talks to a third party. Inter, the icons, every script and stylesheet are served from the same origin as the app. The list below is everything the <em>server</em> fetches on your behalf.</p>
 
   <div class="subproc-group">
     <h3 id="subproc-app-store">App Store &amp; metadata</h3>
@@ -797,8 +796,8 @@
       </div>
       <code class="endpoint">apps.apple.com/&lt;country&gt;/app/&lt;slug&gt;/id&lt;id&gt;</code>
       <dl>
-        <dt>When it runs</dt><dd>During every privacy-label scrape — initial import, manual resync, and the 30-minute background sync.</dd>
-        <dt>What we send</dt><dd>A standard browser-style HTTP GET with a Referer of <code>apps.apple.com</code>. No cookies, no identifiers.</dd>
+        <dt>When it runs</dt><dd>During every privacy-label scrape: initial import, manual resync, and the 30-minute background sync.</dd>
+        <dt>What we send</dt><dd>A standard browser-style HTTP GET with a Referer of <code>apps.apple.com</code>. No cookies or identifiers.</dd>
         <dt>What we receive</dt><dd>The App Store page HTML, which the app parses for the privacy label JSON blob and developer's privacy policy link.</dd>
       </dl>
     </div>
@@ -810,7 +809,7 @@
       </div>
       <code class="endpoint">is1-ssl.mzstatic.com (and siblings)</code>
       <dl>
-        <dt>When it runs</dt><dd>Only when your browser renders an app icon returned by the Apple lookup — Apple host the icons here directly.</dd>
+        <dt>When it runs</dt><dd>Only when your browser renders an app icon returned by the Apple lookup. Apple host the icons here directly.</dd>
         <dt>What we send</dt><dd>Nothing beyond a standard image request.</dd>
         <dt>What we receive</dt><dd>PNG / JPG icon bytes.</dd>
       </dl>
@@ -829,7 +828,7 @@
       <code class="endpoint">Whatever host the developer links to on the App Store page</code>
       <dl>
         <dt>When it runs</dt><dd>Each time you resync an app or the 30-minute background sync runs, we follow the privacy-policy link Apple publishes on the App Store page for that app.</dd>
-        <dt>What we send</dt><dd>A standard HTTP GET. No cookies, no identifiers.</dd>
+        <dt>What we send</dt><dd>A standard HTTP GET. No cookies or identifiers.</dd>
         <dt>What we receive</dt><dd>The HTML of the developer's published privacy policy.</dd>
       </dl>
     </div>
@@ -847,7 +846,7 @@
       <code class="endpoint">archive.org/wayback/available</code>
       <dl>
         <dt>When it runs</dt><dd>Only when you explicitly run a historical Wayback import (once per app, per calendar quarter).</dd>
-        <dt>What we send</dt><dd>The App Store URL you're trying to back-fill, plus a target timestamp. No cookies, no identifiers.</dd>
+        <dt>What we send</dt><dd>The App Store URL you're trying to back-fill, plus a target timestamp. No cookies or identifiers.</dd>
         <dt>What we receive</dt><dd>The closest available Wayback capture URL for that timestamp.</dd>
       </dl>
       <p class="their-policy"><a href="https://archive.org/about/terms.php" rel="noopener">Internet Archive's terms ↗</a></p>
@@ -860,7 +859,7 @@
       </div>
       <code class="endpoint">web.archive.org/web/&lt;timestamp&gt;id_/&lt;original&gt;</code>
       <dl>
-        <dt>When it runs</dt><dd>Follow-up to the availability API — downloads the archived App Store HTML so we can re-parse it against the same schema as a live scrape.</dd>
+        <dt>When it runs</dt><dd>Follow-up to the availability API. Downloads the archived App Store HTML so we can re-parse it against the same schema as a live scrape.</dd>
         <dt>What we send</dt><dd>A standard HTTP GET.</dd>
         <dt>What we receive</dt><dd>The archived HTML with Wayback's toolbar injector disabled (<code>id_</code> suffix).</dd>
       </dl>
@@ -873,7 +872,7 @@
       </div>
       <code class="endpoint">web.archive.org/save/&lt;url&gt;</code>
       <dl>
-        <dt>When it runs</dt><dd>Only fired when a historical import finds an empty quarter with no existing capture — we ask the Archive to create one for future runs.</dd>
+        <dt>When it runs</dt><dd>Only fired when a historical import finds an empty quarter with no existing capture. In that case we ask the Archive to create one for future runs.</dd>
         <dt>What we send</dt><dd>The public App Store URL of the app. Nothing else.</dd>
         <dt>What we receive</dt><dd>An HTTP response indicating whether the snapshot request was accepted; no data stored client-side.</dd>
       </dl>
@@ -919,7 +918,7 @@
       </div>
       <code class="endpoint">Whatever base URL you configure (default 127.0.0.1:11434)</code>
       <dl>
-        <dt>When it runs</dt><dd>Only if you set the AI provider to "Custom" in Settings → AI. Intended for local models — no data leaves your network if the endpoint is local (Ollama, LM Studio, llama.cpp).</dd>
+        <dt>When it runs</dt><dd>Only if you set the AI provider to "Custom" in Settings → AI. Intended for local models. No data leaves your network if the endpoint is local (Ollama, LM Studio, llama.cpp).</dd>
         <dt>What we send</dt><dd>Scraped policy text + summary prompt.</dd>
         <dt>What we receive</dt><dd>A JSON summary.</dd>
       </dl>
@@ -928,29 +927,29 @@
 
   <h2 id="offline">Going fully offline<a href="#offline" class="anchor" aria-label="Link to this section">#</a></h2>
 
-  <p>The website you're reading right now makes zero third-party connections — Inter is self-hosted, every asset is served from the same origin. Server-side, you can cut the last two optional outbound calls from inside the app:</p>
+  <p>The website you're reading right now makes zero third-party connections. Inter is self-hosted and every asset is served from the same origin. Server-side, you can cut the last two optional outbound calls from inside the app:</p>
 
   <ul>
-    <li><strong>AI summaries</strong> — open <code>Settings → AI Policy Summaries</code> and set the provider to "Disabled", or point it at a local Ollama endpoint to keep summarisation on-device.</li>
-    <li><strong>Wayback imports</strong> — leave them alone. They're opt-in, so never running them keeps the Internet Archive out of the picture entirely.</li>
+    <li><strong>AI summaries</strong>: open <code>Settings → AI Policy Summaries</code> and set the provider to "Disabled", or point it at a local Ollama endpoint to keep summarisation on-device.</li>
+    <li><strong>Wayback imports</strong>: leave them alone. They're opt-in, so never running them keeps the Internet Archive out of the picture entirely.</li>
   </ul>
 
-  <p>That leaves only Apple's own endpoints (iTunes Search + App Store pages) and the developer privacy-policy links you explicitly scrape — both of which are the point of the app.</p>
+  <p>That leaves only Apple's own endpoints (iTunes Search + App Store pages) and the developer privacy-policy links you explicitly scrape, both of which are the point of the app.</p>
 
   <h2 id="alternatives">Other privacy-policy summarisers<a href="#alternatives" class="anchor" aria-label="Link to this section">#</a></h2>
 
-  <p>privacytracker's AI summaries are one way to make sense of long policy documents, but they're opt-in and narrow by design — we only summarise policies for apps you've actively added. Two long-running third-party projects tackle the same problem across a much wider catalogue:</p>
+  <p>privacytracker's AI summaries are one way to make sense of long policy documents, but they're opt-in and narrow by design. We only summarise policies for apps you've actively added. Two long-running third-party projects tackle the same problem across a much wider catalogue:</p>
 
   <ul>
-    <li><strong><a href="https://tosdr.org/" rel="noopener">Terms of Service; Didn't Read (ToSDR) ↗</a></strong> — community-reviewed grades for thousands of services, each broken down into plain-language "points" (good / neutral / blocker) with links back to the clause they came from.</li>
-    <li><strong><a href="https://privacyspy.org/" rel="noopener">PrivacySpy ↗</a></strong> — open-source, machine-readable scoring of privacy policies across a curated list of services, with rubric-backed reasons for every rating.</li>
+    <li><strong><a href="https://tosdr.org/" rel="noopener">Terms of Service; Didn't Read (ToSDR) ↗</a></strong>: community-reviewed grades for thousands of services, each broken down into plain-language "points" (good / neutral / blocker) with links back to the clause they came from.</li>
+    <li><strong><a href="https://privacyspy.org/" rel="noopener">PrivacySpy ↗</a></strong>: open-source, machine-readable scoring of privacy policies across a curated list of services, with rubric-backed reasons for every rating.</li>
   </ul>
 
-  <p>privacytracker has no affiliation with either project — they're listed because they're a useful complement to what this app does. If you decide to use either service, read <em>their</em> terms and privacy policy first.</p>
+  <p>privacytracker has no affiliation with either project. They're listed because they're a useful complement to what this app does. If you decide to use either service, read <em>their</em> terms and privacy policy first.</p>
 
   <h2 id="questions">Questions or corrections<a href="#questions" class="anchor" aria-label="Link to this section">#</a></h2>
 
-  <p>If something on this page looks wrong, incomplete, or has drifted from what the app actually does, please <a href="https://github.com/privacykey/privacytracker/issues" rel="noopener">open an issue on GitHub</a>. For security disclosures, follow <a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a> instead — encrypted email or GitHub Private Vulnerability Reporting.</p>
+  <p>If something on this page looks wrong, incomplete, or has drifted from what the app actually does, please <a href="https://github.com/privacykey/privacytracker/issues" rel="noopener">open an issue on GitHub</a>. For security disclosures, follow <a href="https://github.com/privacykey/privacytracker/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a> instead (encrypted email or GitHub Private Vulnerability Reporting).</p>
 
   <p>The full list of bundled libraries and their licences is on the <a href="legal.html">legal page</a>.</p>
 
@@ -971,7 +970,7 @@
           <span class="mark" aria-hidden="true"><img src="assets/logo/privacytracker-256.png" alt="" /></span>
           <span class="name">privacy<span class="accent">tracker</span></span>
         </div>
-        <p class="desc">A privacykey project. Free, open-source, made for people who want answers — not warnings.</p>
+        <p class="desc">A privacykey project. Free, open-source, made for people who want answers rather than warnings.</p>
       </div>
       <div>
         <h5>Product</h5>
@@ -988,7 +987,6 @@
           <li><a href="privacy.html">Privacy policy</a></li>
           <li><a href="legal.html">Legal &amp; licences</a></li>
           <li><a href="/.well-known/security.txt" rel="noopener">security.txt</a></li>
-          <li><a href="/llms.txt" rel="noopener">llms.txt</a></li>
         </ul>
       </div>
       <div>
