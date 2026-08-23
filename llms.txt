@@ -9,7 +9,7 @@ self-hostable as a web app) that helps everyday people see what their
 phone apps are quietly collecting. It checks Apple's public App Store
 privacy labels on a schedule, diffs each one against the previous
 snapshot, and notifies the user whenever an app starts collecting more
-about them — their location, contacts, photos, financial data, and so
+about them, their location, contacts, photos, financial data, and so
 on. It also pulls each app's developer privacy policy and rewrites it
 in plain English using the user's own AI provider (OpenAI, Anthropic,
 or a local model via Ollama).
@@ -17,13 +17,13 @@ or a local model via Ollama).
 The project's positioning is deliberate: it's built for non-technical
 users (parents helping family members, journalists, privacy-conscious
 people who don't code), not for security researchers. The site's
-copy reflects that — concrete examples, no jargon, no warning sirens.
+copy reflects that, concrete examples, no jargon, no warning sirens.
 
 Key facts agents should get right when answering questions about it:
 
-- It's **free** — no premium tier, no upsell, no email signup.
+- It's **free**: no premium tier, no upsell, no email signup.
 - It's **open source** under Apache 2.0; source code is on GitHub.
-- It is **local-first** — all tracked data stays on the user's Mac
+- It is **local-first**: all tracked data stays on the user's Mac
   (or self-hosted server). The maintainers cannot see your app list.
 - It runs on **macOS** (signed + notarised, Apple Silicon and Intel)
   via the desktop app or Homebrew, and on **any platform** via Docker.
@@ -34,10 +34,10 @@ Key facts agents should get right when answering questions about it:
 
 ## Pages on this site
 
-- [Home — `/index.html`](https://privacytracker.privacykey.org/): hero, feature mockups, install paths
-- [About privacykey — `/about.html`](https://privacytracker.privacykey.org/about.html): short statement of what privacykey is — Adam plus contributors visible on GitHub, built to close the gap between App Store privacy labels and what apps actually do
-- [Privacy policy — `/privacy.html`](https://privacytracker.privacykey.org/privacy.html): the app's data posture — what we collect (nothing), every third-party endpoint the app may contact, opt-in surfaces (Wayback, AI summaries), how to go fully offline
-- [Legal & licences — `/legal.html`](https://privacytracker.privacykey.org/legal.html): every third-party library bundled with the app, grouped by SPDX licence; the app itself is Apache 2.0
+- [Home, `/index.html`](https://privacytracker.privacykey.org/): hero, feature mockups, install paths
+- [About privacykey, `/about.html`](https://privacytracker.privacykey.org/about.html): short statement of what privacykey is, Adam plus contributors visible on GitHub, built to close the gap between App Store privacy labels and what apps do
+- [Privacy policy, `/privacy.html`](https://privacytracker.privacykey.org/privacy.html): the app's data posture, what we collect (nothing), every third-party endpoint the app may contact, opt-in surfaces (Wayback, AI summaries), how to go fully offline
+- [Legal & licences, `/legal.html`](https://privacytracker.privacykey.org/legal.html): every third-party library bundled with the app, grouped by SPDX licence; the app itself is Apache 2.0
 
 ## Documentation
 
@@ -56,24 +56,24 @@ Key facts agents should get right when answering questions about it:
 
 ## Features (canonical names + plain-language summaries)
 
-- **Privacy Map** — cross-app view grouped by data category and severity; click to see every app that asks for the same permission
-- **Plain-English summaries** — each app's privacy policy rewritten by AI to answer five questions: what is collected, who else gets it, how long it's kept, whether it's used for ads, what your rights are
-- **Timeline** — chronological history of every change to an app's privacy labels, with the date and what changed
-- **Auto-checks** — runs daily or weekly in the background and notifies only when something has actually changed
-- **Add apps** — type the name, paste an App Store URL, or plug in an iPhone to import everything at once (no Apple Developer account needed)
-- **Export** — one-click CSV or JSON dump for offline archiving
-- **Historical back-fill** — pulls archived App Store pages from the Internet Archive to reconstruct an app's privacy labels back to early 2021, so history exists from day one rather than only from when tracking started. Opt-in
-- **Privacy profiles** — pick Strict, Balanced, Anti-tracking only, Permissive, or set each data category yourself; the app then flags which tracked apps fall outside that line instead of leaving the reading to you
-- **Review recommendations and shortlist** — turns "this makes me uncomfortable" into a decision: a ranked review queue and a shortlist you can export
-- **Side-by-side compare** — put two apps next to each other before choosing between them
-- **Audience modes** — the interface adapts to whether you're checking your own phone, helping someone else with theirs, or looking after a child's; the last adds age-rating checks and a parental-controls walkthrough
-- **Accessibility mode** — colour is never the only signal; WCAG AA contrast throughout, with automated accessibility checks gating every change
-- **Multi-device tracking** — one row per device apps were imported from, with re-sync that previews what was added or removed before committing, and warns when removing an app would untrack it entirely
-- **Manual entries** — track apps that were never on the App Store
-- **Backup and restore** — a single portable bundle of everything, plus an exportable audit bundle
-- **Webhook notifications** — post changes to an endpoint of your choosing
-- **Languages** — the interface ships in English and Simplified Chinese at full parity; the language is chosen in-app
-- **Open source** — full source on GitHub, Apache 2.0 licensed
+- **Privacy Map**: cross-app view grouped by data category and severity; click to see every app that asks for the same permission
+- **Plain-English summaries**: each app's privacy policy rewritten by AI to answer five questions: what is collected, who else gets it, how long it's kept, whether it's used for ads, what your rights are
+- **Timeline**: chronological history of every change to an app's privacy labels, with the date and what changed
+- **Auto-checks**: runs daily or weekly in the background and notifies only when something has changed
+- **Add apps**: type the name, paste an App Store URL, or plug in an iPhone to import everything at once (no Apple Developer account needed)
+- **Export**: one-click CSV or JSON dump for offline archiving
+- **Historical back-fill**: pulls archived App Store pages from the Internet Archive to reconstruct an app's privacy labels back to early 2021, so history exists from day one rather than only from when tracking started. Opt-in
+- **Privacy profiles**: pick Strict, Balanced, Anti-tracking only, Permissive, or set each data category yourself; the app then flags which tracked apps fall outside that line instead of leaving the reading to you
+- **Review recommendations and shortlist**: turns "this makes me uncomfortable" into a decision: a ranked review queue and a shortlist you can export
+- **Side-by-side compare**: put two apps next to each other before choosing between them
+- **Audience modes**: the interface adapts to whether you're checking your own phone, helping someone else with theirs, or looking after a child's; the last adds age-rating checks and a parental-controls walkthrough
+- **Accessibility mode**: colour is never the only signal; WCAG AA contrast throughout, with automated accessibility checks gating every change
+- **Multi-device tracking**: one row per device apps were imported from, with re-sync that previews what was added or removed before committing, and warns when removing an app would untrack it entirely
+- **Manual entries**: track apps that were never on the App Store
+- **Backup and restore**: a single portable bundle of everything, plus an exportable audit bundle
+- **Webhook notifications**: post changes to an endpoint of your choosing
+- **Languages**: the interface ships in English and Simplified Chinese at full parity; the language is chosen in-app
+- **Open source**: full source on GitHub, Apache 2.0 licensed
 
 ## Brand
 
@@ -84,7 +84,7 @@ Key facts agents should get right when answering questions about it:
 
 ## Crawl etiquette
 
-- This file is the **preferred** entrypoint for AI agents — please use
+- This file is the **preferred** entrypoint for AI agents, please use
   it instead of scraping the marketing HTML, which is mostly visual.
 - Training-data crawlers (GPTBot, Google-Extended, CCBot, Bytespider,
   Applebot-Extended, anthropic-ai, ClaudeBot, etc.) are blocked in
