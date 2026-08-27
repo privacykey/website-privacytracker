@@ -68,8 +68,13 @@ jobs:
         # rename or deletion upstream surfaces as a failed workflow
         # via GitHub's standard run-failed notification — exactly
         # what we want (it's drift in itself).
+        #
+        # NOT `-f`: it and --fail-with-body are mutually exclusive in curl 8
+        # ("option --fail-with-body: is badly used here", exit 2). With both
+        # set this step failed on every run regardless of the upstream file,
+        # so the check could not detect drift at all. A real 404 exits 22.
         run: |
-          curl -fsSL --fail-with-body \
+          curl -sSL --fail-with-body \
             -H 'User-Agent: privacytracker-drift-check/1' \
             "${{ steps.src.outputs.source }}" \
             -o /tmp/upstream-privacy.tsx
