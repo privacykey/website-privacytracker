@@ -345,6 +345,13 @@
   .doc-content h2 a.anchor:hover { opacity: 1; }
   .doc-content p { margin: 0 0 18px; color: var(--slate); }
   .doc-content strong { color: var(--ink); font-weight: 600; }
+  .doc-content ul, .doc-content ol {
+    margin: 0 0 22px; padding-left: 24px;
+  }
+  .doc-content li {
+    margin-bottom: 10px; color: var(--slate);
+  }
+  .doc-content li strong { color: var(--ink); }
   .doc-content code {
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: 0.88em; padding: 2px 6px;
@@ -520,6 +527,7 @@
     <span class="crumb">Legal</span>
     <h1>Open-source libraries &amp; licences.</h1>
     <p>privacytracker is built on open-source software. This page lists every third-party library bundled with the app, grouped by SPDX licence identifier, with a short description, how we use it, and links to the source. The app itself is released under the Apache&nbsp;2.0 licence.</p>
+    <p style="font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:13px;color:var(--muted);margin-top:14px;">Revision <a data-page-commit-link href="https://github.com/privacykey/website-privacytracker/commit/aa7b1efb9081c7f7e218fb6094f8541053bd84d0" rel="noopener" aria-label="Latest commit that changed this page, on GitHub"><span data-page-commit>aa7b1ef</span></a> (<time data-page-commit-date datetime="2026-09-14">2026-09-14</time>) · <a href="https://github.com/privacykey/website-privacytracker/commits/main/legal.html" rel="noopener">Page history ↗</a></p>
   </div>
 </header>
 
@@ -533,6 +541,7 @@
       <li><a href="#license-apache" data-target="license-apache"><span>Apache 2.0</span><span class="count">4</span></a></li>
       <li><a href="#license-ofl"   data-target="license-ofl"><span>OFL 1.1</span><span class="count">1</span></a></li>
       <li><a href="#license-bsv"   data-target="license-bsv"><span>Bitstream Vera</span><span class="count">1</span></a></li>
+      <li><a href="#history"       data-target="history"><span>Version history</span></a></li>
     </ul>
   </aside>
 
@@ -780,10 +789,20 @@
       </div>
     </section>
 
+    <section id="history">
+      <h2>Version history<a href="#history" class="anchor" aria-label="Link">#</a></h2>
+      <p>This page is a plain HTML file in a public Git repository, so every change to it is on the record. The licence and version claims above can be checked against that history rather than taken on trust:</p>
+      <ul>
+        <li><strong><a href="https://github.com/privacykey/website-privacytracker/commits/main/legal.html" rel="noopener">Page history ↗</a></strong>: every commit that touched this page, newest first, each with a diff of exactly what changed and when. Version bumps from the weekly sync show up here too.</li>
+        <li><strong><a data-page-commit-link href="https://github.com/privacykey/website-privacytracker/commit/aa7b1efb9081c7f7e218fb6094f8541053bd84d0" rel="noopener">Latest commit ↗</a></strong> <code data-page-commit>aa7b1ef</code> (<time data-page-commit-date datetime="2026-09-14">2026-09-14</time>): the most recent commit that changed this page. A workflow writes the hash here once a change lands on <code>main</code>, so the page itself says which revision you're reading.</li>
+        <li><strong><a href="https://github.com/privacykey/website-privacytracker/blob/main/legal.html" rel="noopener">Current source ↗</a></strong>: the file behind the page you're reading.</li>
+      </ul>
+    </section>
+
     <hr />
 
     <p style="font-size:14px;color:var(--muted);font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;">
-      Versions on this page are auto-synced from the app's <code>package.json</code> via a weekly GitHub Action; see <code>scripts/update-versions.py</code> in this repo. If you spot one that's stale, please <a href="https://github.com/privacykey/privacytracker/issues" rel="noopener">open an issue</a>.
+      Versions on this page are auto-synced from the app's <code>package.json</code> via a <a href="https://github.com/privacykey/website-privacytracker/actions/workflows/bump-oss-versions.yml" rel="noopener">weekly GitHub Action</a>; see <a href="https://github.com/privacykey/website-privacytracker/blob/main/scripts/update-versions.py" rel="noopener"><code>scripts/update-versions.py</code></a> in this repo. If you spot one that's stale, please <a href="https://github.com/privacykey/website-privacytracker/issues" rel="noopener">open an issue</a>.
     </p>
 
   </div>

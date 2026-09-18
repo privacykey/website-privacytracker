@@ -1,0 +1,109 @@
+name: Pin page revisions
+
+# Writes the hash + date of the latest commit that changed privacy.html
+# and legal.html into those pages (the "Revision …" line), so each page
+# states which revision it is and a reader can check the served page
+# against the repository instead of trusting a hand-typed date.
+# The rewrite lives in scripts/pin-page-revisions.py.
+#
+# Triggers:
+#   - push to main touching either page — a human edit or a merged PR.
+#     Also when the script or this workflow changes, so a refactor is
+#     exercised against real input.
+#   - workflow_run after the two bots that also rewrite these pages
+#     (the hourly release-version footer sync and the weekly OSS
+#     version bump). They push with GITHUB_TOKEN, which never fires
+#     `push` workflows, so this is the only way we see their commits.
+#   - Daily schedule as a fallback in case a workflow_run is missed.
+#   - Manual dispatch from the Actions tab.
+#
+# Loop safety: the pin commit itself touches both pages, but
+#   (a) pushes made with GITHUB_TOKEN don't trigger `push` workflows, and
+#   (b) the script skips pin commits (by their fixed subject line) when
+#       it looks for "the latest commit", so re-running against an
+#       already-pinned page changes nothing and no commit is made.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'privacy.html'
+      - 'legal.html'
+      - 'scripts/pin-page-revisions.py'
+      - '.github/workflows/pin-page-revisions.yml'
+  workflow_run:
+    workflows: ['Release version', 'Bump OSS versions in legal.html']
+    types: [completed]
+    branches: [main]
+  schedule:
+    # 06:41 UTC daily — clear of the Monday 06:00 OSS bump, and off the
+    # hour so it doesn't queue behind everyone else's on-the-hour jobs.
+    - cron: '41 6 * * *'
+  workflow_dispatch:
+
+# One run at a time. A push and a workflow_run can land seconds apart;
+# the second waits and then finds nothing left to do.
+concurrency:
+  group: pin-page-revisions
+  cancel-in-progress: false
+
+# We commit + push directly from the workflow.
+permissions:
+  contents: write
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out main with full history
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          # `git log -- <page>` needs the pages' history, not just the
+          # tip commit a shallow clone would give us.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          # pin-page-revisions.py is stdlib-only — nothing to install.
+
+      - name: Pin, commit, push
+        # If another workflow pushes to main between our checkout and our
+        # push, the push is rejected. Rather than rebase a possibly-stale
+        # pin onto the new tip, start over from it: reset, re-pin, retry.
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            python3 scripts/pin-page-revisions.py
+
+            if git diff --quiet -- privacy.html legal.html; then
+              echo "pages already pinned to their latest commits — nothing to do"
+              exit 0
+            fi
+
+            echo "revision pins updated:"
+            git --no-pager diff -- privacy.html legal.html | sed -n '1,80p'
+
+            git add privacy.html legal.html
+            # The subject must stay exactly this: the script recognises
+            # pin commits by it (PIN_SUBJECT) and skips them.
+            git commit -m "chore(pages): pin page revisions" \
+                       -m "Triggered by: ${{ github.event_name }}"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "push rejected on attempt $attempt — main moved; retrying on the new tip"
+          done
+
+          echo "::error::could not push the revision pins after 3 attempts"
+          exit 1
