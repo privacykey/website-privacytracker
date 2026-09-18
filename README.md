@@ -29,12 +29,13 @@ connected to this repository and deploys every push to `main` with
 ├── site.webmanifest
 ├── assets/                 CSS, fonts, icons, social images
 └── scripts/
-    └── update-versions.py  Syncs the dependency version pills in legal.html
+    ├── update-versions.py      Syncs the dependency version pills in legal.html
+    └── pin-page-revisions.py   Stamps each page's latest commit hash + date into privacy.html and legal.html
 ```
 
 ## Keeping it honest
 
-Two automations guard the pages that make factual claims:
+Three automations guard the pages that make factual claims:
 
 - **`.github/workflows/check-privacy-drift.yml`** watches privacytracker's own
   privacy-policy source. When it changes, the workflow opens an issue so
@@ -42,6 +43,11 @@ Two automations guard the pages that make factual claims:
   live in `.github/upstream-hashes/`.
 - **`.github/workflows/bump-oss-versions.yml`** keeps the third-party version
   pills in `legal.html` current, via `scripts/update-versions.py`.
+- **`.github/workflows/pin-page-revisions.yml`** writes the hash and date of
+  the latest commit that changed `privacy.html` / `legal.html` into the page
+  itself (the "Revision …" line), via `scripts/pin-page-revisions.py`. It runs
+  on every push to `main` that touches a page and after the other two bots
+  commit, and it skips its own commits so it never loops.
 
 If you change `privacy.html` in response to an upstream change, record the new
 baseline hash in the same commit.
